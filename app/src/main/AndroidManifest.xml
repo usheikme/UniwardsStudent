@@ -24,13 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-        <activity
-            android:name=".TestActivity"
-            android:label="@string/title_activity_test"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".MeinActivity"
-            android:label="@string/title_activity_mein"></activity>
+        <activity android:name=".RegisterActivity"></activity>
     </application>
 
 </manifest>
