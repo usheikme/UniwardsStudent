@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //Initialize the onclicklistener for the login button and make the button send the login request on click
     protected void InitLoginButton() {
-        Toast.makeText(getBaseContext(), "FFF", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Bic", Toast.LENGTH_LONG).show();
         Button loginButton = findViewById(R.id.button_login);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
