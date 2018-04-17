@@ -22,8 +22,7 @@ public class LoginResult implements IReqResult<String> {
 
     public String GetResult() {
         String message = "";
-        Type resultType = Type.valueOf(loginData.getResponse());
-        switch(resultType) {
+            switch(GetLoginType()) {
             case LOGIN_SUCCESS:
                 message = "";
                 break;
@@ -36,11 +35,11 @@ public class LoginResult implements IReqResult<String> {
     }
 
     public Type GetLoginType() {
-        return Type.valueOf(loginData.getResponse());
+        return Type.values()[Integer.parseInt(loginData.getResponse())];
     }
 
     public String GetToken() {
-        return "";
+        return loginData.getToken();
     }
 
 }

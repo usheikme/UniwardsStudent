@@ -41,7 +41,7 @@ public class AsyncLogin extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... theVoid) {
         final EditText text_username = activity.findViewById(R.id.text_username);
-        EditText text_password = activity.findViewById(R.id.text_password);
+        final EditText text_password = activity.findViewById(R.id.text_password);
 
         String username = text_username.getText().toString();
         String password = text_password.getText().toString();
@@ -56,8 +56,8 @@ public class AsyncLogin extends AsyncTask<Void, Void, Void> {
             badUsername = true;
         }
 
-        if (TextUtils.isEmpty(username)) {
-            Log.i("Empty", "username");
+        if (TextUtils.isEmpty(password)) {
+            Log.i("Empty", "password");
             badPassword = true;
         }
 
@@ -81,8 +81,8 @@ public class AsyncLogin extends AsyncTask<Void, Void, Void> {
                     if (pDialog.isShowing()) {
                         pDialog.dismiss();
                     }
-                    text_username.setError("Please enter a valid username");
-                    usernameFocusView.requestFocus();
+                    text_password.setError("Please enter a valid password");
+                    passwordFocusView.requestFocus();
                     Log.wtf("Empty", "password");
                 }
             });
@@ -95,7 +95,7 @@ public class AsyncLogin extends AsyncTask<Void, Void, Void> {
     }
 
 
-    private void StudentLogin(String username, String password) {
+    private void StudentLogin(final String username, String password) {
         Log.wtf("GG", "GG");
         UniwardsAPI uniapi = APIHelper.GetUniwardsAPI();
         Call<LoginResponse> call = uniapi.STUDENT_LOGIN("", username, password);
@@ -104,8 +104,8 @@ public class AsyncLogin extends AsyncTask<Void, Void, Void> {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 loginResp = response.body();
                 //if(response.isSuccessful()) {
-                Log.i("LoginData2", response.body().toString());
-                HandleLogin(new LoginResult(loginResp));
+                Log.wtf("LoginData2", response.body().toString());
+                HandleLogin(new LoginResult(loginResp), username);
 
 
             }
@@ -118,21 +118,23 @@ public class AsyncLogin extends AsyncTask<Void, Void, Void> {
         });
     }
 
-    private void HandleLogin(LoginResult loginResult) {
+    private void HandleLogin(LoginResult loginResult, String username) {
         if (loginResult.GetLoginType() == LoginResult.Type.LOGIN_SUCCESS) {
+            TokenHandle.StoreToken(loginResult.GetToken(), username);
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Intent i = new Intent(activity.getApplicationContext(), MeinActivity.class);
+                    Intent i = new Intent(activity.getApplicationContext(), MainActivity.class);
                     if (pDialog.isShowing()) {
                         pDialog.dismiss();
                     }
                     activity.startActivity(i);
+                    //activity.finish();
                 }
             });
         } else {
             DismissDialog();
-            Toast.makeText(activity, loginResult.GetResult(), Toast.LENGTH_LONG);
+            Toast.makeText(activity, loginResult.GetResult(), Toast.LENGTH_LONG).show();
         }
     }
 

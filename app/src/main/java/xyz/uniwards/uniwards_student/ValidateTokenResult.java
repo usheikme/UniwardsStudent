@@ -5,12 +5,12 @@ package xyz.uniwards.uniwards_student;
  */
 
 public class ValidateTokenResult implements IReqResult<Boolean> {
-    private Type tokenType;
     private ValidateTokenResponse validateTokenResponse;
 
     public enum Type {
         TOKEN_VALID,
-        TOKEN_INVALID,
+        TOKEN_VERFIED,
+        TOKEN_BAD,
         TOKEN_EXPIRED
     }
 
@@ -35,11 +35,7 @@ public class ValidateTokenResult implements IReqResult<Boolean> {
     }
 
     public Type GetType() {
-        return Type.valueOf(validateTokenResponse.getResponse());
-    }
-
-    public String GetToken() {
-        return "";
+        return Type.values()[Integer.parseInt(validateTokenResponse.getResponse())];
     }
 
 }

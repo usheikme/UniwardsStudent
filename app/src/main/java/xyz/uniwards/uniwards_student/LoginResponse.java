@@ -8,9 +8,13 @@ import com.google.gson.annotations.SerializedName;
 public class LoginResponse {
 
     private String response_message;
+    private String user_token;
 
     public String getResponse() {
         return response_message;
+    }
+    public String getToken() {
+        return user_token;
     }
 
 }
