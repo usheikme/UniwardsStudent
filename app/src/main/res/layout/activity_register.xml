@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,16 +8,214 @@
     android:background="@drawable/bg_dark"
     tools:context="xyz.uniwards.uniwards_student.RegisterActivity">
 
+
     <ImageView
-        android:id="@+id/logo"
-        android:layout_width="160dp"
-        android:layout_height="153dp"
+        android:id="@+id/rlogo"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:contentDescription="uniwards logo"
-        app:srcCompat="@drawable/logo"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:srcCompat="@drawable/logo" />
+
+    <EditText
+        android:id="@+id/text_rfname"
+        android:layout_width="250dp"
+        android:layout_height="30dp"
+        android:layout_alignEnd="@+id/text_rusername"
+        android:layout_below="@+id/rlogo"
+        android:background="@layout/rounded_edittext"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="First Name"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/background_light"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/text_rlname"
+        android:layout_width="250dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/text_rfname"
+        android:layout_below="@+id/text_rfname"
+        android:layout_marginTop="11dp"
+        android:background="@layout/rounded_edittext"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Last Name"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/background_light"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="194dp"
+        tools:layout_editor_absoluteY="189dp" />
+
+    <EditText
+        android:id="@+id/text_rmobile"
+        android:layout_width="250dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/text_rlname"
+        android:layout_below="@+id/text_rlname"
+        android:layout_marginTop="13dp"
+        android:background="@layout/rounded_edittext"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Mobile No"
+        android:inputType="phone"
+        android:textColor="@android:color/background_light"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="235dp" />
+
+    <EditText
+        android:id="@+id/text_rdate"
+        android:layout_width="250dp"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignStart="@+id/text_rmobile"
+        android:layout_marginTop="8dp"
+        android:background="@layout/rounded_edittext"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Birthdate"
+        android:inputType="date"
+        android:textColor="@android:color/background_light"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="194dp"
+        tools:layout_editor_absoluteY="235dp" />
+
+    <EditText
+        android:id="@+id/text_rusername"
+        android:layout_width="250dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/text_rdate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:background="@layout/rounded_edittext"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/background_light"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="287dp" />
+
+    <EditText
+        android:id="@+id/text_remail"
+        android:layout_width="250dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/text_rusername"
+        android:layout_below="@+id/text_rusername"
+        android:layout_marginTop="15dp"
+        android:background="@layout/rounded_edittext"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textColor="@android:color/background_light"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="332dp" />
+
+    <EditText
+        android:id="@+id/text_rpassword"
+        android:layout_width="250dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/text_remail"
+        android:layout_below="@+id/text_remail"
+        android:layout_marginTop="15dp"
+        android:background="@layout/rounded_edittext"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColor="@android:color/background_light"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/backgroundthing_1"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_alignEnd="@+id/text_rpassword"
+        android:layout_below="@+id/text_rpassword"
+        android:layout_marginTop="12dp"
+        android:background="@layout/rounded_edittext"
+        android:clickable="false"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:textColor="@android:color/background_light" />
+
+    <Button
+        android:id="@+id/backgroundthing_2"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/text_rpassword"
+        android:layout_below="@+id/text_rpassword"
+        android:layout_marginTop="12dp"
+        android:background="@layout/rounded_edittext"
+        android:clickable="false"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:textColor="@android:color/background_light"
+        tools:layout_editor_absoluteX="66dp"
+        tools:layout_editor_absoluteY="418dp" />
+
+    <RadioButton
+        android:id="@+id/radio_rtutor"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/text_rpassword"
+        android:layout_below="@+id/text_rpassword"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:text="Tutor"
+        android:textSize="14sp" />
 
 
-</android.support.constraint.ConstraintLayout>
+    <RadioButton
+        android:id="@+id/radio_rstudent"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_alignEnd="@+id/text_rpassword"
+        android:layout_below="@+id/text_rpassword"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:text="Student"
+        android:textColor="@android:color/background_light"
+        android:textSize="14sp" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="250dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/radio_rtutor"
+        android:layout_below="@+id/radio_rtutor"
+        android:layout_marginTop="15dp"
+        android:background="@layout/rounded_edittext"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="463dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="28dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/text_rmobile"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/spinner_arrow"
+        tools:layout_editor_absoluteX="277dp"
+        tools:layout_editor_absoluteY="463dp" />
+
+    <Button
+        android:id="@+id/button_register"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/spinner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@layout/rounded_button"
+        android:elevation="15dp"
+        android:stateListAnimator="@null"
+        android:text="Register" />
+
+</RelativeLayout>

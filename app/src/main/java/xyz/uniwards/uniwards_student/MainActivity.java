@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("Token-ME", token);
                 Log.e("Token", "Not Null");
                 TokenHandle.ValidateToken(token, username, this);
-                //TokenHandle.DeleteToken();
+                TokenHandle.DeleteToken();
             }
         }
         else {
