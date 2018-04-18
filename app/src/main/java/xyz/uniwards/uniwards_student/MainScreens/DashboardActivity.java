@@ -1,5 +1,6 @@
 package xyz.uniwards.uniwards_student.MainScreens;
 
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,6 +30,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         TabLayout MyTabs;
         ViewPager MyPage;
+        private Integer[] tabIcons = {R.drawable.dashboard_icon};
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -40,22 +43,22 @@ public class DashboardActivity extends AppCompatActivity {
 
                 MyTabs.setupWithViewPager(MyPage);
                 SetUpViewPager(MyPage);
-               // MyTabs.getTabAt(0).setIcon(R.drawable.login_pass);
-                TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-                tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.dashboard_icon, 0, 0);
-                TextView tab2 = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-                tab2.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.login_pass, 0, 0);
-                TextView tab3 = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-                tab3.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.login_pass, 0, 0);
-                TextView tab4 = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-                tab4.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.login_pass, 0, 0);
-                MyTabs.getTabAt(0).setCustomView(tabOne);
-                MyTabs.getTabAt(1).setCustomView(tab2);
-                MyTabs.getTabAt(2).setCustomView(tab3);
-                MyTabs.getTabAt(3).setCustomView(tab4);
+
+                int tabCount = MyTabs.getTabCount();
+                for(int x =0; x < tabCount; x++) {
+                    AddTabIcons(x, tabIcons[x]);
+                }
+
             }
             catch (Exception e) { Log.wtf("FUCK<", "THIS"); }
 
+        }
+
+        private void AddTabIcons(int tab, Integer image) {
+            TextView tabIcon = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
+            tabIcon.setCompoundDrawablesWithIntrinsicBounds(0, image, 0, 0);
+
+            MyTabs.getTabAt(tab).setCustomView(tabIcon);
         }
 
         public void SetUpViewPager (ViewPager viewpage){
