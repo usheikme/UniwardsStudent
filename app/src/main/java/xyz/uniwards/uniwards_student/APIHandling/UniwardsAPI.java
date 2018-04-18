@@ -1,13 +1,16 @@
-package xyz.uniwards.uniwards_student;
+package xyz.uniwards.uniwards_student.APIHandling;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import xyz.uniwards.uniwards_student.Login.LoginResponse;
+import xyz.uniwards.uniwards_student.Registration.RegisterResponse;
+import xyz.uniwards.uniwards_student.TokenValidation.ValidateTokenResponse;
+import xyz.uniwards.uniwards_student.UniversityHandling.UniversityResponse;
 
 /**
  * Created by Umayr on 4/10/2018.
@@ -16,6 +19,9 @@ import retrofit2.http.Path;
 public interface UniwardsAPI {
     @GET("/apitest")
     Call<APITest> API_TEST_CALL();
+
+    @GET("/api/getuniversitylist")
+    Call<UniversityResponse> GetUniversityList(@Header("Token") String token);
 
     @GET("/api/validate_token/{token}/{username}")
     Call<ValidateTokenResponse> ValidateToken(@Path("token") String token, @Path("username") String username);

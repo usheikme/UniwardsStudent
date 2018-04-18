@@ -1,4 +1,4 @@
-package xyz.uniwards.uniwards_student;
+package xyz.uniwards.uniwards_student.Login;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import xyz.uniwards.uniwards_student.R;
+import xyz.uniwards.uniwards_student.Registration.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity {
 

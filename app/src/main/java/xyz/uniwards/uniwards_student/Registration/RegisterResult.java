@@ -1,4 +1,4 @@
-package xyz.uniwards.uniwards_student;
+package xyz.uniwards.uniwards_student.Registration;
 
 /**
  * Created by Umayr on 4/18/2018.

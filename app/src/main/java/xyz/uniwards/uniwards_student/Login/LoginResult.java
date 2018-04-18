@@ -1,4 +1,6 @@
-package xyz.uniwards.uniwards_student;
+package xyz.uniwards.uniwards_student.Login;
+
+import xyz.uniwards.uniwards_student.APIHandling.IReqResult;
 
 /**
  * Created by Umayr on 4/16/2018.

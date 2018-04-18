@@ -1,4 +1,4 @@
-package xyz.uniwards.uniwards_student;
+package xyz.uniwards.uniwards_student.TokenValidation;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 /**
@@ -9,7 +9,7 @@ public class ValidateTokenResponse {
 
     private String response_message;
 
-    public String getResponse() {
+    public String GetResponse() {
         return response_message;
     }
 

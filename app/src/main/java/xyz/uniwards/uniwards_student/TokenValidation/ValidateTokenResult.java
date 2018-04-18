@@ -1,4 +1,6 @@
-package xyz.uniwards.uniwards_student;
+package xyz.uniwards.uniwards_student.TokenValidation;
+
+import xyz.uniwards.uniwards_student.APIHandling.IReqResult;
 
 /**
  * Created by Umayr on 4/16/2018.
@@ -20,7 +22,7 @@ public class ValidateTokenResult implements IReqResult<Boolean> {
     }
 
     public Boolean GetResult() {
-        Type resultType = Type.valueOf(validateTokenResponse.getResponse());
+        Type resultType = Type.valueOf(validateTokenResponse.GetResponse());
         Boolean result;
         switch(resultType) {
             case TOKEN_VALID:
@@ -35,7 +37,7 @@ public class ValidateTokenResult implements IReqResult<Boolean> {
     }
 
     public Type GetType() {
-        return Type.values()[Integer.parseInt(validateTokenResponse.getResponse())];
+        return Type.values()[Integer.parseInt(validateTokenResponse.GetResponse())];
     }
 
 }

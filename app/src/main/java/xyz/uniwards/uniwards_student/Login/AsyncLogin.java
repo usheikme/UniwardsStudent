@@ -1,4 +1,4 @@
-package xyz.uniwards.uniwards_student;
+package xyz.uniwards.uniwards_student.Login;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -7,12 +7,16 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.os.Bundle;
 import android.widget.Toast;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import xyz.uniwards.uniwards_student.APIHandling.APIHelper;
+import xyz.uniwards.uniwards_student.MainScreens.DashboardActivity;
+import xyz.uniwards.uniwards_student.R;
+import xyz.uniwards.uniwards_student.TokenValidation.TokenHandle;
+import xyz.uniwards.uniwards_student.APIHandling.UniwardsAPI;
 
 /**
  * Created by Umayr on 4/15/2018.

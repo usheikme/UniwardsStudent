@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_dark"
-    tools:context="xyz.uniwards.uniwards_student.LoginActivity">
+    tools:context="xyz.uniwards.uniwards_student.Login.LoginActivity">
 
     <TextView
         android:id="@+id/text_forgot_password"

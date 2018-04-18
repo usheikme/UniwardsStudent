@@ -1,4 +1,4 @@
-package xyz.uniwards.uniwards_student;
+package xyz.uniwards.uniwards_student.Login;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 /**

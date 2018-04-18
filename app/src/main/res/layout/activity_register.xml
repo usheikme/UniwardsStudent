@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_dark"
-    tools:context="xyz.uniwards.uniwards_student.RegisterActivity">
+    tools:context="xyz.uniwards.uniwards_student.Registration.RegisterActivity">
 
 
     <ImageView
@@ -132,45 +132,18 @@
         android:textColor="@android:color/background_light"
         android:textSize="15sp" />
 
-    <Button
-        android:id="@+id/backgroundthing_1"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_alignEnd="@+id/text_rpassword"
-        android:layout_below="@+id/text_rpassword"
-        android:layout_marginTop="12dp"
-        android:background="@layout/rounded_edittext"
-        android:clickable="false"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:textColor="@android:color/background_light" />
-
-    <Button
-        android:id="@+id/backgroundthing_2"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_alignStart="@+id/text_rpassword"
-        android:layout_below="@+id/text_rpassword"
-        android:layout_marginTop="12dp"
-        android:background="@layout/rounded_edittext"
-        android:clickable="false"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:textColor="@android:color/background_light"
-        tools:layout_editor_absoluteX="66dp"
-        tools:layout_editor_absoluteY="418dp" />
-
     <RadioButton
         android:id="@+id/radio_rtutor"
         android:layout_width="100dp"
         android:layout_height="30dp"
+        android:layout_alignBaseline="@+id/radio_rstudent"
+        android:layout_alignBottom="@+id/radio_rstudent"
         android:layout_alignStart="@+id/text_rpassword"
-        android:layout_below="@+id/text_rpassword"
-        android:layout_marginTop="12dp"
         android:checked="true"
         android:ems="10"
         android:text="Tutor"
         android:textSize="14sp" />
+    />
 
 
     <RadioButton
@@ -179,11 +152,13 @@
         android:layout_height="30dp"
         android:layout_alignEnd="@+id/text_rpassword"
         android:layout_below="@+id/text_rpassword"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:text="Student"
         android:textColor="@android:color/background_light"
         android:textSize="14sp" />
+
+
 
     <Spinner
         android:id="@+id/spinner_uni"

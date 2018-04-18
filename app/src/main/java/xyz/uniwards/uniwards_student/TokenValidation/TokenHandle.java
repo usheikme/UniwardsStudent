@@ -1,4 +1,4 @@
-package xyz.uniwards.uniwards_student;
+package xyz.uniwards.uniwards_student.TokenValidation;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,10 @@ import android.util.Log;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import xyz.uniwards.uniwards_student.APIHandling.APIHelper;
+import xyz.uniwards.uniwards_student.Login.LoginActivity;
+import xyz.uniwards.uniwards_student.MainScreens.MainActivity;
+import xyz.uniwards.uniwards_student.APIHandling.UniwardsAPI;
 
 /**
  * Created by Umayr on 4/16/2018.

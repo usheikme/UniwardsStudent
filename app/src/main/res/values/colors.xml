@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="bgBottomNavigation">#131733</color>
+    <color name="colorButton">#131733</color>
+    <color name="colorEditText">#41000000</color>
 </resources>
