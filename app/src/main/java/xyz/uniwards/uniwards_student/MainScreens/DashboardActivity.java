@@ -30,7 +30,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         TabLayout MyTabs;
         ViewPager MyPage;
-        private Integer[] tabIcons = {R.drawable.dashboard_icon};
+        private Integer[] tabIcons = {R.drawable.login_pass};
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class DashboardActivity extends AppCompatActivity {
                 }
 
             }
-            catch (Exception e) { Log.wtf("FUCK<", "THIS"); }
+            catch (Exception e) { Log.wtf("FUCK<", e.toString()); }
 
         }
 
@@ -64,7 +64,7 @@ public class DashboardActivity extends AppCompatActivity {
         public void SetUpViewPager (ViewPager viewpage){
             MyViewPageAdapter Adapter = new MyViewPageAdapter(getSupportFragmentManager());
 
-            Adapter.AddFragmentPage(new DashboardFragment(), "    ");
+            Adapter.AddFragmentPage(new DashboardFragment(), "");
             Adapter.AddFragmentPage(new CouponFragment(), "Coupons");
             Adapter.AddFragmentPage(new RewardFragment(), "Rewards");
             Adapter.AddFragmentPage(new ProfileFragment(), "Profile");
