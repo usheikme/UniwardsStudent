@@ -124,7 +124,7 @@ public class AsyncLogin extends AsyncTask<Void, Void, Void> {
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Intent i = new Intent(activity.getApplicationContext(), MainActivity.class);
+                    Intent i = new Intent(activity.getApplicationContext(), DashboardActivity.class);
                     if (pDialog.isShowing()) {
                         pDialog.dismiss();
                     }

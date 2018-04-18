@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="Dahboard" />
+
+    <item
+        android:id="@+id/navigation_coupons"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="Coupons" />
+
+    <item
+        android:id="@+id/navigation_rewards"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="Rewards" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="@string/title_profile" />
+</menu>
