@@ -35,11 +35,11 @@ public class LoginResult implements IReqResult<String> {
     }
 
     public Type GetLoginType() {
-        return Type.values()[Integer.parseInt(loginData.getResponse())];
+        return Type.values()[Integer.parseInt(loginData.GetResponse())];
     }
 
     public String GetToken() {
-        return loginData.getToken();
+        return loginData.GetToken();
     }
 
 }

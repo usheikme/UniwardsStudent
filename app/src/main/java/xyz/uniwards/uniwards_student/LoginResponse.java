@@ -10,10 +10,10 @@ public class LoginResponse {
     private String response_message;
     private String user_token;
 
-    public String getResponse() {
+    public String GetResponse() {
         return response_message;
     }
-    public String getToken() {
+    public String GetToken() {
         return user_token;
     }
 

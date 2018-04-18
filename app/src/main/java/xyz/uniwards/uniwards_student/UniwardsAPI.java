@@ -22,5 +22,19 @@ public interface UniwardsAPI {
 
     @FormUrlEncoded
     @POST("/api/studentlogin")
-    Call<LoginResponse> STUDENT_LOGIN(@Header("Token") String token, @Field("username") String username, @Field("password") String password);
+    Call<LoginResponse> StudentLogin(@Header("Token") String token, @Field("username") String username, @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("/api/registeruser")
+    Call<RegisterResponse> RegisterUser(@Header("Token") String token,
+                                        @Field("fname") String fname,
+                                        @Field("lname") String lname,
+                                        @Field("mobile") String mobile,
+                                        @Field("birth") String birthdate,
+                                        @Field("username") String username,
+                                        @Field("email") String email,
+                                        @Field("password") String password,
+                                        @Field("st_type") Integer st_type,
+                                        @Field("auth_status") Integer auth_status,
+                                        @Field("uni_id") Integer uni_id);
 }

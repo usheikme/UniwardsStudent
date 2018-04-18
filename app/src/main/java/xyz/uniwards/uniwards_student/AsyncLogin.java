@@ -88,17 +88,17 @@ public class AsyncLogin extends AsyncTask<Void, Void, Void> {
             });
         }
         else {
-            StudentLogin(text_username.getText().toString(), text_password.getText().toString());
+            StudentLoginStub(text_username.getText().toString(), text_password.getText().toString());
         }
 
         return null;
     }
 
 
-    private void StudentLogin(final String username, String password) {
+    private void StudentLoginStub(final String username, String password) {
         Log.wtf("GG", "GG");
         UniwardsAPI uniapi = APIHelper.GetUniwardsAPI();
-        Call<LoginResponse> call = uniapi.STUDENT_LOGIN("", username, password);
+        Call<LoginResponse> call = uniapi.StudentLogin("", username, password);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
