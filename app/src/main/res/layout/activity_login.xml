@@ -36,7 +36,7 @@
         android:layout_marginTop="68dp"
         android:background="@layout/rounded_edittext"
         android:drawableStart="@drawable/login_username"
-        android:ems="10"
+        android:ems="100"
         android:hint="Username"
         android:inputType="textPersonName"
         android:textColor="@android:color/background_light"

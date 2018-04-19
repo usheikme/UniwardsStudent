@@ -16,12 +16,17 @@ package xyz.uniwards.uniwards_student;
 * limitations under the License.
 */
 
+        import android.graphics.drawable.Drawable;
         import android.support.v7.widget.RecyclerView;
         import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
+        import android.widget.ImageView;
         import android.widget.TextView;
+        import android.widget.Toast;
+
+        import org.w3c.dom.Text;
 
 /**
  * Provide views to RecyclerView with data from mDataSet.
@@ -31,19 +36,55 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     private String[] mDataSet;
 
+    //TODO FUCK
+    public static int count = 0;
+
     /**
      * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
 
+        //TODO REMOVE
+        public ImageView itemImage;
+        public TextView itemTitle;
+        public TextView itemDetail;
+
+        public String[] titles = new String[50];
+        public String[] descs = new String[50];
+        public Integer[] drawme = new Integer[50];
+
         public ViewHolder(View v) {
             super(v);
+
+            //TODO TAKE OUT
+            titles[0] = "Class detected!";
+            titles[1] = "Coupon Redeemed!";
+            titles[2] = "Reward Received!";
+
+            descs[0] = "We've detected that you're in CSIT113, click this to confirm";
+            descs[1] = "Thank you for redeeming your 15% off at SinX Digital Solutions";
+            descs[2] = "250 points have added to your account for attending your last 3 classes in a row";
+
+            drawme[0] = R.mipmap.classroom_detected;
+            drawme[1] = R.mipmap.coupon_redeemed;
+            drawme[2] = R.mipmap.reward_given;
+
+            itemImage = (ImageView)itemView.findViewById(R.id.card_dashimage);
+            itemTitle = (TextView)itemView.findViewById(R.id.card_dashtitle);
+            itemDetail =
+                    (TextView)itemView.findViewById(R.id.card_dashdesc);
+
+            itemDetail.setText(descs[count]);
+            itemImage.setImageResource(drawme[count]);
+            itemTitle.setText(titles[count++]);
+
             // Define click listener for the ViewHolder's View.
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
+                    Toast.makeText(v.getContext(), "Thank you, enjoy your points :)", Toast.LENGTH_LONG).show();
                 }
             });
             textView = (TextView) v.findViewById(R.id.card_dashtitle);
@@ -80,12 +121,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
-        viewHolder.getTextView().setText(mDataSet[position]);
+        //TODO UNDO
+
+        //viewHolder.getTextView().setText(mDataSet[position]);
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
+        //TODO PATCHES
         return mDataSet.length;
     }
 }

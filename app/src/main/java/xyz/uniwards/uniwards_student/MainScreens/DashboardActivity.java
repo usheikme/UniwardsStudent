@@ -30,7 +30,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         TabLayout MyTabs;
         ViewPager MyPage;
-        private Integer[] tabIcons = {R.drawable.login_pass};
+        private Integer[] tabIcons = {R.drawable.dashboard_icon, R.drawable.coupon_icon, R.drawable.reward_icon, R.drawable.profile_icon};
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
