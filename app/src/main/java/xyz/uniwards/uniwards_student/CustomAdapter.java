@@ -105,13 +105,19 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     }
 
     // Create new views (invoked by the layout manager)
+    //TODO UNRIG
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view.
-        View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.cardview_layout, viewGroup, false);
+        View v = null;
+        try {
+            v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.cardview_layout, viewGroup, false);
+        } catch (Exception e){ }
 
-        return new ViewHolder(v);
+
+            return new ViewHolder(v);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
