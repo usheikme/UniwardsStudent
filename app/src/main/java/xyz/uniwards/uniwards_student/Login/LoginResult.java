@@ -25,12 +25,21 @@ public class LoginResult implements IReqResult<String> {
     public String GetResult() {
         String message = "";
             switch(GetLoginType()) {
-            case LOGIN_SUCCESS:
-                message = "";
-                break;
-            default:
-                message = "Unknown";
-                break;
+                case LOGIN_SUCCESS:
+                    message = "Success!";
+                    break;
+                case LOGIN_INCORRECT_PASSWORD:
+                        message = "Incorrect Password!";
+                        break;
+                case LOGIN_NONEXISTANT_USER:
+                        message = "User does not exist!";
+                        break;
+                case LOGIN_WRONG_USERNAME:
+                        message = "Error!";
+                        break;
+                default:
+                    message = "An error occured!";
+                    break;
         }
 
         return message;

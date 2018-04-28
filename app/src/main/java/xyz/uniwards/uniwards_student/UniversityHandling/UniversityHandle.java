@@ -30,17 +30,17 @@ public class UniversityHandle {
     public static void GetUniversityListStub(final Spinner spinner_runi, final Activity activity) {
         Log.wtf("GG", "GG");
         UniwardsAPI uniapi = APIHelper.GetUniwardsAPI();
-        Call<UniversityResponse> call = uniapi.GetUniversityList("");
-        call.enqueue(new Callback<UniversityResponse>() {
+        Call<UniversitiesResponse> call = uniapi.GetUniversityList("");
+        call.enqueue(new Callback<UniversitiesResponse>() {
             @Override
-            public void onResponse(Call<UniversityResponse> call, Response<UniversityResponse> response) {
-                UniversityResponse universityResponse = response.body();
-                AddToUniversitySpinner(universityResponse.GetResponse(), spinner_runi, activity);
+            public void onResponse(Call<UniversitiesResponse> call, Response<UniversitiesResponse> response) {
+                UniversitiesResponse universitiesResponse = response.body();
+                AddToUniversitySpinner(universitiesResponse.GetUniverisityCodes(), spinner_runi, activity);
 
             }
 
             @Override
-            public void onFailure(Call<UniversityResponse> call, Throwable t) {
+            public void onFailure(Call<UniversitiesResponse> call, Throwable t) {
                 //HandleRegister(t);
             }
         });

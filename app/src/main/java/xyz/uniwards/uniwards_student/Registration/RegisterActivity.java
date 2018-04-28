@@ -107,11 +107,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void InitUniversitySpinner() {
         Spinner spinner_runi = findViewById(R.id.spinner_uni);
-        //UniversityHandle.GetUniversityListStub(spinner_runi, this);
-        List<String> tempList = new ArrayList<String>();
+        UniversityHandle.GetUniversityListStub(spinner_runi, this);
+  /*      List<String> tempList = new ArrayList<String>();
         tempList.add("UOWD");
-        tempList.add("MDX");
-        UniversityHandle.AddToUniversitySpinner(tempList, spinner_runi, this);
+        tempList.add("MDX");*/
     }
 
     @Override

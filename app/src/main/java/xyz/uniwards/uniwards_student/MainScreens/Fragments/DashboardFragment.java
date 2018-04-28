@@ -15,7 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import xyz.uniwards.uniwards_student.CustomAdapter;
+import xyz.uniwards.uniwards_student.DashCard;
 import xyz.uniwards.uniwards_student.R;
 import xyz.uniwards.uniwards_student.RecyclerAdapter;
 
@@ -39,54 +43,38 @@ public class DashboardFragment extends Fragment {
     protected RecyclerView mRecyclerView;
     protected CustomAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected String[] mDataset;
+    protected List<DashCard> dashCards;
 
-    public DashboardFragment(){};
+    public DashboardFragment(){}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //View PageOne = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        View Page = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        Page.setTag(TAG);
 
-        View PageOne = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        PageOne.setTag(TAG);
-
-        mRecyclerView = (RecyclerView) PageOne.findViewById(R.id.recyclerview_dashboard);
-
-        // LinearLayoutManager is used here, this will layout the elements in a similar fashion
-        // to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
-        // elements are laid out.
+        mRecyclerView = (RecyclerView) Page.findViewById(R.id.recyclerview_dashboard);
         mLayoutManager = new LinearLayoutManager(getActivity());
-
         mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
 
         if (savedInstanceState != null) {
-            // Restore saved layout manager type.
             mCurrentLayoutManagerType = (LayoutManagerType) savedInstanceState
                     .getSerializable(KEY_LAYOUT_MANAGER);
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        mAdapter = new CustomAdapter(mDataset);
-        // Set CustomAdapter as the adapter for RecyclerView.
+        mAdapter = new CustomAdapter(dashCards);
         mRecyclerView.setAdapter(mAdapter);
 
-        return PageOne;
+        return Page;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Initialize dataset, this data would usually come from a local content provider or
-        // remote server.
-        initDataset();
+        initDashCards();
     }
 
-    /**
-     * Set RecyclerView's LayoutManager to the one given.
-     *
-     * @param layoutManagerType Type of layout manager to switch to.
-     */
     public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
         int scrollPosition = 0;
 
@@ -121,14 +109,18 @@ public class DashboardFragment extends Fragment {
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    /**
-     * Generates Strings for RecyclerView's adapter. This data would usually come
-     * from a local content provider or remote server.
-     */
-    private void initDataset() {
-        mDataset = new String[DATASET_COUNT];
+    private void initDashCards() {
+        //mDataset = new String[DATASET_COUNT];
         for (int i = 0; i < DATASET_COUNT; i++) {
-            mDataset[i] = "This is element #" + i;
+            //mDataset[i] = "This is element #" + i;
         }
+
+        dashCards = new ArrayList<>();
+        dashCards.add(new DashCard(R.mipmap.classroom_detected,"Class detected!",
+                "We've detected that you're in CSIT113, click this to confirm"));
+        dashCards.add(new DashCard(R.mipmap.coupon_redeemed,"Coupon Redeemed!",
+                "Thank you for redeeming your 15% off at SinX Digital Solutions"));
+        dashCards.add(new DashCard(R.mipmap.reward_given,"Reward Received!",
+                "250 points have added to your account for attending your last 3 classes in a row"));
     }
 }

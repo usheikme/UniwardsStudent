@@ -1,0 +1,31 @@
+package xyz.uniwards.uniwards_student.EnrolmentHandling;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Umayr on 4/28/2018.
+ */
+
+public class EnrolmentsResponse {
+    private List<EnrolmentResponse> enrolments = null;
+
+    public List<EnrolmentResponse> GetEnrolments() {
+        return enrolments;
+    }
+
+    //TODO Empty Check
+    public List<String> GetUniverisityCodes() {
+        List<String> uni_codes = new ArrayList<>();
+        for (EnrolmentResponse uni : enrolments) {
+            uni_codes.add(uni.GetEnDate());
+        }
+
+        return uni_codes;
+    }
+
+    public void SetEnrolments(List<EnrolmentResponse> enrolments) {
+        this.enrolments = enrolments;
+    }
+
+}

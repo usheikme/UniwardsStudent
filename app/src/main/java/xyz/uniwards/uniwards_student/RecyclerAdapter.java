@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
-    private String[] titles = {"Chapter One"};
+    private String[] titles = {"Class detected!", "Coupon Redeemed!", "Reward Received!"};
 
     private String[] details = {"Item one details"};
 
