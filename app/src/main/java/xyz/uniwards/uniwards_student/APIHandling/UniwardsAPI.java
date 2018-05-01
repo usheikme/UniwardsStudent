@@ -33,68 +33,68 @@ public interface UniwardsAPI {
     Call<UniversitiesResponse> GetUniversityList(@Header("Token") String token);
 
     //TODO check if int works > string
-    @GET("/api/getuniversity/<id>")
-    Call<UniversityResponse> GetUniversity(@Header("Token") String token, int id);
+    @GET("/api/getuniversity/{id}")
+    Call<UniversityResponse> GetUniversity(@Header("Token") String token, @Path("id") int id);
 
     @GET("/api/getcoupons")
     Call<CouponsResponse> GetCoupons(@Header("Token") String token);
 
-    @GET("/api/getcouponbyid/<id>")
-    Call<CouponResponse> GetCouponByID(@Header("Token") String token, int id);
+    @GET("/api/getcouponbyid/{id}")
+    Call<CouponResponse> GetCouponByID(@Header("Token") String token, @Path("id") int id);
 
-    @GET("/api/getcouponbyvendorid/<vendor_id>")
-    Call<CouponResponse> GetCouponByVendorID(@Header("Token") String token, int vendor_id);
+    @GET("/api/getcouponbyvendorid/{vendor_id}")
+    Call<CouponResponse> GetCouponByVendorID(@Header("Token") String token, @Path("vendor_id") int vendor_id);
 
     @GET("/api/getenrolments")
     Call<EnrolmentsResponse> GetEnrolments(@Header("Token") String token);
 
-    @GET("/api/getenrolmentsbystudentid/<student_id>")
-    Call<EnrolmentsResponse> GetEnrolmentsByID(@Header("Token") String token, int student_id);
+    @GET("/api/getenrolmentsbystudentid/{student_id}")
+    Call<EnrolmentsResponse> GetEnrolmentsByStudentID(@Header("Token") String token, @Path("student_id") int student_id);
 
-    @GET("/api/getenrolmentsbyclassid/<class_id>")
-    Call<EnrolmentsResponse> GetEnrolmentsByClassID(@Header("Token") String token, int class_id);
+    @GET("/api/getenrolmentsbyclassid/{class_id}")
+    Call<EnrolmentsResponse> GetEnrolmentsByClassID(@Header("Token") String token, @Path("class_id") int class_id);
 
-    @GET("/api/getpointsbystudentid/<student_id>")
-    Call<PointsResponse> GetPointsByStudentID(@Header("Token") String token, int student_id);
+    @GET("/api/getpointsbystudentid/{student_id}")
+    Call<PointsResponse> GetPointsByStudentID(@Header("Token") String token, @Path("student_id") int student_id);
 
-    @GET("/api/getpointsbytutorid/<tutor_id>")
-    Call<PointsResponse> GetPointsByTutorID(@Header("Token") String token, int tutor_id);
+    @GET("/api/getpointsbytutorid/{tutor_id}")
+    Call<PointsResponse> GetPointsByTutorID(@Header("Token") String token, @Path("tutor_id") int tutor_id);
 
-    @GET("/api/getpointsbyrewardid/<reward_id>")
-    Call<PointsResponse> GetPointsByRewardID(@Header("Token") String token, int reward_id);
+    @GET("/api/getpointsbyrewardid/{reward_id}")
+    Call<PointsResponse> GetPointsByRewardID(@Header("Token") String token, @Path("reward_id") int reward_id);
 
-    @GET("/api/getredemptionbyid/<id>")
-    Call<RedemptionResponse> GetRedemptionByID(@Header("Token") String token, int id);
+    @GET("/api/getredemptionbyid/{id}")
+    Call<RedemptionResponse> GetRedemptionByID(@Header("Token") String token, @Path("id") int id);
 
     @GET("/api/getredemptions")
     Call<RedemptionsResponse> GetRedemptions(@Header("Token") String token);
 
-    @GET("/api/getredemptionsbystudentid/<student_id>")
-    Call<RedemptionsResponse> GetRedemptionsByStudentID(@Header("Token") String token, int student_id);
+    @GET("/api/getredemptionsbystudentid/{student_id}")
+    Call<RedemptionsResponse> GetRedemptionsByStudentID(@Header("Token") String token, @Path("student_id") int student_id);
 
-    @GET("/api/getredemptionsbycouponid/<coupon_id>")
-    Call<RedemptionsResponse> GetRedemptionsByCouponID(@Header("Token") String token, int coupon_id);
+    @GET("/api/getredemptionsbycouponid/{coupon_id}")
+    Call<RedemptionsResponse> GetRedemptionsByCouponID(@Header("Token") String token, @Path("coupon_id") int coupon_id);
 
-    @GET("/api/getrewardbyid/<id>")
-    Call<RewardResponse> GetRewardByID(@Header("Token") String token, int id);
+    @GET("/api/getrewardbyid/{id}")
+    Call<RewardResponse> GetRewardByID(@Header("Token") String token, @Path("id") int id);
 
     @GET("/api/getrewards")
     Call<RewardsResponse> GetRewards(@Header("Token") String token);
 
-    @GET("/api/getrewardsbytier/<tier>")
-    Call<RewardsResponse> GetRewardByTier(@Header("Token") String token, int tier);
+    @GET("/api/getrewardsbytier/{tier}")
+    Call<RewardsResponse> GetRewardByTier(@Header("Token") String token, @Path("tier") int tier);
 
-    @GET("/api/getuniclassbyname/<name>")
-    Call<RewardResponse> GetUniclassByName(@Header("Token") String token, String name);
+    @GET("/api/getuniclassbyname/{name}")
+    Call<RewardResponse> GetUniclassByName(@Header("Token") String token, @Path("name") String name);
 
     @GET("/api/getuniclasses")
     Call<RewardsResponse> GetUniClasses(@Header("Token") String token);
 
-    @GET("/api/getuniclassesbyuniid/<uniclass_id>")
-    Call<RewardsResponse> GetUniclassesByUniID(@Header("Token") String token, int uniclass_id);
+    @GET("/api/getuniclassesbyuniid/{uniclass_id}")
+    Call<RewardsResponse> GetUniclassesByUniID(@Header("Token") String token, @Path("uniclass_id") int uniclass_id);
 
-    @GET("/api/getuniclassesbytutorid/<tutor_id>")
-    Call<RewardsResponse> GetUniclassesByTutorID(@Header("Token") String token, int tutor_id);
+    @GET("/api/getuniclassesbytutorid/{tutor_id}")
+    Call<RewardsResponse> GetUniclassesByTutorID(@Header("Token") String token, @Path("tutor_id") int tutor_id);
 
     @GET("/api/validate_token/{token}/{username}")
     Call<ValidateTokenResponse> ValidateToken(@Path("token") String token, @Path("username") String username);

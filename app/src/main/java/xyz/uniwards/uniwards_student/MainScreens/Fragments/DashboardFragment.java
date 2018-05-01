@@ -1,27 +1,21 @@
 package xyz.uniwards.uniwards_student.MainScreens.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import xyz.uniwards.uniwards_student.CustomAdapter;
-import xyz.uniwards.uniwards_student.DashCard;
+import xyz.uniwards.uniwards_student.DashCardHandle.AsyncDashCard;
+import xyz.uniwards.uniwards_student.DashCardHandle.DashCard;
 import xyz.uniwards.uniwards_student.R;
-import xyz.uniwards.uniwards_student.RecyclerAdapter;
 
 public class DashboardFragment extends Fragment {
     private RecyclerView recyclerView;
@@ -31,7 +25,6 @@ public class DashboardFragment extends Fragment {
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
-    private static final int DATASET_COUNT = 3;
 
     private enum LayoutManagerType {
         GRID_LAYOUT_MANAGER,
@@ -62,8 +55,9 @@ public class DashboardFragment extends Fragment {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        mAdapter = new CustomAdapter(dashCards);
-        mRecyclerView.setAdapter(mAdapter);
+        new AsyncDashCard(this.getActivity(), this.mAdapter, this.mRecyclerView).execute();
+        //mAdapter = new CustomAdapter(dashCards);
+        //mRecyclerView.setAdapter(mAdapter);
 
         return Page;
     }
@@ -71,8 +65,7 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        initDashCards();
+        //initDashCards();
     }
 
     public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
@@ -110,12 +103,8 @@ public class DashboardFragment extends Fragment {
     }
 
     private void initDashCards() {
-        //mDataset = new String[DATASET_COUNT];
-        for (int i = 0; i < DATASET_COUNT; i++) {
-            //mDataset[i] = "This is element #" + i;
-        }
-
         dashCards = new ArrayList<>();
+
         dashCards.add(new DashCard(R.mipmap.classroom_detected,"Class detected!",
                 "We've detected that you're in CSIT113, click this to confirm"));
         dashCards.add(new DashCard(R.mipmap.coupon_redeemed,"Coupon Redeemed!",

@@ -8,6 +8,7 @@ import java.util.List;
  */
 
 public class EnrolmentsResponse {
+    private String response_message;
     private List<EnrolmentResponse> enrolments = null;
 
     public List<EnrolmentResponse> GetEnrolments() {
@@ -28,4 +29,5 @@ public class EnrolmentsResponse {
         this.enrolments = enrolments;
     }
 
+    public String GetResponse() { return this.response_message; }
 }

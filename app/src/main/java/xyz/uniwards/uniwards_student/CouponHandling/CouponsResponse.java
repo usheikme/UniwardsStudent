@@ -8,6 +8,7 @@ import java.util.List;
  */
 
 public class CouponsResponse {
+    private String response_message;
     private List<CouponResponse> coupons = null;
 
     public List<CouponResponse> GetCoupons() {
@@ -28,4 +29,5 @@ public class CouponsResponse {
         this.coupons = coupons;
     }
 
+    public String GetResponse() { return this.response_message; }
 }

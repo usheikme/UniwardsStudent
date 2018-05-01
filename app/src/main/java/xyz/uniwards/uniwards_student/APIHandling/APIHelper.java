@@ -37,6 +37,7 @@ public class APIHelper {
 
     public static UniwardsAPI GetUniwardsAPI() {
         if(isInitialized) {
+            Log.wtf("Initializedd", "INIT");
         }
         else {
             initAPIHelper();

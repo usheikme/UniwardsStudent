@@ -9,6 +9,7 @@ import java.util.List;
  */
 
 public class RedemptionsResponse {
+    private String response_message;
     private List<RedemptionResponse> redemptions = null;
 
     public List<RedemptionResponse> GetRedemptions() {
@@ -29,4 +30,5 @@ public class RedemptionsResponse {
         this.redemptions = redemptions;
     }
 
+    public String GetResponse() { return this.response_message; }
 }

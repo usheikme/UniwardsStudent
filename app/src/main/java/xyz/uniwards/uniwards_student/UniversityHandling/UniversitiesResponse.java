@@ -10,6 +10,7 @@ import java.util.List;
 
 
 public class UniversitiesResponse {
+    private String response_message;
     private List<UniversityResponse> universities = null;
 
     public List<UniversityResponse> GetUniversities() {
@@ -29,6 +30,8 @@ public class UniversitiesResponse {
     public void SetUniversities(List<UniversityResponse> universities) {
         this.universities = universities;
     }
+
+    public String GetResponse() { return this.response_message; }
 
 }
 

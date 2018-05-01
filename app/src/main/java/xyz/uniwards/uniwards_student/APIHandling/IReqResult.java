@@ -5,6 +5,6 @@ package xyz.uniwards.uniwards_student.APIHandling;
  */
 
 public interface IReqResult<T> {
-    enum Type{};
+    enum Type{}
     T GetResult();
 }

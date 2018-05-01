@@ -1,5 +1,8 @@
 package xyz.uniwards.uniwards_student.MainScreens;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +11,7 @@ import android.util.Log;
 import xyz.uniwards.uniwards_student.Login.LoginActivity;
 import xyz.uniwards.uniwards_student.R;
 import xyz.uniwards.uniwards_student.TokenValidation.TokenHandle;
+import xyz.uniwards.uniwards_student.NotifcationHandle;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             Log.e("Token", "Exists");
             String token = TokenHandle.ReadToken();
             String username = TokenHandle.ReadUsername();
-            if(token != null) {
+            if(token != "") {
                 Log.e("Token-ME", token);
                 Log.e("Token", "Not Null");
                 TokenHandle.ValidateToken(token, username, this);
@@ -30,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else {
+            Intent intent = new Intent(this, DashboardActivity.class);
+            NotifcationHandle.MakeNotifcation(this, "Test Noti", "Test", R.drawable.login_pass, intent);
+
             Intent i = new Intent(this, LoginActivity.class);
             startActivity(i);
         }

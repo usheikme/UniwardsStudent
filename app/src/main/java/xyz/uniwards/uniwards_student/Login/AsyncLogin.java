@@ -110,8 +110,6 @@ public class AsyncLogin extends AsyncTask<Void, Void, Void> {
                 //if(response.isSuccessful()) {
                 Log.wtf("LoginData2", response.body().toString());
                 HandleLogin(new LoginResult(loginResp), username);
-
-
             }
 
             @Override
@@ -123,7 +121,7 @@ public class AsyncLogin extends AsyncTask<Void, Void, Void> {
     }
 
     private void HandleLogin(LoginResult loginResult, String username) {
-        if (loginResult.GetLoginType() == LoginResult.Type.LOGIN_SUCCESS) {
+        if (loginResult.GetType() == LoginResult.Type.LOGIN_SUCCESS) {
             TokenHandle.StoreToken(loginResult.GetToken(), username);
             activity.runOnUiThread(new Runnable() {
                 @Override

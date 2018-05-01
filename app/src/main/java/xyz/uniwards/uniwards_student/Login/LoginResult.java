@@ -24,7 +24,7 @@ public class LoginResult implements IReqResult<String> {
 
     public String GetResult() {
         String message = "";
-            switch(GetLoginType()) {
+            switch(GetType()) {
                 case LOGIN_SUCCESS:
                     message = "Success!";
                     break;
@@ -45,7 +45,7 @@ public class LoginResult implements IReqResult<String> {
         return message;
     }
 
-    public Type GetLoginType() {
+    public Type GetType() {
         return Type.values()[Integer.parseInt(loginData.GetResponse())];
     }
 

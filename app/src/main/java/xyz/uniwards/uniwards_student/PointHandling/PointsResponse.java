@@ -9,9 +9,10 @@ import java.util.List;
  */
 
 public class PointsResponse {
+    private String response_message;
     private List<PointResponse> points = null;
 
-    public List<PointResponse> GetEnrolments() {
+    public List<PointResponse> GetPoints() {
         return points;
     }
 
@@ -29,4 +30,5 @@ public class PointsResponse {
         this.points = points;
     }
 
+    public String GetResponse() { return this.response_message; }
 }

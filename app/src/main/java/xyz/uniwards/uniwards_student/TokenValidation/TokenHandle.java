@@ -24,7 +24,7 @@ public class TokenHandle {
     public static Boolean isInitialized = false;
     public static Boolean isValid = false;
     public static Boolean hasBeenValidated = false;
-    private static String token;
+    public static String token;
 
     public static void InitTokenHandle(Context context) {
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -34,8 +34,8 @@ public class TokenHandle {
     public static boolean TokenExists() {
         if(isInitialized) {
             Log.e("EREKT", "CCC");
-            String raw_token = ReadToken();
-            if(raw_token != null)
+            token = ReadToken();
+            if(token != "")
                 return true;
             else
                 return false;
@@ -74,7 +74,7 @@ public class TokenHandle {
             }
         }
 
-        return null;
+        return "";
     }
 
     public static String ReadUsername() {

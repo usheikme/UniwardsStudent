@@ -8,6 +8,7 @@ import java.util.List;
  */
 
 public class RewardsResponse {
+    private String response_message;
     private List<RewardResponse> rewards = null;
 
     public List<RewardResponse> GetRewards() {
@@ -24,8 +25,8 @@ public class RewardsResponse {
         return uni_codes;
     }
 
-    public void SetRewards(List<RewardResponse> rewards) {
-        this.rewards = rewards;
-    }
+    public void SetRewards(List<RewardResponse> rewards) { this.rewards = rewards; }
+
+    public String GetResponse() { return this.response_message; }
 
 }

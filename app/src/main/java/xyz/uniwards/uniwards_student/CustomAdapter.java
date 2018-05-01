@@ -1,6 +1,5 @@
 package xyz.uniwards.uniwards_student;
 
-        import android.graphics.drawable.Drawable;
         import android.support.v7.widget.RecyclerView;
         import android.util.Log;
         import android.view.LayoutInflater;
@@ -10,9 +9,9 @@ package xyz.uniwards.uniwards_student;
         import android.widget.TextView;
         import android.widget.Toast;
 
-        import org.w3c.dom.Text;
-
         import java.util.List;
+
+        import xyz.uniwards.uniwards_student.DashCardHandle.DashCard;
 
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
