@@ -38,7 +38,7 @@ public class LoginResult implements IReqResult<String> {
                         message = "Error!";
                         break;
                 default:
-                    message = "An error occured!";
+                    message = "An error occurred!";
                     break;
         }
 
@@ -53,4 +53,7 @@ public class LoginResult implements IReqResult<String> {
         return loginData.GetToken();
     }
 
+    public Integer GetUniID() {
+        return loginData.GetUniID();
+    }
 }

@@ -11,7 +11,7 @@ import xyz.uniwards.uniwards_student.ListResultEntity;
  * Created by Umayr on 5/1/2018.
  */
 
-public class PointsResult implements IReqResult<ListResultEntity<List<PointResponse>> > {
+public class PointsResult implements IReqResult<ListResultEntity<PointResponse> > {
     private PointsResponse pointsData;
 
     public enum Type {
@@ -30,8 +30,8 @@ public class PointsResult implements IReqResult<ListResultEntity<List<PointRespo
         this.pointsData = data;
     }
 
-    public ListResultEntity<List<PointResponse>> GetResult() {
-        ListResultEntity<List<PointResponse>> pointsEnt = new ListResultEntity("", null);
+    public ListResultEntity<PointResponse> GetResult() {
+        ListResultEntity<PointResponse> pointsEnt = new ListResultEntity("", null, ListResultEntity.Type.CARD_POINT);
         switch(GetType()) {
             case POINT_GET_FAILED:
                 pointsEnt.SetResponseMessage("Failed to get points!");

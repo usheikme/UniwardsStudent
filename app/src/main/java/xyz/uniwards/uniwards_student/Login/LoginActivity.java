@@ -23,12 +23,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        InitLoginButton();
+        InitLoginButtonAsClickable();
         InitRegisterAsClickable();
     }
 
     //Initialize the onclicklistener for the login button and make the button send the login request on click
-    protected void InitLoginButton() {
+    protected void InitLoginButtonAsClickable() {
         Button loginButton = findViewById(R.id.button_login);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

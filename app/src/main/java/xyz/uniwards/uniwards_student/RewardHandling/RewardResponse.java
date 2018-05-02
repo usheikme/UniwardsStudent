@@ -5,32 +5,36 @@ package xyz.uniwards.uniwards_student.RewardHandling;
  */
 
 public class RewardResponse {
+    private String response_message;
     private String desc;
-    private int id;
-    private int name;
+    private Integer id;
+    private String name;
     private String requirement;
-    private int tier;
-    private int type;
-    private int value;
+    private Integer tier;
+    private Integer type;
+    private Integer value;
+
+    public String GetResponse() { return this.response_message; }
+    public void SetResponse(String response_message) { this.response_message = response_message; }
 
     public String GetDesc() { return desc; }
-    public void SetDesc(String value) { this.desc = value; }
+    public void SetDesc(String desc) { this.desc = desc; }
 
-    public long GetID() { return id; }
-    public void SetID(int value) { this.id = value; }
+    public Integer GetID() { return id; }
+    public void SetID(Integer id) { this.id = id; }
 
-    public long GetName() { return name; }
-    public void SetName(int value) { this.name = value; }
+    public String GetName() { return name; }
+    public void SetName(String name) { this.name = name; }
 
     public String GetRequirement() { return requirement; }
-    public void SetRequirement(String value) { this.requirement = value; }
+    public void SetRequirement(String requirement) { this.requirement = requirement; }
 
-    public long GetTier() { return tier; }
-    public void SetTier(int value) { this.tier = value; }
+    public Integer GetTier() { return tier; }
+    public void SetTier(Integer tier) { this.tier = tier; }
 
-    public long GetType() { return type; }
-    public void SetType(int value) { this.type = value; }
+    public Integer GetType() { return type; }
+    public void SetType(Integer type) { this.type = type; }
 
-    public long GetValue() { return value; }
-    public void SetValue(int value) { this.value = value; }
+    public Integer GetValue() { return value; }
+    public void SetValue(Integer value) { this.value = value; }
 }

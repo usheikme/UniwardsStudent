@@ -6,5 +6,5 @@
     android:layout_height="match_parent"
     android:id="@+id/MyPage"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="xyz.uniwards.uniwards_student.MainScreens.Fragments.DashboardFragment"
+    tools:context="xyz.uniwards.uniwards_student.MainScreens.Fragments.Dashboard.DashboardFragment"
     tools:showIn="@layout/activity_main"/>

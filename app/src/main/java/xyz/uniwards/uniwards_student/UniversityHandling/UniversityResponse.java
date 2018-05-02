@@ -5,12 +5,16 @@ package xyz.uniwards.uniwards_student.UniversityHandling;
  */
 
 public class UniversityResponse {
-
+    private String response_message;
     private String address;
     private Integer id;
     private String mobile_no;
     private String name;
     private String uni_code;
+
+    public String GetResponse() { return this.response_message; }
+    public void SetResponse(String response_message) { this.response_message = response_message; }
+
 
     public String GetAddress() {
         return address;

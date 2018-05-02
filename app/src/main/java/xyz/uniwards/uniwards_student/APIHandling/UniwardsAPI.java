@@ -10,6 +10,7 @@ import retrofit2.http.Path;
 import xyz.uniwards.uniwards_student.CouponHandling.CouponResponse;
 import xyz.uniwards.uniwards_student.CouponHandling.CouponsResponse;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentsResponse;
+import xyz.uniwards.uniwards_student.EnrolmentHandling.NewEnrolmentResponse;
 import xyz.uniwards.uniwards_student.Login.LoginResponse;
 import xyz.uniwards.uniwards_student.PointHandling.PointsResponse;
 import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionResponse;
@@ -18,6 +19,8 @@ import xyz.uniwards.uniwards_student.Registration.RegisterResponse;
 import xyz.uniwards.uniwards_student.RewardHandling.RewardResponse;
 import xyz.uniwards.uniwards_student.RewardHandling.RewardsResponse;
 import xyz.uniwards.uniwards_student.TokenValidation.ValidateTokenResponse;
+import xyz.uniwards.uniwards_student.UniclassHandling.UniclassResponse;
+import xyz.uniwards.uniwards_student.UniclassHandling.UniclassesResponse;
 import xyz.uniwards.uniwards_student.UniversityHandling.UniversitiesResponse;
 import xyz.uniwards.uniwards_student.UniversityHandling.UniversityResponse;
 
@@ -85,16 +88,16 @@ public interface UniwardsAPI {
     Call<RewardsResponse> GetRewardByTier(@Header("Token") String token, @Path("tier") int tier);
 
     @GET("/api/getuniclassbyname/{name}")
-    Call<RewardResponse> GetUniclassByName(@Header("Token") String token, @Path("name") String name);
+    Call<UniclassResponse> GetUniclassByName(@Header("Token") String token, @Path("name") String name);
 
     @GET("/api/getuniclasses")
-    Call<RewardsResponse> GetUniClasses(@Header("Token") String token);
+    Call<UniclassesResponse> GetUniClasses(@Header("Token") String token);
 
     @GET("/api/getuniclassesbyuniid/{uniclass_id}")
-    Call<RewardsResponse> GetUniclassesByUniID(@Header("Token") String token, @Path("uniclass_id") int uniclass_id);
+    Call<UniclassesResponse> GetUniclassesByUniID(@Header("Token") String token, @Path("uniclass_id") int uniclass_id);
 
     @GET("/api/getuniclassesbytutorid/{tutor_id}")
-    Call<RewardsResponse> GetUniclassesByTutorID(@Header("Token") String token, @Path("tutor_id") int tutor_id);
+    Call<UniclassesResponse> GetUniclassesByTutorID(@Header("Token") String token, @Path("tutor_id") int tutor_id);
 
     @GET("/api/validate_token/{token}/{username}")
     Call<ValidateTokenResponse> ValidateToken(@Path("token") String token, @Path("username") String username);
@@ -102,6 +105,12 @@ public interface UniwardsAPI {
     @FormUrlEncoded
     @POST("/api/login")
     Call<LoginResponse> StudentLogin(@Header("Token") String token, @Field("username") String username, @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("/api/newenrolment")
+    Call<NewEnrolmentResponse> NewEnrolment(@Header("Token") String token, @Field("uniclass_id") Integer uniclass_id,
+                                     @Field("student_id") Integer student_id,
+                                     @Field("date") String date);
 
     @FormUrlEncoded
     @POST("/api/registeruser")

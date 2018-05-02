@@ -1,29 +1,27 @@
-package xyz.uniwards.uniwards_student;
+package xyz.uniwards.uniwards_student.MainScreens.Popups.Enrol;
 
-        import android.support.v7.widget.RecyclerView;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.ImageView;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-        import java.util.List;
+import java.util.List;
 
-        import xyz.uniwards.uniwards_student.DashCardHandle.DashCard;
+import xyz.uniwards.uniwards_student.DashCardHandle.DashCard;
+import xyz.uniwards.uniwards_student.EnrolmentHandling.AsyncNewEnrolment;
+import xyz.uniwards.uniwards_student.R;
 
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
+public class EnrolAdaptor extends RecyclerView.Adapter<EnrolAdaptor.ViewHolder> {
     private static final String TAG = "CustomAdapter";
-
     private static List<DashCard> dashCards;
 
-    //TODO FUCK
-    public static int count = 0;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
 
         //TODO REMOVE
         public ImageView itemImage;
@@ -38,23 +36,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             itemTitle = (TextView)itemView.findViewById(R.id.card_dashtitle);
             itemDetail = (TextView)itemView.findViewById(R.id.card_dashdesc);
 
-            // Define click listener for the ViewHolder's View.
+
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
-                    Toast.makeText(v.getContext(), "Thank you, enjoy your points :)", Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "Element " + dashCards.get(getAdapterPosition()).GetCardTitle() + " clicked.");
+                    new AsyncNewEnrolment(v, dashCards.get(getAdapterPosition()).GetCardTitle()).execute();
                 }
             });
-            textView = (TextView) v.findViewById(R.id.card_dashtitle);
-        }
-
-        public TextView getTextView() {
-            return textView;
         }
     }
 
-    public CustomAdapter(List<DashCard> dashCards) {
+    public EnrolAdaptor(List<DashCard> dashCards) {
         this.dashCards = dashCards;
     }
 
@@ -81,7 +74,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         viewHolder.itemDetail.setText(dashCards.get(position).GetCardDesc());
         viewHolder.itemImage.setImageResource(dashCards.get(position).GetCardImage());
         viewHolder.itemTitle.setText(dashCards.get(position).GetCardTitle());
-        //viewHolder.getTextView().setText(mDataSet[position]);
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)

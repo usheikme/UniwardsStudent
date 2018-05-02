@@ -5,10 +5,15 @@ package xyz.uniwards.uniwards_student.RedemptionHandling;
  */
 
 public class RedemptionResponse {
+        private String response_message;
         private int coupon_id;
         private String date;
         private int id;
         private int student_id;
+
+        public String GetResponse() { return this.response_message; }
+        public void SetResponse(String response_message) { this.response_message = response_message; }
+
 
         public long GetCouponID() { return coupon_id; }
         public void SetCouponID(int value) { this.coupon_id = value; }

@@ -25,6 +25,8 @@ public class TokenHandle {
     public static Boolean isValid = false;
     public static Boolean hasBeenValidated = false;
     public static String token;
+    public static String username;
+    public static Integer uni_id;
 
     public static void InitTokenHandle(Context context) {
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -33,7 +35,6 @@ public class TokenHandle {
 
     public static boolean TokenExists() {
         if(isInitialized) {
-            Log.e("EREKT", "CCC");
             token = ReadToken();
             if(token != "")
                 return true;
@@ -44,31 +45,30 @@ public class TokenHandle {
         return false;
     }
 
-    public static void StoreToken(String inToken, String username) {
+    public static void StoreToken(String inToken, String inUsername, Integer inUniID) {
         if(isInitialized) {
             SharedPreferences.Editor editor = preferences.edit();
             editor.clear();
             editor.putString("TOKEN", inToken);
-            editor.putString("USERNAME", username);
+            editor.putString("USERNAME", inUsername);
+            editor.putInt("UNI_ID", inUniID);
             editor.apply();
             editor.commit();
 
-            Log.e("Toked", isInitialized.toString());
-
             token = inToken;
+            username = inUsername;
+            uni_id = inUniID;
             isValid = true;
             hasBeenValidated = true;
         }
     }
 
+
     public static String ReadToken() {
         String raw_token = "";
-        Log.e("MAHTOKE", isInitialized.toString());
         if(isInitialized) {
             raw_token = preferences.getString("TOKEN", "");
-            Log.e("MAHTOK2E", "WTF");
             if(raw_token.length() > 0) {
-                Log.e("MAHTOKE", raw_token);
                 token = raw_token;
                 return raw_token;
             }
@@ -78,7 +78,7 @@ public class TokenHandle {
     }
 
     public static String ReadUsername() {
-        String username = "";
+        username = "";
         if(isInitialized) {
             username = preferences.getString("USERNAME", "");
             if(username.length() > 0) {
@@ -87,6 +87,18 @@ public class TokenHandle {
         }
 
         return null;
+    }
+
+    public static Integer ReadUniID() {
+        uni_id = -1;
+        if(isInitialized) {
+            uni_id = preferences.getInt("UNI_ID", 0);
+            if(uni_id > -1) {
+                return uni_id;
+            }
+        }
+
+        return -1;
     }
 
     public static void DeleteToken() {

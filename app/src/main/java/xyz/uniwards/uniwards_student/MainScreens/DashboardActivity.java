@@ -1,7 +1,5 @@
 package xyz.uniwards.uniwards_student.MainScreens;
 
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,20 +7,18 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import xyz.uniwards.uniwards_student.MainScreens.Fragments.CouponFragment;
-import xyz.uniwards.uniwards_student.MainScreens.Fragments.DashboardFragment;
-import xyz.uniwards.uniwards_student.MainScreens.Fragments.ProfileFragment;
+import xyz.uniwards.uniwards_student.MainScreens.Fragments.Coupon.CouponFragment;
+import xyz.uniwards.uniwards_student.MainScreens.Fragments.Dashboard.DashboardFragment;
+import xyz.uniwards.uniwards_student.MainScreens.Fragments.Profile.ProfileFragment;
 import xyz.uniwards.uniwards_student.MainScreens.Fragments.RewardFragment;
 import xyz.uniwards.uniwards_student.R;
 
@@ -36,7 +32,7 @@ public class DashboardActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_dashboard);
-            Log.wtf("FUCK22222", "THIS");
+
             try {
                 MyTabs = (TabLayout) findViewById(R.id.MyTabs);
                 MyPage = (ViewPager) findViewById(R.id.MyPage);

@@ -25,7 +25,11 @@
         </activity>
         <activity android:name=".Login.LoginActivity" />
         <activity android:name=".Registration.RegisterActivity" />
-        <activity android:name=".MainScreens.DashboardActivity"></activity>
+        <activity android:name=".MainScreens.DashboardActivity" />
+        <activity
+            android:name=".MainScreens.Popups.Enrol.PopupEnrolActivity"
+            android:theme="@style/Theme.Transparent">
+        </activity>
     </application>
 
 </manifest>

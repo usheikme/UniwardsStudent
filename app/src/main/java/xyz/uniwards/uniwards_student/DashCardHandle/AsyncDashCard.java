@@ -11,6 +11,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,19 +23,29 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import xyz.uniwards.uniwards_student.APIHandling.APIHelper;
-import xyz.uniwards.uniwards_student.CustomAdapter;
+import xyz.uniwards.uniwards_student.CouponHandling.CouponsResponse;
+import xyz.uniwards.uniwards_student.CouponHandling.CouponsResult;
 import xyz.uniwards.uniwards_student.DashCardHandle.DashCard;
+import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentResponse;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentsResponse;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentsResult;
 import xyz.uniwards.uniwards_student.Globals;
+import xyz.uniwards.uniwards_student.ListResultEntity;
+import xyz.uniwards.uniwards_student.MainScreens.Fragments.Dashboard.DashboardAdaptor;
+import xyz.uniwards.uniwards_student.PointHandling.PointResponse;
 import xyz.uniwards.uniwards_student.PointHandling.PointsResponse;
 import xyz.uniwards.uniwards_student.PointHandling.PointsResult;
 import xyz.uniwards.uniwards_student.R;
+import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionResponse;
 import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionsResponse;
 import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionsResult;
+import xyz.uniwards.uniwards_student.RewardHandling.RewardsResult;
+import xyz.uniwards.uniwards_student.UniclassHandling.UniclassesResult;
 import xyz.uniwards.uniwards_student.RewardHandling.RewardsResponse;
 import xyz.uniwards.uniwards_student.TokenValidation.TokenHandle;
 import xyz.uniwards.uniwards_student.APIHandling.UniwardsAPI;
+import xyz.uniwards.uniwards_student.UniclassHandling.UniclassResponse;
+import xyz.uniwards.uniwards_student.UniclassHandling.UniclassesResponse;
 
 /**
  * Created by Umayr on 4/15/2018.
@@ -38,17 +53,19 @@ import xyz.uniwards.uniwards_student.APIHandling.UniwardsAPI;
 
 public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
     private Activity activity;
-    private CustomAdapter mAdapter;
+    private DashboardAdaptor mAdapter;
     private RecyclerView mRecyclerView;
     private PointsResponse pointsResp;
     private RedemptionsResponse redemptionsResp;
     private RewardsResponse rewardsResp;
     private EnrolmentsResponse enrolmentsResp;
+    private UniclassesResponse uniclassesResponse;
+    private CouponsResponse couponsResp;
     private APIHelper helper;
     private ProgressDialog pDialog;
     private List<DashCard> dashCards;
 
-    public AsyncDashCard(Activity activity, CustomAdapter mAdapter, RecyclerView mRecyclerView) {
+    public AsyncDashCard(Activity activity, DashboardAdaptor mAdapter, RecyclerView mRecyclerView) {
         this.activity = activity;
         this.mAdapter = mAdapter;
         this.mRecyclerView = mRecyclerView;
@@ -64,16 +81,73 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
         Globals globals = new Globals();
         globals.setInstance(globals);
 
+        GetCouponsStub();
+        GetRewardsStub();
+        GetUniclassesStub();
         GetPointsStub();
         GetRedemptionsStub();
         GetEnrolmentsStub();
         return null;
     }
 
+    private void GetCouponsStub() {
+        UniwardsAPI uniapi = APIHelper.GetUniwardsAPI();
+        Call<CouponsResponse> call = uniapi.GetCoupons(TokenHandle.token);
+        call.enqueue(new Callback<CouponsResponse>() {
+            @Override
+            public void onResponse(Call<CouponsResponse> call, Response<CouponsResponse> response) {
+                couponsResp = response.body();
+                HandleCouponsResponse(new CouponsResult(couponsResp));
+            }
+
+            @Override
+            public void onFailure(Call<CouponsResponse> call, Throwable t) {
+                HandleCouponsResponse(t);
+            }
+        });
+    }
+
+    private void HandleCouponsResponse(CouponsResult couponsResult) {
+        if (couponsResult.GetType() == CouponsResult.Type.COUPON_GET_SUCCESS) {
+            Globals.getInstance().SetCouponsResult(couponsResult);
+        } else {
+            Toast.makeText(activity, couponsResult.GetResult().GetResponseMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void HandleCouponsResponse(Throwable t) { Log.wtf(t.toString(), "xxc");}
+
+    private void GetRewardsStub() {
+        UniwardsAPI uniapi = APIHelper.GetUniwardsAPI();
+        Call<RewardsResponse> call = uniapi.GetRewards(TokenHandle.token);
+        call.enqueue(new Callback<RewardsResponse>() {
+            @Override
+            public void onResponse(Call<RewardsResponse> call, Response<RewardsResponse> response) {
+                rewardsResp = response.body();
+                HandleRewardsResponse(new RewardsResult(rewardsResp));
+            }
+
+            @Override
+            public void onFailure(Call<RewardsResponse> call, Throwable t) {
+                HandleRewardsResponse(t);
+            }
+        });
+    }
+
+    private void HandleRewardsResponse(RewardsResult rewardsResult) {
+        if (rewardsResult.GetType() == RewardsResult.Type.REWARD_GET_SUCCESS) {
+            Globals.getInstance().SetRewardsResult(rewardsResult);
+        } else {
+            Toast.makeText(activity, rewardsResult.GetResult().GetResponseMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void HandleRewardsResponse(Throwable t) { Log.wtf(t.toString(), "xxc");}
+
     private void GetPointsStub() {
         UniwardsAPI uniapi = APIHelper.GetUniwardsAPI();
-        Globals.getInstance().SetID(1);
         Log.wtf("TokenHandle.token", TokenHandle.token.toString());
+        Globals.getInstance().SetID(1);
         Log.wtf("GLOBALSSTUFF", Globals.getInstance().GetID().toString());
         Call<PointsResponse> call = uniapi.GetPointsByStudentID(TokenHandle.token, Globals.getInstance().GetID());
         call.enqueue(new Callback<PointsResponse>() {
@@ -98,7 +172,7 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
         }
     }
 
-    private void HandlePointsResponse(Throwable t) { }
+    private void HandlePointsResponse(Throwable t) { Log.wtf(t.toString(), "xxc");}
 
     private void GetRedemptionsStub() {
         Log.wtf("RedemptionsStub", "LOL");
@@ -126,7 +200,36 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
         }
     }
 
-    private void HandleRedemptionsResponse(Throwable t) { }
+    private void HandleRedemptionsResponse(Throwable t) { Log.wtf(t.toString(), "xxc");}
+
+    private void GetUniclassesStub() {
+        Log.wtf("Uniclasses", "LOL");
+        UniwardsAPI uniapi = APIHelper.GetUniwardsAPI();
+        //TODO ADD UNI ID FOR STUDENT... 2 days later I'm a legend. The Real m9
+        Call<UniclassesResponse> call = uniapi.GetUniclassesByUniID(TokenHandle.token, TokenHandle.uni_id);
+        call.enqueue(new Callback<UniclassesResponse>() {
+            @Override
+            public void onResponse(Call<UniclassesResponse> call, Response<UniclassesResponse> response) {
+                uniclassesResponse = response.body();
+                HandleUniclassesResponse(new UniclassesResult(uniclassesResponse));
+            }
+
+            @Override
+            public void onFailure(Call<UniclassesResponse> call, Throwable t) {
+                HandleUniclassesResponse(t);
+            }
+        });
+    }
+
+    private void HandleUniclassesResponse(UniclassesResult uniclassesResult) {
+        if (uniclassesResult.GetType() == UniclassesResult.Type.UNICLASS_GET_SUCCESS) {
+            Globals.getInstance().SetUniclassesResult(uniclassesResult);
+        } else {
+            Toast.makeText(activity, uniclassesResult.GetResult().GetResponseMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void HandleUniclassesResponse(Throwable t) { Log.wtf(t.toString(), "xxc");}
 
     private void GetEnrolmentsStub() {
         Log.wtf("GetEnrolmentsStub", "LOL");
@@ -161,17 +264,88 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
 
     private void AddDashCards() {
         dashCards = new ArrayList<>();
+        ListResultEntity<EnrolmentResponse> enrolmentsEnt = null;
+        ListResultEntity<PointResponse> pointsEnt = null;
+        ListResultEntity<RedemptionResponse> redemptionsEnt = null;
 
-        dashCards.add(new DashCard(R.mipmap.classroom_detected,"Class detected!",
-                "We've detected that you're in CSIT113, click this to confirm"));
-        dashCards.add(new DashCard(R.mipmap.coupon_redeemed,"Coupon Redeemed!",
-                "Thank you for redeeming your 15% off at SinX Digital Solutions"));
-        dashCards.add(new DashCard(R.mipmap.reward_given,"Reward Received!",
-                "250 points have added to your account for attending your last 3 classes in a row"));
-        dashCards.add(new DashCard(R.mipmap.reward_given,Globals.getInstance().GetEnrolmentsResult().GetResult().GetResponseMessage(),
-                Integer.toString(Globals.getInstance().GetEnrolmentsResult().GetResult().GetList().get(0).GetStudentID())));
+        try {
+        enrolmentsEnt =  Globals.getInstance().GetEnrolmentsResult().GetResult();
+        } catch (Exception e) { Log.wtf(e.toString(), "LOL"); }
 
-        this.mAdapter = new CustomAdapter(dashCards);
+        try {
+        pointsEnt =  Globals.getInstance().GetPointsResult().GetResult();
+        } catch (Exception e) { Log.wtf(e.toString(), "LOL"); }
+
+        try {
+        redemptionsEnt =  Globals.getInstance().GetRedemptionsResult().GetResult();
+        } catch (Exception e) { Log.wtf(e.toString(), "LOL"); }
+
+
+        Integer i = 0;
+        try {
+            if (enrolmentsEnt != null) {
+                for (EnrolmentResponse enrolment : enrolmentsEnt.GetList()) {
+                    Date tempDate = null;
+                    try {
+                        tempDate = new SimpleDateFormat("dd/MM/yyyy").parse(enrolment.GetDate());
+                    } catch (Exception e) {
+                        Log.wtf(e.toString(), "LOL");
+                    }
+
+                    dashCards.add(new DashCard(enrolmentsEnt.GetIcon(),
+                            enrolmentsEnt.GetTitle(),
+                            enrolmentsEnt.GetDesc(enrolmentsEnt.GetFormatData(i)),
+                            tempDate));
+                    i++;
+                }
+            }
+        } catch (Exception e) { Log.wtf(e.toString(), "LOL"); }
+
+        i = 0;
+        try {
+            for (PointResponse point : pointsEnt.GetList()) {
+                Date tempDate = null;
+                try {
+                    tempDate = new SimpleDateFormat("dd/MM/yyyy").parse(point.GetDate());
+                } catch (Exception e) {
+                    Log.wtf(e.toString(), "LOL");
+                }
+
+                dashCards.add(new DashCard(pointsEnt.GetIcon(),
+                        pointsEnt.GetTitle(),
+                        pointsEnt.GetDesc(pointsEnt.GetFormatData(0)),
+                        tempDate));
+                i++;
+            }
+        } catch (Exception e) { Log.wtf(e.toString(), "LOL"); }
+
+        i = 0;
+        try {
+            for (RedemptionResponse redemption : redemptionsEnt.GetList()) {
+                Date tempDate = null;
+                try {
+                    tempDate = new SimpleDateFormat("dd/MM/yyyy").parse(redemption.GetDate());
+                } catch (Exception e) {
+                    Log.wtf(e.toString(), "LOL");
+                }
+
+                dashCards.add(new DashCard(redemptionsEnt.GetIcon(),
+                        redemptionsEnt.GetTitle(),
+                        redemptionsEnt.GetDesc(redemptionsEnt.GetFormatData(0)),
+                        tempDate));
+                i++;
+            }
+        } catch (Exception e) { Log.wtf(e.toString(), "LOL"); }
+
+        Collections.sort(dashCards, new Comparator<DashCard>() {
+            public int compare(DashCard o1, DashCard o2) {
+                if (o1.GetCardDate() == null || o2.GetCardDate() == null)
+                    return 0;
+                return o1.GetCardDate().compareTo(o2.GetCardDate());
+            }
+        });
+
+        this.mAdapter = new DashboardAdaptor(dashCards);
         this.mRecyclerView.setAdapter(this.mAdapter);
     }
 }

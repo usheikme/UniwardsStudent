@@ -6,4 +6,6 @@
     <color name="bgBottomNavigation">#131733</color>
     <color name="colorButton">#131733</color>
     <color name="colorEditText">#41000000</color>
+    <color name="colorLightBlue">#4d8dcd</color>
+    <color name="colorWhite">#ffff</color>
 </resources>

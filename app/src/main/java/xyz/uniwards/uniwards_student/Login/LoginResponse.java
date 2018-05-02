@@ -9,12 +9,14 @@ public class LoginResponse {
 
     private String response_message;
     private String user_token;
-
+    private Integer uni_id;
     public String GetResponse() {
         return response_message;
     }
     public String GetToken() {
         return user_token;
     }
-
+    public Integer GetUniID() {
+        return uni_id;
+    }
 }

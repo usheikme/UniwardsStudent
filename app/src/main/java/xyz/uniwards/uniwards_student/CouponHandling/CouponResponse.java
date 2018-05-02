@@ -5,32 +5,36 @@ package xyz.uniwards.uniwards_student.CouponHandling;
  */
 
 public class CouponResponse {
-    private long code;
+    private String response_message;
+    private Integer code;
     private String desc;
     private String expiry;
-    private long id;
+    private Integer id;
     private String name;
-    private long point_cost;
-    private long vendor_id;
+    private Integer point_cost;
+    private Integer vendor_id;
 
-    public long GetCode() { return code; }
-    public void SetCode(long value) { this.code = value; }
+    public String GetResponse() { return this.response_message; }
+    public void SetResponse(String response_message) { this.response_message = response_message; }
+
+    public Integer GetCode() { return code; }
+    public void SetCode(Integer code) { this.code = code; }
 
     public String GetDesc() { return desc; }
-    public void SetDesc(String value) { this.desc = value; }
+    public void SetDesc(String desc) { this.desc = desc; }
 
     public Object GetExpiry() { return expiry; }
-    public void SetExpiry(String value) { this.expiry = value; }
+    public void SetExpiry(String expiry) { this.expiry = expiry; }
 
-    public long GetID() { return id; }
-    public void SetID(long value) { this.id = value; }
+    public Integer GetID() { return id; }
+    public void SetID(Integer id) { this.id = id; }
 
     public String GetName() { return name; }
-    public void SetName(String value) { this.name = value; }
+    public void SetName(String name) { this.name = name; }
 
-    public long GetPointCost() { return point_cost; }
-    public void SetPointCost(long value) { this.point_cost = value; }
+    public Integer GetPointCost() { return point_cost; }
+    public void SetPointCost(Integer value) { this.point_cost = value; }
 
-    public long GetVendorID() { return vendor_id; }
-    public void SetVendorID(long value) { this.vendor_id = value; }
+    public Integer GetVendorID() { return vendor_id; }
+    public void SetVendorID(Integer vendor_id) { this.vendor_id = vendor_id; }
 }

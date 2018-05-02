@@ -5,12 +5,16 @@ package xyz.uniwards.uniwards_student.EnrolmentHandling;
  */
 
 public class EnrolmentResponse {
-    private String en_date;
+    private String response_message;
+    private String date;
     private int student_id;
     private int uniclass_id;
 
-    public String GetEnDate() { return en_date; }
-    public void SetEnDate(String value) { this.en_date = value; }
+    public String GetResponse() { return this.response_message; }
+    public void SetResponse(String response_message) { this.response_message = response_message; }
+
+    public String GetDate() { return date; }
+    public void SetDate(String value) { this.date = value; }
 
     public int GetStudentID() { return student_id; }
     public void SetStudentID(int value) { this.student_id = value; }

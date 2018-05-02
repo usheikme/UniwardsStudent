@@ -19,7 +19,7 @@ public class EnrolmentsResponse {
     public List<String> GetUniverisityCodes() {
         List<String> uni_codes = new ArrayList<>();
         for (EnrolmentResponse uni : enrolments) {
-            uni_codes.add(uni.GetEnDate());
+            uni_codes.add(uni.GetDate());
         }
 
         return uni_codes;

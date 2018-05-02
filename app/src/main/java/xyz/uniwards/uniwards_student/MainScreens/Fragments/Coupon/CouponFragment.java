@@ -1,4 +1,4 @@
-package xyz.uniwards.uniwards_student.MainScreens.Fragments;
+package xyz.uniwards.uniwards_student.MainScreens.Fragments.Coupon;
 
 import android.content.Context;
 import android.net.Uri;

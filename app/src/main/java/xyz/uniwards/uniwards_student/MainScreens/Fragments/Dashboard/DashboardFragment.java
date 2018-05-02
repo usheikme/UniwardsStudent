@@ -1,4 +1,4 @@
-package xyz.uniwards.uniwards_student.MainScreens.Fragments;
+package xyz.uniwards.uniwards_student.MainScreens.Fragments.Dashboard;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,21 +8,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import xyz.uniwards.uniwards_student.CustomAdapter;
 import xyz.uniwards.uniwards_student.DashCardHandle.AsyncDashCard;
 import xyz.uniwards.uniwards_student.DashCardHandle.DashCard;
+import xyz.uniwards.uniwards_student.Globals;
 import xyz.uniwards.uniwards_student.R;
+import xyz.uniwards.uniwards_student.TokenValidation.TokenHandle;
 
 public class DashboardFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
 
-    private static final String TAG = "RecyclerViewFragment";
+    private static final String TAG = "DashboardFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
 
@@ -34,7 +36,7 @@ public class DashboardFragment extends Fragment {
     protected LayoutManagerType mCurrentLayoutManagerType;
 
     protected RecyclerView mRecyclerView;
-    protected CustomAdapter mAdapter;
+    protected DashboardAdaptor mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
     protected List<DashCard> dashCards;
 
@@ -55,9 +57,10 @@ public class DashboardFragment extends Fragment {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
+        TextView username = Page.findViewById(R.id.toolbar_username);
+        username.setText(TokenHandle.username);
+
         new AsyncDashCard(this.getActivity(), this.mAdapter, this.mRecyclerView).execute();
-        //mAdapter = new CustomAdapter(dashCards);
-        //mRecyclerView.setAdapter(mAdapter);
 
         return Page;
     }
@@ -65,7 +68,6 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //initDashCards();
     }
 
     public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
@@ -100,16 +102,5 @@ public class DashboardFragment extends Fragment {
         // Save currently selected layout manager.
         savedInstanceState.putSerializable(KEY_LAYOUT_MANAGER, mCurrentLayoutManagerType);
         super.onSaveInstanceState(savedInstanceState);
-    }
-
-    private void initDashCards() {
-        dashCards = new ArrayList<>();
-
-        dashCards.add(new DashCard(R.mipmap.classroom_detected,"Class detected!",
-                "We've detected that you're in CSIT113, click this to confirm"));
-        dashCards.add(new DashCard(R.mipmap.coupon_redeemed,"Coupon Redeemed!",
-                "Thank you for redeeming your 15% off at SinX Digital Solutions"));
-        dashCards.add(new DashCard(R.mipmap.reward_given,"Reward Received!",
-                "250 points have added to your account for attending your last 3 classes in a row"));
     }
 }

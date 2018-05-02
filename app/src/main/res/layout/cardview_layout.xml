@@ -4,16 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    card_view:cardBackgroundColor="#70000000">
-
+    card_view:cardBackgroundColor="#70000000"
+    card_view:cardElevation="1dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/card_dashimage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:layout_alignParentTop="true"
             android:scaleType="centerCrop" />
 
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/card_dashimage"
             android:maxLines="3"
-            android:padding="12dp"
+            android:padding="8dp"
             android:text="xxxx"
             android:textColor="#fff"
             android:textStyle="bold"
@@ -36,7 +36,8 @@
             android:layout_toRightOf="@+id/card_dashimage"
             android:layout_below="@+id/card_dashtitle"
             android:maxLines="3"
-            android:padding="12dp"
+            android:paddingLeft="8dp"
+            android:paddingBottom="12dp"
             android:text="test"
             android:textColor="#ffff"
             android:textSize="14dp" />

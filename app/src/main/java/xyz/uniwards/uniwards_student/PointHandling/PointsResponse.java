@@ -20,7 +20,7 @@ public class PointsResponse {
     public List<String> GetUniverisityCodes() {
         List<String> uni_codes = new ArrayList<>();
         for (PointResponse uni : points) {
-            uni_codes.add(uni.GetEnDate());
+            uni_codes.add(uni.GetDate());
         }
 
         return uni_codes;

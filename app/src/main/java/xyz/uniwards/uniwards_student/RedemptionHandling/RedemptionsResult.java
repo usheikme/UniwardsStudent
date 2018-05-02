@@ -11,7 +11,7 @@ import xyz.uniwards.uniwards_student.ListResultEntity;
  * Created by Umayr on 5/1/2018.
  */
 
-public class RedemptionsResult implements IReqResult<ListResultEntity<List<RedemptionResponse>>> {
+public class RedemptionsResult implements IReqResult<ListResultEntity<RedemptionResponse>> {
     private RedemptionsResponse redemptionsData;
 
     public enum Type {
@@ -30,22 +30,22 @@ public class RedemptionsResult implements IReqResult<ListResultEntity<List<Redem
         this.redemptionsData = data;
     }
 
-    public ListResultEntity<List<RedemptionResponse>> GetResult() {
-        ListResultEntity<List<RedemptionResponse>> pointsEnt = new ListResultEntity("", null);
+    public ListResultEntity<RedemptionResponse> GetResult() {
+        ListResultEntity<RedemptionResponse> redemptionsEnt = new ListResultEntity("", null, ListResultEntity.Type.CARD_REDEMPTION);
         switch(GetType()) {
             case REDEMPTION_GET_FAILED:
-                pointsEnt.SetResponseMessage("Failed to get redemptions!");
+                redemptionsEnt.SetResponseMessage("Failed to get redemptions!");
                 break;
             case REDEMPTION_GET_SUCCESS:
-                pointsEnt.SetResponseMessage("Successfully got redemptions!");
-                pointsEnt.SetList(redemptionsData.GetRedemptions());
+                redemptionsEnt.SetResponseMessage("Successfully got redemptions!");
+                redemptionsEnt.SetList(redemptionsData.GetRedemptions());
                 break;
             default:
-                pointsEnt.SetResponseMessage("An unknown error occured!");
+                redemptionsEnt.SetResponseMessage("An unknown error occured!");
                 break;
         }
 
-        return pointsEnt;
+        return redemptionsEnt;
     }
 
     public Type GetType() {

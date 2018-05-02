@@ -3,12 +3,17 @@ package xyz.uniwards.uniwards_student;
 import android.content.Intent;
 import android.graphics.Point;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import xyz.uniwards.uniwards_student.CouponHandling.CouponsResponse;
+import xyz.uniwards.uniwards_student.CouponHandling.CouponsResult;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentsResult;
 import xyz.uniwards.uniwards_student.PointHandling.PointsResult;
 import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionsResult;
 import xyz.uniwards.uniwards_student.RewardHandling.RewardsResult;
+import xyz.uniwards.uniwards_student.UniclassHandling.UniclassesResult;
 
 /**
  * Created by Umayr on 4/30/2018.
@@ -19,6 +24,8 @@ public class Globals {
     private EnrolmentsResult enrolmentsResult;
     private PointsResult pointsResult;
     private RedemptionsResult redemptionsResult;
+    private UniclassesResult uniclassesResult;
+    private CouponsResult couponsResult;
     private Integer id;
 
     public static Globals getInstance() {
@@ -38,6 +45,12 @@ public class Globals {
 
     public  Globals() {}
 
+    public CouponsResult GetCouponsResult() {
+        return this.couponsResult;
+    }
+
+    public void SetCouponsResult(CouponsResult couponsResult) {this.couponsResult = couponsResult; }
+
     public RewardsResult GetRewardsResult() {
         return this.rewardsResult;
     }
@@ -50,9 +63,7 @@ public class Globals {
         return this.enrolmentsResult;
     }
 
-    public void SetEnrolmentsResult(EnrolmentsResult enrolmentsResult) {
-        this.enrolmentsResult = enrolmentsResult;
-    }
+    public void SetEnrolmentsResult(EnrolmentsResult enrolmentsResult) { this.enrolmentsResult = enrolmentsResult; }
 
     public PointsResult GetPointsResult() {
         return this.pointsResult;
@@ -66,9 +77,13 @@ public class Globals {
         return this.redemptionsResult;
     }
 
-    public void SetRedemptionsResult(RedemptionsResult redemptionsResult) {
-        this.redemptionsResult = redemptionsResult;
+    public void SetRedemptionsResult(RedemptionsResult redemptionsResult) { this.redemptionsResult = redemptionsResult; }
+
+    public UniclassesResult GetUniclassesResult() {
+        return this.uniclassesResult;
     }
+
+    public void SetUniclassesResult(UniclassesResult uniclassesResult) { this.uniclassesResult = uniclassesResult; }
 
     public Integer GetID() {
         return this.id;
@@ -76,5 +91,11 @@ public class Globals {
 
     public void SetID(Integer id) {
         this.id = id;
+    }
+
+    public static String GetCurrentDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        return formatter.format(date);
     }
 }

@@ -9,7 +9,7 @@ import xyz.uniwards.uniwards_student.ListResultEntity;
  * Created by Umayr on 5/1/2018.
  */
 
-public class EnrolmentsResult implements IReqResult<ListResultEntity<List<EnrolmentResponse>>> {
+public class EnrolmentsResult implements IReqResult<ListResultEntity<EnrolmentResponse>> {
     private EnrolmentsResponse enrolmentsData;
 
     public enum Type {
@@ -27,22 +27,22 @@ public class EnrolmentsResult implements IReqResult<ListResultEntity<List<Enrolm
         this.enrolmentsData = data;
     }
 
-    public ListResultEntity<List<EnrolmentResponse>> GetResult() {
-        ListResultEntity<List<EnrolmentResponse>> pointsEnt = new ListResultEntity("", null);
+    public ListResultEntity<EnrolmentResponse> GetResult() {
+        ListResultEntity<EnrolmentResponse> enrolmentsEnt = new ListResultEntity("", null, ListResultEntity.Type.CARD_ENROLMENT);
         switch (GetType()) {
             case ENROLMENT_GET_FAILED:
-                pointsEnt.SetResponseMessage("Failed to get enrolments!");
+                enrolmentsEnt.SetResponseMessage("Failed to get enrolments!");
                 break;
             case ENROLMENT_GET_SUCCESS:
-                pointsEnt.SetResponseMessage("Successfully got enrolments!");
-                pointsEnt.SetList(enrolmentsData.GetEnrolments());
+                enrolmentsEnt.SetResponseMessage("Successfully got enrolments!");
+                enrolmentsEnt.SetList(enrolmentsData.GetEnrolments());
                 break;
             default:
-                pointsEnt.SetResponseMessage("An unknown error occured!");
+                enrolmentsEnt.SetResponseMessage("An unknown error occured!");
                 break;
         }
 
-        return pointsEnt;
+        return enrolmentsEnt;
     }
 
     public Type GetType() {

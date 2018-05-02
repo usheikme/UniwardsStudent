@@ -122,7 +122,7 @@ public class AsyncLogin extends AsyncTask<Void, Void, Void> {
 
     private void HandleLogin(LoginResult loginResult, String username) {
         if (loginResult.GetType() == LoginResult.Type.LOGIN_SUCCESS) {
-            TokenHandle.StoreToken(loginResult.GetToken(), username);
+            TokenHandle.StoreToken(loginResult.GetToken(), username, loginResult.GetUniID());
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
