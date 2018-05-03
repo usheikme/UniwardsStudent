@@ -35,10 +35,10 @@ public class UniclassesResult implements IReqResult<ListResultEntity<UniclassRes
         ListResultEntity<UniclassResponse> uniclassEnt = new ListResultEntity("", null, ListResultEntity.Type.CARD_UNICLASS);
         switch(GetType()) {
             case UNICLASS_GET_FAILED:
-                uniclassEnt.SetResponseMessage("Failed to get redemptions!");
+                uniclassEnt.SetResponseMessage("Failed to get uniclasses!");
                 break;
             case UNICLASS_GET_SUCCESS:
-                uniclassEnt.SetResponseMessage("Successfully got redemptions!");
+                uniclassEnt.SetResponseMessage("Successfully got uniclasses!");
                 uniclassEnt.SetList(uniclassesData.GetUniclasses());
                 break;
             default:

@@ -10,7 +10,7 @@ import retrofit2.http.Path;
 import xyz.uniwards.uniwards_student.CouponHandling.CouponResponse;
 import xyz.uniwards.uniwards_student.CouponHandling.CouponsResponse;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentsResponse;
-import xyz.uniwards.uniwards_student.EnrolmentHandling.NewEnrolmentResponse;
+import xyz.uniwards.uniwards_student.EnrolmentHandling.GenericEnrolmentResponse;
 import xyz.uniwards.uniwards_student.Login.LoginResponse;
 import xyz.uniwards.uniwards_student.PointHandling.PointsResponse;
 import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionResponse;
@@ -18,6 +18,7 @@ import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionsResponse;
 import xyz.uniwards.uniwards_student.Registration.RegisterResponse;
 import xyz.uniwards.uniwards_student.RewardHandling.RewardResponse;
 import xyz.uniwards.uniwards_student.RewardHandling.RewardsResponse;
+import xyz.uniwards.uniwards_student.StudentHandle.StudentResponse;
 import xyz.uniwards.uniwards_student.TokenValidation.ValidateTokenResponse;
 import xyz.uniwards.uniwards_student.UniclassHandling.UniclassResponse;
 import xyz.uniwards.uniwards_student.UniclassHandling.UniclassesResponse;
@@ -99,6 +100,9 @@ public interface UniwardsAPI {
     @GET("/api/getuniclassesbytutorid/{tutor_id}")
     Call<UniclassesResponse> GetUniclassesByTutorID(@Header("Token") String token, @Path("tutor_id") int tutor_id);
 
+    @GET("/api/getstudent")
+    Call<StudentResponse> GetStudent(@Header("token") String token);
+
     @GET("/api/validate_token/{token}/{username}")
     Call<ValidateTokenResponse> ValidateToken(@Path("token") String token, @Path("username") String username);
 
@@ -108,9 +112,15 @@ public interface UniwardsAPI {
 
     @FormUrlEncoded
     @POST("/api/newenrolment")
-    Call<NewEnrolmentResponse> NewEnrolment(@Header("Token") String token, @Field("uniclass_id") Integer uniclass_id,
-                                     @Field("student_id") Integer student_id,
-                                     @Field("date") String date);
+    Call<GenericEnrolmentResponse> NewEnrolment(@Header("Token") String token, @Field("uniclass_id") Integer uniclass_id,
+                                                @Field("student_id") Integer student_id,
+                                                @Field("date") String date);
+
+    @FormUrlEncoded
+    @POST("/api/deleteenrolment")
+    Call<GenericEnrolmentResponse> DeleteEnrolment(@Header("Token") String token, @Field("uniclass_id") Integer uniclass_id,
+                                            @Field("student_id") Integer student_id,
+                                            @Field("date") String date);
 
     @FormUrlEncoded
     @POST("/api/registeruser")

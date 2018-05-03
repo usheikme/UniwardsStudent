@@ -1,4 +1,4 @@
-package xyz.uniwards.uniwards_student.MainScreens.Popups.Enrol;
+package xyz.uniwards.uniwards_student.MainScreens.Popups.DropEnrolment;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
@@ -8,19 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import xyz.uniwards.uniwards_student.DashCardHandle.DashCard;
+import xyz.uniwards.uniwards_student.EnrolmentHandling.AsyncDeleteEnrolment;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.AsyncNewEnrolment;
 import xyz.uniwards.uniwards_student.R;
 
 
-public class EnrolAdaptor extends RecyclerView.Adapter<EnrolAdaptor.ViewHolder> {
+public class DropAdaptor extends RecyclerView.Adapter<DropAdaptor.ViewHolder> {
     private static final String TAG = "CustomAdapter";
-    private static List<DashCard> dashCards;
     private static Activity activity;
+    private static List<DashCard> dashCards;
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -42,13 +43,13 @@ public class EnrolAdaptor extends RecyclerView.Adapter<EnrolAdaptor.ViewHolder> 
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "Element " + dashCards.get(getAdapterPosition()).GetCardTitle() + " clicked.");
-                    new AsyncNewEnrolment(activity, dashCards.get(getAdapterPosition()).GetCardTitle()).execute();
+                    new AsyncDeleteEnrolment(activity, dashCards.get(getAdapterPosition()).GetCardTitle()).execute();
                 }
             });
         }
     }
 
-    public EnrolAdaptor(Activity activity, List<DashCard> dashCards) {
+    public DropAdaptor(Activity activity, List<DashCard> dashCards) {
         this.activity = activity;
         this.dashCards = dashCards;
     }
@@ -71,6 +72,7 @@ public class EnrolAdaptor extends RecyclerView.Adapter<EnrolAdaptor.ViewHolder> 
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
+    //TODO Title is classname
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Log.d(TAG, "Element " + position + " set.");
         viewHolder.itemDetail.setText(dashCards.get(position).GetCardDesc());

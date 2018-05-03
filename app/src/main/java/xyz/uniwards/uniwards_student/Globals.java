@@ -7,12 +7,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import xyz.uniwards.uniwards_student.APIHandling.RequestThread;
 import xyz.uniwards.uniwards_student.CouponHandling.CouponsResponse;
 import xyz.uniwards.uniwards_student.CouponHandling.CouponsResult;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentsResult;
 import xyz.uniwards.uniwards_student.PointHandling.PointsResult;
 import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionsResult;
 import xyz.uniwards.uniwards_student.RewardHandling.RewardsResult;
+import xyz.uniwards.uniwards_student.StudentHandle.StudentResult;
 import xyz.uniwards.uniwards_student.UniclassHandling.UniclassesResult;
 
 /**
@@ -20,12 +22,14 @@ import xyz.uniwards.uniwards_student.UniclassHandling.UniclassesResult;
  */
 public class Globals {
     private static Globals instance;
+    private RequestThread reqThread;
     private RewardsResult rewardsResult;
     private EnrolmentsResult enrolmentsResult;
     private PointsResult pointsResult;
     private RedemptionsResult redemptionsResult;
     private UniclassesResult uniclassesResult;
     private CouponsResult couponsResult;
+    private StudentResult studentResult;
     private Integer id;
 
     public static Globals getInstance() {
@@ -44,6 +48,12 @@ public class Globals {
     }
 
     public  Globals() {}
+
+    public RequestThread GetReqThread() {
+        return this.reqThread;
+    }
+
+    public void SetReqThread(RequestThread reqThread) {this.reqThread = reqThread; }
 
     public CouponsResult GetCouponsResult() {
         return this.couponsResult;
@@ -84,6 +94,12 @@ public class Globals {
     }
 
     public void SetUniclassesResult(UniclassesResult uniclassesResult) { this.uniclassesResult = uniclassesResult; }
+
+    public StudentResult GetStudentResult() {
+        return this.studentResult;
+    }
+
+    public void SetStudentResult(StudentResult studentResult) { this.studentResult = studentResult; }
 
     public Integer GetID() {
         return this.id;

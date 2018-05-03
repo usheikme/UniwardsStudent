@@ -32,10 +32,9 @@ public class CouponsResult implements IReqResult<ListResultEntity<CouponResponse
         ListResultEntity<CouponResponse> couponsEnt = new ListResultEntity("", null, ListResultEntity.Type.CARD_ENROLMENT);
         switch (GetType()) {
             case COUPON_GET_FAILED:
-                couponsEnt.SetResponseMessage("Failed to get enrolments!");
                 break;
             case COUPON_GET_SUCCESS:
-                couponsEnt.SetResponseMessage("Successfully got enrolments!");
+                couponsEnt.SetResponseMessage("Successfully got coupons!");
                 couponsEnt.SetList(couponsData.GetCoupons());
                 break;
             default:

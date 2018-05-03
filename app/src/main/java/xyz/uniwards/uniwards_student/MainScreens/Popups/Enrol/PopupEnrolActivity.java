@@ -11,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
+import xyz.uniwards.uniwards_student.APIHandling.ReqThreadEntity;
+import xyz.uniwards.uniwards_student.Globals;
 import xyz.uniwards.uniwards_student.R;
 
 public class PopupEnrolActivity extends AppCompatActivity {
@@ -48,7 +50,8 @@ public class PopupEnrolActivity extends AppCompatActivity {
 
         InitExitButtonAsClickable(this);
 
-        new AsyncEnrol(this, this.mAdapter, this.mRecyclerView).execute();
+        ReqThreadEntity request = new ReqThreadEntity(this, new AsyncEnrol(this, this.mAdapter, this.mRecyclerView));
+        Globals.getInstance().GetReqThread().AddRequest(request);
     }
 
 

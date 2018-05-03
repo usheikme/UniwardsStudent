@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="75dp"
+    android:layout_marginBottom="75dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginLeft="20dp"
+    android:padding="0dp"
+    android:layout_gravity="center"
+    android:background="@layout/rounded_bg"
+    tools:context="xyz.uniwards.uniwards_student.MainScreens.Popups.DropEnrolment.PopupDropActivity">
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_drop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="40dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <Button
+        android:id="@+id/button_dfinish"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="5dp"
+        android:background="@layout/rounded_button"
+        android:elevation="10dp"
+        android:stateListAnimator="@null"
+        android:text="Done"
+        android:textColor="@color/colorWhite"
+        app:layout_anchor="@+id/nestedScrollView"
+        app:layout_anchorGravity="bottom|center" />
+</android.support.design.widget.CoordinatorLayout>
+
+

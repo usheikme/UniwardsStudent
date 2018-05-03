@@ -78,9 +78,6 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... theVoid) {
-        Globals globals = new Globals();
-        globals.setInstance(globals);
-
         GetCouponsStub();
         GetRewardsStub();
         GetUniclassesStub();
@@ -115,7 +112,7 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
         }
     }
 
-    private void HandleCouponsResponse(Throwable t) { Log.wtf(t.toString(), "xxc");}
+    private void HandleCouponsResponse(Throwable t) { Log.wtf(t.toString(), "coupon_stub");}
 
     private void GetRewardsStub() {
         UniwardsAPI uniapi = APIHelper.GetUniwardsAPI();
@@ -142,7 +139,7 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
         }
     }
 
-    private void HandleRewardsResponse(Throwable t) { Log.wtf(t.toString(), "xxc");}
+    private void HandleRewardsResponse(Throwable t) { Log.wtf(t.toString(), "reward_stub");}
 
     private void GetPointsStub() {
         UniwardsAPI uniapi = APIHelper.GetUniwardsAPI();
@@ -172,7 +169,7 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
         }
     }
 
-    private void HandlePointsResponse(Throwable t) { Log.wtf(t.toString(), "xxc");}
+    private void HandlePointsResponse(Throwable t) { Log.wtf(t.toString(), "point_stub");}
 
     private void GetRedemptionsStub() {
         Log.wtf("RedemptionsStub", "LOL");
@@ -200,7 +197,7 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
         }
     }
 
-    private void HandleRedemptionsResponse(Throwable t) { Log.wtf(t.toString(), "xxc");}
+    private void HandleRedemptionsResponse(Throwable t) { Log.wtf(t.toString(), "redemption_stub");}
 
     private void GetUniclassesStub() {
         Log.wtf("Uniclasses", "LOL");
@@ -229,7 +226,7 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
         }
     }
 
-    private void HandleUniclassesResponse(Throwable t) { Log.wtf(t.toString(), "xxc");}
+    private void HandleUniclassesResponse(Throwable t) { Log.wtf(t.toString(), "uniclasses_stub");}
 
     private void GetEnrolmentsStub() {
         Log.wtf("GetEnrolmentsStub", "LOL");
@@ -260,7 +257,7 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
         }
     }
 
-    private void HandleEnrolmentsResponse(Throwable t) { Log.wtf(t.toString(), "xxc");}
+    private void HandleEnrolmentsResponse(Throwable t) { Log.wtf(t.toString(), "enrolment_stub");}
 
     private void AddDashCards() {
         dashCards = new ArrayList<>();
@@ -289,7 +286,7 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
                     try {
                         tempDate = new SimpleDateFormat("dd/MM/yyyy").parse(enrolment.GetDate());
                     } catch (Exception e) {
-                        Log.wtf(e.toString(), "LOL");
+                        Log.wtf(e.toString(), "enrolmentdate");
                     }
 
                     dashCards.add(new DashCard(enrolmentsEnt.GetIcon(),
@@ -299,7 +296,7 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
                     i++;
                 }
             }
-        } catch (Exception e) { Log.wtf(e.toString(), "LOL"); }
+        } catch (Exception e) { Log.wtf(e.toString(), "enrolment"); }
 
         i = 0;
         try {
@@ -308,16 +305,16 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
                 try {
                     tempDate = new SimpleDateFormat("dd/MM/yyyy").parse(point.GetDate());
                 } catch (Exception e) {
-                    Log.wtf(e.toString(), "LOL");
+                    Log.wtf(e.toString(), "pointdate");
                 }
 
                 dashCards.add(new DashCard(pointsEnt.GetIcon(),
                         pointsEnt.GetTitle(),
-                        pointsEnt.GetDesc(pointsEnt.GetFormatData(0)),
+                        pointsEnt.GetDesc(pointsEnt.GetFormatData(i)),
                         tempDate));
                 i++;
             }
-        } catch (Exception e) { Log.wtf(e.toString(), "LOL"); }
+        } catch (Exception e) { Log.wtf(e.toString(), "point"); }
 
         i = 0;
         try {
@@ -326,16 +323,16 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
                 try {
                     tempDate = new SimpleDateFormat("dd/MM/yyyy").parse(redemption.GetDate());
                 } catch (Exception e) {
-                    Log.wtf(e.toString(), "LOL");
+                    Log.wtf(e.toString(), "redemptiondate");
                 }
 
                 dashCards.add(new DashCard(redemptionsEnt.GetIcon(),
                         redemptionsEnt.GetTitle(),
-                        redemptionsEnt.GetDesc(redemptionsEnt.GetFormatData(0)),
+                        redemptionsEnt.GetDesc(redemptionsEnt.GetFormatData(i)),
                         tempDate));
                 i++;
             }
-        } catch (Exception e) { Log.wtf(e.toString(), "LOL"); }
+        } catch (Exception e) { Log.wtf(e.toString(), "redemption"); }
 
         Collections.sort(dashCards, new Comparator<DashCard>() {
             public int compare(DashCard o1, DashCard o2) {

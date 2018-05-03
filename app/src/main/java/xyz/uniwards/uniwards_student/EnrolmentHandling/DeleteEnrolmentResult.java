@@ -9,8 +9,8 @@ import xyz.uniwards.uniwards_student.ListResultEntity;
  * Created by Umayr on 5/2/2018.
  */
 
-public class NewEnrolmentResult implements IReqResult<String> {
-    private GenericEnrolmentResponse newEnrolmentsData;
+public class DeleteEnrolmentResult implements IReqResult<String> {
+    private GenericEnrolmentResponse deleteEnrolmentsData;
 
     public enum Type {
         ENROLMENT_GET_FAILED,
@@ -23,9 +23,7 @@ public class NewEnrolmentResult implements IReqResult<String> {
         ENROLMENT_UPDATE_SUCCESS
     }
 
-    public NewEnrolmentResult(GenericEnrolmentResponse data) {
-        this.newEnrolmentsData = data;
-    }
+    public DeleteEnrolmentResult(GenericEnrolmentResponse data) {this.deleteEnrolmentsData = data; }
 
     public String GetResult() {
         String message = "";
@@ -63,6 +61,6 @@ public class NewEnrolmentResult implements IReqResult<String> {
     }
 
     public NewEnrolmentResult.Type GetType() {
-        return NewEnrolmentResult.Type.values()[Integer.parseInt(newEnrolmentsData.GetResponse())];
+        return NewEnrolmentResult.Type.values()[Integer.parseInt(deleteEnrolmentsData.GetResponse())];
     }
 }

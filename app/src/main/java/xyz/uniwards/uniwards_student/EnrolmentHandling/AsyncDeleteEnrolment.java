@@ -28,29 +28,39 @@ import xyz.uniwards.uniwards_student.UniclassHandling.UniclassesResult;
  * Created by Umayr on 5/2/2018.
  */
 
-public class AsyncNewEnrolment extends AsyncTask<Void, Void, Void> {
+public class AsyncDeleteEnrolment extends AsyncTask<Void, Void, Void> {
     private Activity activity;
     private RecyclerView mRecyclerView;
     private APIHelper helper;
-    private GenericEnrolmentResponse newEnrolmentResp;
-    private UniclassResponse newUniclass;
-
-    public AsyncNewEnrolment(Activity activity, String uniclassName) {
+    private GenericEnrolmentResponse deleteEnrolmentResp;
+    private EnrolmentResponse enrolmentToDelete;
+    private Integer uniclassID;
+    public AsyncDeleteEnrolment(Activity activity, String uniclassName) {
         this.activity = activity;
-        this.newUniclass = GetUniclassByName(uniclassName);
+        this.uniclassID = GetUniclassIDByName(uniclassName);
+        this.enrolmentToDelete = GetEnrolmentByUniclassID(this.uniclassID);
         this.helper = new APIHelper();
     }
 
-    private UniclassResponse GetUniclassByName(String uniclassName) {
-        UniclassResponse theClass = null;
-        for (UniclassResponse uniclass : Globals.getInstance().GetUniclassesResult().GetUniclasses()) {
-            Log.d(uniclassName, uniclass.GetName());
-            if (uniclassName.equals(uniclass.GetName())) {
-                Log.d("XXXXXXXXXXXXXXXXXXXX", uniclass.GetName());
-                theClass = uniclass;
+    private EnrolmentResponse GetEnrolmentByUniclassID(Integer uniClassID) {
+        EnrolmentResponse theEnrolment = null;
+        for (EnrolmentResponse enrolment : Globals.getInstance().GetEnrolmentsResult().GetEnrolments()) {
+            if (uniClassID.equals(enrolment.GetUniclassID())) {
+                theEnrolment = enrolment;
             }
         }
-        return theClass;
+        return theEnrolment;
+    }
+
+    private Integer GetUniclassIDByName(String uniclassName) {
+        Integer uniclass_id = -1;
+        for (UniclassResponse uniclass : Globals.getInstance().GetUniclassesResult().GetUniclasses()) {
+            if (uniclassName.equals(uniclass.GetName())) {
+                uniclass_id = uniclass.GetID();
+            }
+        }
+
+        return uniclass_id;
     }
 
     @Override
@@ -59,44 +69,45 @@ public class AsyncNewEnrolment extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... theVoid) {
-        if(newUniclass != null)
-            NewEnrolmentSub(newUniclass.GetID(), Globals.getInstance().GetID(), Globals.GetCurrentDate());
+        if(enrolmentToDelete != null)
+            DeleteEnrolmentSub(enrolmentToDelete.GetUniclassID(), Globals.getInstance().GetID(), enrolmentToDelete.GetDate());
         else
             Toast.makeText(activity, "Failed to enrol!", Toast.LENGTH_LONG).show();
         return null;
     }
 
-    private void NewEnrolmentSub(Integer uniclass_id, Integer student_id, String date) {
+    private void DeleteEnrolmentSub(Integer uniclass_id, Integer student_id, String date) {
         UniwardsAPI uniapi = APIHelper.GetUniwardsAPI();
-        Call<GenericEnrolmentResponse> call = uniapi.NewEnrolment(TokenHandle.token, uniclass_id, student_id, date);
+        Call<GenericEnrolmentResponse> call = uniapi.DeleteEnrolment(TokenHandle.token, uniclass_id, student_id, date);
         call.enqueue(new Callback<GenericEnrolmentResponse>() {
             @Override
             public void onResponse(Call<GenericEnrolmentResponse> call, Response<GenericEnrolmentResponse> response) {
-                newEnrolmentResp = response.body();
-                HandleNewEnrolmentResponse(new NewEnrolmentResult(newEnrolmentResp));
+                deleteEnrolmentResp = response.body();
+                HandleDeleteEnrolmentResponse(new DeleteEnrolmentResult(deleteEnrolmentResp));
             }
 
             @Override
             public void onFailure(Call<GenericEnrolmentResponse> call, Throwable t) {
-                HandleNewEnrolmentResponse(t);
+                HandleDeleteEnrolmentResponse(t);
             }
         });
     }
 
-    private void HandleNewEnrolmentResponse(NewEnrolmentResult newEnrolmentResult) {
-        if (newEnrolmentResult.GetType() == NewEnrolmentResult.Type.ENROLMENT_REGISTER_SUCCESS) {
-            EnrolmentComplete();
+    private void HandleDeleteEnrolmentResponse(DeleteEnrolmentResult deleteEnrolmentResult) {
+        if (deleteEnrolmentResult.GetType() == NewEnrolmentResult.Type.ENROLMENT_DELETE_SUCCESS
+                && this.uniclassID != -1) {
+            DeleteEnrolmentComplete();
         } else {
-            Toast.makeText(activity, newEnrolmentResult.GetResult(), Toast.LENGTH_LONG).show();
+            Toast.makeText(activity, deleteEnrolmentResult.GetResult(), Toast.LENGTH_LONG).show();
         }
     }
 
-    private void HandleNewEnrolmentResponse(Throwable t) {
+    private void HandleDeleteEnrolmentResponse(Throwable t) {
         Log.wtf(t.toString(), "xxc");
     }
 
-    private void EnrolmentComplete() {
-        Toast.makeText(activity, "Successfully Enrolled!", Toast.LENGTH_LONG).show();
+    private void DeleteEnrolmentComplete() {
+        Toast.makeText(activity, "Successfully dropped enrolment!", Toast.LENGTH_LONG).show();
         activity.finish();
     }
 }

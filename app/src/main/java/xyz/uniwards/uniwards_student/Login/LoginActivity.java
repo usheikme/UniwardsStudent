@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import xyz.uniwards.uniwards_student.APIHandling.ReqThreadEntity;
+import xyz.uniwards.uniwards_student.Globals;
 import xyz.uniwards.uniwards_student.R;
 import xyz.uniwards.uniwards_student.Registration.RegisterActivity;
 
@@ -34,7 +36,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(getApplicationContext(), "GG", Toast.LENGTH_LONG).show();;
-                new AsyncLogin(LoginActivity.this).execute();
+                ReqThreadEntity request = new ReqThreadEntity(LoginActivity.this, new AsyncLogin(LoginActivity.this));
+                Globals.getInstance().GetReqThread().AddRequest(request);
             }
         });
     }

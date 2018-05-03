@@ -1,4 +1,4 @@
-package xyz.uniwards.uniwards_student.MainScreens.Popups.Enrol;
+package xyz.uniwards.uniwards_student.MainScreens.Popups.DropEnrolment;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -20,6 +20,7 @@ import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentsResponse;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentsResult;
 import xyz.uniwards.uniwards_student.Globals;
 import xyz.uniwards.uniwards_student.ListResultEntity;
+import xyz.uniwards.uniwards_student.MainScreens.Popups.Enrol.EnrolAdaptor;
 import xyz.uniwards.uniwards_student.TokenValidation.TokenHandle;
 import xyz.uniwards.uniwards_student.UniclassHandling.UniclassResponse;
 import xyz.uniwards.uniwards_student.UniclassHandling.UniclassesResponse;
@@ -29,16 +30,15 @@ import xyz.uniwards.uniwards_student.UniclassHandling.UniclassesResult;
  * Created by Umayr on 5/2/2018.
  */
 
-public class AsyncEnrol extends AsyncTask<Void, Void, Void> {
+public class AsyncDrop extends AsyncTask<Void, Void, Void> {
     private Activity activity;
-    private EnrolAdaptor mAdapter;
+    private DropAdaptor mAdapter;
     private RecyclerView mRecyclerView;
-    private UniclassesResponse uniclassesResponse;
     private EnrolmentsResponse enrolmentsResp;
     private APIHelper helper;
     private List<DashCard> dashCards;
 
-    public AsyncEnrol(Activity activity, EnrolAdaptor mAdapter, RecyclerView mRecyclerView) {
+    public AsyncDrop(Activity activity, DropAdaptor mAdapter, RecyclerView mRecyclerView) {
         this.activity = activity;
         this.mAdapter = mAdapter;
         this.mRecyclerView = mRecyclerView;
@@ -52,43 +52,12 @@ public class AsyncEnrol extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... theVoid) {
         GetEnrolmentsStub();
-        GetUniclassesStub();
         return null;
-    }
-
-    private void GetUniclassesStub() {
-        UniwardsAPI uniapi = APIHelper.GetUniwardsAPI();
-        Call<UniclassesResponse> call = uniapi.GetUniclassesByUniID(TokenHandle.token, TokenHandle.uni_id);
-        call.enqueue(new Callback<UniclassesResponse>() {
-            @Override
-            public void onResponse(Call<UniclassesResponse> call, Response<UniclassesResponse> response) {
-                uniclassesResponse = response.body();
-                HandleUniclassesResponse(new UniclassesResult(uniclassesResponse));
-            }
-
-            @Override
-            public void onFailure(Call<UniclassesResponse> call, Throwable t) {
-                HandleUniclassesResponse(t);
-            }
-        });
-    }
-
-    private void HandleUniclassesResponse(UniclassesResult uniclassesResult) {
-        if (uniclassesResult.GetType() == UniclassesResult.Type.UNICLASS_GET_SUCCESS) {
-            Globals.getInstance().SetUniclassesResult(uniclassesResult);
-            AddDashCards();
-        } else {
-            Toast.makeText(activity, uniclassesResult.GetResult().GetResponseMessage(), Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private void HandleUniclassesResponse(Throwable t) {
-        Log.wtf(t.toString(), "xxc");
     }
 
     private void GetEnrolmentsStub() {
         UniwardsAPI uniapi = APIHelper.GetUniwardsAPI();
-        Call<EnrolmentsResponse> call = uniapi.GetEnrolments(TokenHandle.token);
+        Call<EnrolmentsResponse> call = uniapi.GetEnrolmentsByStudentID(TokenHandle.token, Globals.getInstance().GetID());
         call.enqueue(new Callback<EnrolmentsResponse>() {
             @Override
             public void onResponse(Call<EnrolmentsResponse> call, Response<EnrolmentsResponse> response) {
@@ -108,7 +77,6 @@ public class AsyncEnrol extends AsyncTask<Void, Void, Void> {
             Globals.getInstance().SetEnrolmentsResult(enrolmentsResult);
             AddDashCards();
         } else {
-            Globals.getInstance().SetEnrolmentsResult(null);
             Toast.makeText(activity, enrolmentsResult.GetResult().GetResponseMessage(), Toast.LENGTH_LONG).show();
         }
     }
@@ -124,24 +92,23 @@ public class AsyncEnrol extends AsyncTask<Void, Void, Void> {
         ListResultEntity<EnrolmentResponse> enrolmentsEnt = null;
         try {
             uniclassesEnt =  Globals.getInstance().GetUniclassesResult().GetResult();
-            if( Globals.getInstance().GetEnrolmentsResult() != null)
-                enrolmentsEnt =  Globals.getInstance().GetEnrolmentsResult().GetResult();
-        } catch (Exception e) { Log.wtf("LOL", e.toString()); }
+            enrolmentsEnt =  Globals.getInstance().GetEnrolmentsResult().GetResult();
+        } catch (Exception e) { Log.wtf(e.toString(), "LOL"); }
 
         Integer i = 0;
         try {
-            if (uniclassesEnt != null) {
+            if (uniclassesEnt != null && enrolmentsEnt != null) {
                 for (UniclassResponse uniclass : uniclassesEnt.GetList()) {
                     Boolean enrolled = false;
-                    if(enrolmentsEnt != null) {
-                        for (EnrolmentResponse enrolment : enrolmentsEnt.GetList()) {
-                            if (enrolment.GetUniclassID() == uniclass.GetID()) {
-                                enrolled = true;
-                            }
+                    for (EnrolmentResponse enrolment : enrolmentsEnt.GetList()) {
+                        if (enrolment.GetUniclassID() == uniclass.GetID()) {
+                            Log.wtf(uniclass.GetName(), "FALSE");
+                            enrolled = true;
                         }
                     }
 
-                    if(!enrolled) {
+                    if(enrolled == true) {
+                        Log.wtf("WTFISTHIS", uniclassesEnt.GetTitle());
                         //so wrong... Swapped desc and title
                         dashCards.add(new DashCard(uniclassesEnt.GetIcon(),
                                 uniclassesEnt.GetDesc(uniclassesEnt.GetFormatData(i)),
@@ -152,10 +119,10 @@ public class AsyncEnrol extends AsyncTask<Void, Void, Void> {
                 }
             }
         } catch (Exception e) {
-            Log.wtf("XD", e.toString());
+            Log.wtf(e.toString(), "LOL");
         }
 
-        this.mAdapter = new EnrolAdaptor(activity, dashCards);
+        this.mAdapter = new DropAdaptor(activity, dashCards);
         this.mRecyclerView.setAdapter(this.mAdapter);
     }
 }

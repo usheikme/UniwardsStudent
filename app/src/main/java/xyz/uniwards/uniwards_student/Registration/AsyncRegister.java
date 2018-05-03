@@ -63,7 +63,8 @@ public class AsyncRegister extends AsyncTask<Void, Void, Void> {
             st_type = 1;
 
         //Integer uni_id = ParseUni_id(spinner_uni.getSelectedItem().toString());
-        Integer uni_id = 0;
+        Integer uni_id = spinner_uni.getSelectedItemPosition()+1;
+        Log.wtf("UNI_ID", Integer.toString(uni_id));
         //TODO Implement parseBD
         String birthdate = "12/02/1995";
 

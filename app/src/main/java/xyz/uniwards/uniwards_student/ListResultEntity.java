@@ -89,6 +89,7 @@ public class ListResultEntity<T> {
     public String GetDesc(String formatData) {
         switch (GetType()) {
             case CARD_ENROLMENT:
+                Log.wtf("Format Date", formatData);
                 return String.format(enromentDescFormats[new Random().nextInt(enromentDescFormats.length)], formatData);
             case CARD_POINT:
                 return String.format(pointDescFormats[new Random().nextInt(pointDescFormats.length)], formatData);

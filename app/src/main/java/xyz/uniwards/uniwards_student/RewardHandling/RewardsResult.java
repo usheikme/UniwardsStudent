@@ -32,7 +32,7 @@ public class RewardsResult implements IReqResult<ListResultEntity<RewardResponse
         ListResultEntity<RewardResponse> rewardsEnt = new ListResultEntity("", null, ListResultEntity.Type.CARD_REDEMPTION);
         switch(GetType()) {
             case REWARD_GET_FAILED:
-                rewardsEnt.SetResponseMessage("Failed to get rewardsd!");
+                rewardsEnt.SetResponseMessage("Failed to get rewards!");
                 break;
             case REWARD_GET_SUCCESS:
                 rewardsEnt.SetResponseMessage("Successfully got rewards!");

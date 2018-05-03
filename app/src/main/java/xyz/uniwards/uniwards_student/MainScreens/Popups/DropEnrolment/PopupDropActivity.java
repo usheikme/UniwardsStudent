@@ -1,31 +1,25 @@
-package xyz.uniwards.uniwards_student.MainScreens.Fragments.Dashboard;
+package xyz.uniwards.uniwards_student.MainScreens.Popups.DropEnrolment;
 
+
+import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.widget.Button;
 
 import xyz.uniwards.uniwards_student.APIHandling.ReqThreadEntity;
 import xyz.uniwards.uniwards_student.DashCardHandle.AsyncDashCard;
-import xyz.uniwards.uniwards_student.DashCardHandle.DashCard;
 import xyz.uniwards.uniwards_student.Globals;
+import xyz.uniwards.uniwards_student.MainScreens.Popups.Enrol.AsyncEnrol;
+import xyz.uniwards.uniwards_student.MainScreens.Popups.Enrol.EnrolAdaptor;
 import xyz.uniwards.uniwards_student.R;
-import xyz.uniwards.uniwards_student.TokenValidation.TokenHandle;
 
-public class DashboardFragment extends Fragment {
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
-    private RecyclerView.Adapter adapter;
-
-    private static final String TAG = "DashboardFragment";
+public class PopupDropActivity extends AppCompatActivity {
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
 
@@ -37,19 +31,19 @@ public class DashboardFragment extends Fragment {
     protected LayoutManagerType mCurrentLayoutManagerType;
 
     protected RecyclerView mRecyclerView;
-    protected DashboardAdaptor mAdapter;
+    protected DropAdaptor mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected List<DashCard> dashCards;
 
-    public DashboardFragment(){}
+    public PopupDropActivity() {
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View Page = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        Page.setTag(TAG);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_popup_drop);
 
-        mRecyclerView = (RecyclerView) Page.findViewById(R.id.recyclerview_dashboard);
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_drop);
+        mLayoutManager = new LinearLayoutManager(this);
         mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
 
         if (savedInstanceState != null) {
@@ -58,23 +52,16 @@ public class DashboardFragment extends Fragment {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        TextView username = Page.findViewById(R.id.toolbar_username);
-        username.setText(TokenHandle.username);
-        ReqThreadEntity request = new ReqThreadEntity(getActivity(), new AsyncDashCard(this.getActivity(), this.mAdapter, this.mRecyclerView));
+        InitExitButtonAsClickable(this);
+
+        ReqThreadEntity request = new ReqThreadEntity(this, new AsyncDrop(this, this.mAdapter, this.mRecyclerView));
         Globals.getInstance().GetReqThread().AddRequest(request);
-
-        return Page;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
         int scrollPosition = 0;
 
-        // If a layout manager has already been set, get current scroll position.
         if (mRecyclerView.getLayoutManager() != null) {
             scrollPosition = ((LinearLayoutManager) mRecyclerView.getLayoutManager())
                     .findFirstCompletelyVisibleItemPosition();
@@ -82,15 +69,15 @@ public class DashboardFragment extends Fragment {
 
         switch (layoutManagerType) {
             case GRID_LAYOUT_MANAGER:
-                mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT);
+                mLayoutManager = new GridLayoutManager(this, SPAN_COUNT);
                 mCurrentLayoutManagerType = LayoutManagerType.GRID_LAYOUT_MANAGER;
                 break;
             case LINEAR_LAYOUT_MANAGER:
-                mLayoutManager = new LinearLayoutManager(getActivity());
+                mLayoutManager = new LinearLayoutManager(this);
                 mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
                 break;
             default:
-                mLayoutManager = new LinearLayoutManager(getActivity());
+                mLayoutManager = new LinearLayoutManager(this);
                 mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
         }
 
@@ -104,4 +91,15 @@ public class DashboardFragment extends Fragment {
         savedInstanceState.putSerializable(KEY_LAYOUT_MANAGER, mCurrentLayoutManagerType);
         super.onSaveInstanceState(savedInstanceState);
     }
+
+    private void InitExitButtonAsClickable(final Activity thisAct) {
+        final Button button_dfinish =findViewById(R.id.button_dfinish);
+        button_dfinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {thisAct.finish();
+            }
+        });
+        this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
 }
