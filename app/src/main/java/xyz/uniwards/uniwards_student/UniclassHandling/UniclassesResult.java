@@ -12,7 +12,7 @@ import xyz.uniwards.uniwards_student.UniclassHandling.UniclassesResponse;
  * Created by Umayr on 5/1/2018.
  */
 
-public class UniclassesResult implements IReqResult<ListResultEntity<UniclassResponse>> {
+public class UniclassesResult implements IReqResult<ListResultEntity<UniclassEntity>> {
     private UniclassesResponse uniclassesData;
 
     public enum Type {
@@ -31,8 +31,8 @@ public class UniclassesResult implements IReqResult<ListResultEntity<UniclassRes
         this.uniclassesData = data;
     }
 
-    public ListResultEntity<UniclassResponse> GetResult() {
-        ListResultEntity<UniclassResponse> uniclassEnt = new ListResultEntity("", null, ListResultEntity.Type.CARD_UNICLASS);
+    public ListResultEntity<UniclassEntity> GetResult() {
+        ListResultEntity<UniclassEntity> uniclassEnt = new ListResultEntity("", null, ListResultEntity.Type.CARD_UNICLASS);
         switch(GetType()) {
             case UNICLASS_GET_FAILED:
                 uniclassEnt.SetResponseMessage("Failed to get uniclasses!");
@@ -53,5 +53,5 @@ public class UniclassesResult implements IReqResult<ListResultEntity<UniclassRes
         return Type.values()[Integer.parseInt(uniclassesData.GetResponse())];
     }
 
-    public List<UniclassResponse> GetUniclasses() { return uniclassesData.GetUniclasses(); }
+    public List<UniclassEntity> GetUniclasses() { return uniclassesData.GetUniclasses(); }
 }

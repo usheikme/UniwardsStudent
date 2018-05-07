@@ -9,23 +9,23 @@ import java.util.List;
 
 public class EnrolmentsResponse {
     private String response_message;
-    private List<EnrolmentResponse> enrolments = null;
+    private List<EnrolmentEntity> enrolments = null;
 
-    public List<EnrolmentResponse> GetEnrolments() {
+    public List<EnrolmentEntity> GetEnrolments() {
         return enrolments;
     }
 
     //TODO Empty Check
     public List<String> GetUniverisityCodes() {
         List<String> uni_codes = new ArrayList<>();
-        for (EnrolmentResponse uni : enrolments) {
-            uni_codes.add(uni.GetDate());
+        for (EnrolmentEntity uni : enrolments) {
+            //uni_codes.add(uni.GetDate());
         }
 
         return uni_codes;
     }
 
-    public void SetEnrolments(List<EnrolmentResponse> enrolments) {
+    public void SetEnrolments(List<EnrolmentEntity> enrolments) {
         this.enrolments = enrolments;
     }
 

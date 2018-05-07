@@ -9,7 +9,7 @@ import xyz.uniwards.uniwards_student.ListResultEntity;
  * Created by Umayr on 5/1/2018.
  */
 
-public class RewardsResult implements IReqResult<ListResultEntity<RewardResponse>> {
+public class RewardsResult implements IReqResult<ListResultEntity<RewardEntity>> {
     private RewardsResponse rewardData;
 
     public enum Type {
@@ -28,8 +28,8 @@ public class RewardsResult implements IReqResult<ListResultEntity<RewardResponse
         this.rewardData = data;
     }
 
-    public ListResultEntity<RewardResponse> GetResult() {
-        ListResultEntity<RewardResponse> rewardsEnt = new ListResultEntity("", null, ListResultEntity.Type.CARD_REDEMPTION);
+    public ListResultEntity<RewardEntity> GetResult() {
+        ListResultEntity<RewardEntity> rewardsEnt = new ListResultEntity("", null, ListResultEntity.Type.CARD_REDEMPTION);
         switch(GetType()) {
             case REWARD_GET_FAILED:
                 rewardsEnt.SetResponseMessage("Failed to get rewards!");
@@ -50,5 +50,5 @@ public class RewardsResult implements IReqResult<ListResultEntity<RewardResponse
         return Type.values()[Integer.parseInt(rewardData.GetResponse())];
     }
 
-    public List<RewardResponse> GetRedemptions() { return rewardData.GetRewards(); }
+    public List<RewardEntity> GetRedemptions() { return rewardData.GetRewards(); }
 }

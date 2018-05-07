@@ -11,23 +11,23 @@ import java.util.List;
 
 public class UniversitiesResponse {
     private String response_message;
-    private List<UniversityResponse> universities = null;
+    private List<UniversityEntity> universities = null;
 
-    public List<UniversityResponse> GetUniversities() {
+    public List<UniversityEntity> GetUniversities() {
         return universities;
     }
 
     //TODO Empty Check
     public List<String> GetUniverisityCodes() {
         List<String> uni_codes = new ArrayList<>();
-        for (UniversityResponse uni : universities) {
+        for (UniversityEntity uni : universities) {
             uni_codes.add(uni.GetUniCode());
         }
 
         return uni_codes;
     }
 
-    public void SetUniversities(List<UniversityResponse> universities) {
+    public void SetUniversities(List<UniversityEntity> universities) {
         this.universities = universities;
     }
 

@@ -9,23 +9,23 @@ import java.util.List;
 
 public class UniclassesResponse {
     private String response_message;
-    private List<UniclassResponse> uniclasses = null;
+    private List<UniclassEntity> uniclasses = null;
 
-    public List<UniclassResponse> GetUniclasses() {
+    public List<UniclassEntity> GetUniclasses() {
         return uniclasses;
     }
 
     //TODO Empty Check
     public List<String> GetUniverisityCodes() {
         List<String> uni_codes = new ArrayList<>();
-        for (UniclassResponse uni : uniclasses) {
-            uni_codes.add(uni.GetName());
+        for (UniclassEntity uni : uniclasses) {
+            //uni_codes.add(uni.GetName());
         }
 
         return uni_codes;
     }
 
-    public void SetUniclasses(List<UniclassResponse> uniclasses) { this.uniclasses = uniclasses; }
+    public void SetUniclasses(List<UniclassEntity> uniclasses) { this.uniclasses = uniclasses; }
 
     public String GetResponse() { return this.response_message; }
 

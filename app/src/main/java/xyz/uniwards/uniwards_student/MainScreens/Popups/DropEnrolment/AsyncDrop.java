@@ -15,6 +15,7 @@ import retrofit2.Response;
 import xyz.uniwards.uniwards_student.APIHandling.APIHelper;
 import xyz.uniwards.uniwards_student.APIHandling.UniwardsAPI;
 import xyz.uniwards.uniwards_student.DashCardHandle.DashCard;
+import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentEntity;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentResponse;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentsResponse;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentsResult;
@@ -22,6 +23,7 @@ import xyz.uniwards.uniwards_student.Globals;
 import xyz.uniwards.uniwards_student.ListResultEntity;
 import xyz.uniwards.uniwards_student.MainScreens.Popups.Enrol.EnrolAdaptor;
 import xyz.uniwards.uniwards_student.TokenValidation.TokenHandle;
+import xyz.uniwards.uniwards_student.UniclassHandling.UniclassEntity;
 import xyz.uniwards.uniwards_student.UniclassHandling.UniclassResponse;
 import xyz.uniwards.uniwards_student.UniclassHandling.UniclassesResponse;
 import xyz.uniwards.uniwards_student.UniclassHandling.UniclassesResult;
@@ -88,8 +90,8 @@ public class AsyncDrop extends AsyncTask<Void, Void, Void> {
 
     private void AddDashCards() {
         dashCards = new ArrayList<>();
-        ListResultEntity<UniclassResponse> uniclassesEnt = null;
-        ListResultEntity<EnrolmentResponse> enrolmentsEnt = null;
+        ListResultEntity<UniclassEntity> uniclassesEnt = null;
+        ListResultEntity<EnrolmentEntity> enrolmentsEnt = null;
         try {
             uniclassesEnt =  Globals.getInstance().GetUniclassesResult().GetResult();
             enrolmentsEnt =  Globals.getInstance().GetEnrolmentsResult().GetResult();
@@ -98,9 +100,9 @@ public class AsyncDrop extends AsyncTask<Void, Void, Void> {
         Integer i = 0;
         try {
             if (uniclassesEnt != null && enrolmentsEnt != null) {
-                for (UniclassResponse uniclass : uniclassesEnt.GetList()) {
+                for (UniclassEntity uniclass : uniclassesEnt.GetList()) {
                     Boolean enrolled = false;
-                    for (EnrolmentResponse enrolment : enrolmentsEnt.GetList()) {
+                    for (EnrolmentEntity enrolment : enrolmentsEnt.GetList()) {
                         if (enrolment.GetUniclassID() == uniclass.GetID()) {
                             Log.wtf(uniclass.GetName(), "FALSE");
                             enrolled = true;
@@ -111,8 +113,8 @@ public class AsyncDrop extends AsyncTask<Void, Void, Void> {
                         Log.wtf("WTFISTHIS", uniclassesEnt.GetTitle());
                         //so wrong... Swapped desc and title
                         dashCards.add(new DashCard(uniclassesEnt.GetIcon(),
-                                uniclassesEnt.GetDesc(uniclassesEnt.GetFormatData(i)),
                                 uniclassesEnt.GetTitle(),
+                                uniclassesEnt.GetDesc(uniclassesEnt.GetFormatData(i)),
                                 null));
                     }
                     i++;

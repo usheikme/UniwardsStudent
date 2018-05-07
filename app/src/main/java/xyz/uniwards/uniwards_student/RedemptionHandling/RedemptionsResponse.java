@@ -10,23 +10,23 @@ import java.util.List;
 
 public class RedemptionsResponse {
     private String response_message;
-    private List<RedemptionResponse> redemptions = null;
+    private List<RedemptionEntity> redemptions = null;
 
-    public List<RedemptionResponse> GetRedemptions() {
+    public List<RedemptionEntity> GetRedemptions() {
         return redemptions;
     }
 
     //TODO Empty Check
     public List<String> GetUniverisityCodes() {
         List<String> uni_codes = new ArrayList<>();
-        for (RedemptionResponse uni : redemptions) {
-            uni_codes.add(uni.GetDate());
+        for (RedemptionEntity uni : redemptions) {
+            //uni_codes.add(uni.GetDate());
         }
 
         return uni_codes;
     }
 
-    public void SetRedemptions(List<RedemptionResponse> redemptions) {
+    public void SetRedemptions(List<RedemptionEntity> redemptions) {
         this.redemptions = redemptions;
     }
 

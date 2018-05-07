@@ -13,6 +13,7 @@ import xyz.uniwards.uniwards_student.APIHandling.APIHelper;
 import xyz.uniwards.uniwards_student.APIHandling.UniwardsAPI;
 import xyz.uniwards.uniwards_student.Globals;
 import xyz.uniwards.uniwards_student.R;
+import xyz.uniwards.uniwards_student.StudentHandle.StudentEntity;
 import xyz.uniwards.uniwards_student.StudentHandle.StudentResponse;
 import xyz.uniwards.uniwards_student.StudentHandle.StudentResult;
 import xyz.uniwards.uniwards_student.TokenValidation.TokenHandle;
@@ -72,17 +73,18 @@ public class AsyncProfile extends AsyncTask<Void, Void, Void> {
     }
 
     private void SetupProfile(StudentResult studentResult) {
+        StudentEntity student = studentResult.GetStudent();
         TextView text_total_points_value = activity.findViewById(R.id.text_total_points_value);
         TextView text_tier_value = activity.findViewById(R.id.text_tier_value);
         TextView text_next_tier_value = activity.findViewById(R.id.text_next_tier_value);
         TextView profile_name = activity.findViewById(R.id.profile_name);
 
-        Log.wtf("WTF", studentResult.GetResult().GetFname());
+        Log.wtf("WTF", student.toString());
 
-        //String fullName = studentResult.GetResult().GetFname() + " " + studentResult.GetResult().GetLname();
-        profile_name.setText("Test");
+        String fullName = student.GetFname() + " " + student.GetLname();
+        profile_name.setText(fullName);
 
-        text_total_points_value.setText("0");
+        text_total_points_value.setText(student.GetTotalPoints().toString());
         text_tier_value.setText("1");
         text_next_tier_value.setText("0");
     }

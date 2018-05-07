@@ -26,16 +26,19 @@ import xyz.uniwards.uniwards_student.APIHandling.APIHelper;
 import xyz.uniwards.uniwards_student.CouponHandling.CouponsResponse;
 import xyz.uniwards.uniwards_student.CouponHandling.CouponsResult;
 import xyz.uniwards.uniwards_student.DashCardHandle.DashCard;
+import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentEntity;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentResponse;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentsResponse;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentsResult;
 import xyz.uniwards.uniwards_student.Globals;
 import xyz.uniwards.uniwards_student.ListResultEntity;
 import xyz.uniwards.uniwards_student.MainScreens.Fragments.Dashboard.DashboardAdaptor;
+import xyz.uniwards.uniwards_student.PointHandling.PointEntity;
 import xyz.uniwards.uniwards_student.PointHandling.PointResponse;
 import xyz.uniwards.uniwards_student.PointHandling.PointsResponse;
 import xyz.uniwards.uniwards_student.PointHandling.PointsResult;
 import xyz.uniwards.uniwards_student.R;
+import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionEntity;
 import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionResponse;
 import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionsResponse;
 import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionsResult;
@@ -261,9 +264,9 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
 
     private void AddDashCards() {
         dashCards = new ArrayList<>();
-        ListResultEntity<EnrolmentResponse> enrolmentsEnt = null;
-        ListResultEntity<PointResponse> pointsEnt = null;
-        ListResultEntity<RedemptionResponse> redemptionsEnt = null;
+        ListResultEntity<EnrolmentEntity> enrolmentsEnt = null;
+        ListResultEntity<PointEntity> pointsEnt = null;
+        ListResultEntity<RedemptionEntity> redemptionsEnt = null;
 
         try {
         enrolmentsEnt =  Globals.getInstance().GetEnrolmentsResult().GetResult();
@@ -281,7 +284,7 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
         Integer i = 0;
         try {
             if (enrolmentsEnt != null) {
-                for (EnrolmentResponse enrolment : enrolmentsEnt.GetList()) {
+                for (EnrolmentEntity enrolment : enrolmentsEnt.GetList()) {
                     Date tempDate = null;
                     try {
                         tempDate = new SimpleDateFormat("dd/MM/yyyy").parse(enrolment.GetDate());
@@ -300,7 +303,7 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
 
         i = 0;
         try {
-            for (PointResponse point : pointsEnt.GetList()) {
+            for (PointEntity point : pointsEnt.GetList()) {
                 Date tempDate = null;
                 try {
                     tempDate = new SimpleDateFormat("dd/MM/yyyy").parse(point.GetDate());
@@ -318,7 +321,7 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
 
         i = 0;
         try {
-            for (RedemptionResponse redemption : redemptionsEnt.GetList()) {
+            for (RedemptionEntity redemption : redemptionsEnt.GetList()) {
                 Date tempDate = null;
                 try {
                     tempDate = new SimpleDateFormat("dd/MM/yyyy").parse(redemption.GetDate());

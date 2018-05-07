@@ -11,7 +11,7 @@ import xyz.uniwards.uniwards_student.ListResultEntity;
  * Created by Umayr on 5/1/2018.
  */
 
-public class RedemptionsResult implements IReqResult<ListResultEntity<RedemptionResponse>> {
+public class RedemptionsResult implements IReqResult<ListResultEntity<RedemptionEntity>> {
     private RedemptionsResponse redemptionsData;
 
     public enum Type {
@@ -30,8 +30,8 @@ public class RedemptionsResult implements IReqResult<ListResultEntity<Redemption
         this.redemptionsData = data;
     }
 
-    public ListResultEntity<RedemptionResponse> GetResult() {
-        ListResultEntity<RedemptionResponse> redemptionsEnt = new ListResultEntity("", null, ListResultEntity.Type.CARD_REDEMPTION);
+    public ListResultEntity<RedemptionEntity> GetResult() {
+        ListResultEntity<RedemptionEntity> redemptionsEnt = new ListResultEntity("", null, ListResultEntity.Type.CARD_REDEMPTION);
         switch(GetType()) {
             case REDEMPTION_GET_FAILED:
                 redemptionsEnt.SetResponseMessage("Failed to get redemptions!");
@@ -52,5 +52,5 @@ public class RedemptionsResult implements IReqResult<ListResultEntity<Redemption
         return Type.values()[Integer.parseInt(redemptionsData.GetResponse())];
     }
 
-    public List<RedemptionResponse> GetRedemptions() { return redemptionsData.GetRedemptions(); }
+    public List<RedemptionEntity> GetRedemptions() { return redemptionsData.GetRedemptions(); }
 }

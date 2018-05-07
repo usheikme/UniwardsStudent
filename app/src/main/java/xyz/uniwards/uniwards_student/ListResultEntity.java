@@ -6,12 +6,18 @@ import android.view.View;
 import java.util.List;
 import java.util.Random;
 
+import xyz.uniwards.uniwards_student.CouponHandling.CouponEntity;
 import xyz.uniwards.uniwards_student.CouponHandling.CouponResponse;
+import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentEntity;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentResponse;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentsResult;
+import xyz.uniwards.uniwards_student.PointHandling.PointEntity;
 import xyz.uniwards.uniwards_student.PointHandling.PointResponse;
+import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionEntity;
 import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionResponse;
+import xyz.uniwards.uniwards_student.RewardHandling.RewardEntity;
 import xyz.uniwards.uniwards_student.RewardHandling.RewardResponse;
+import xyz.uniwards.uniwards_student.UniclassHandling.UniclassEntity;
 import xyz.uniwards.uniwards_student.UniclassHandling.UniclassResponse;
 
 /**
@@ -26,19 +32,22 @@ public class ListResultEntity<T> {
     private String[] enromentTitleFormats = {"New Enrolment"};
     private String[] pointTitleFormats = {"Congratulations!", "Wow!", "Good job!", "Look at you go!"};
     private String[] redemptionTitleFormats = {"Enjoy!", "Time to go out!"};
-    private String[] uniclassTitleFormats = {"Is this the class you're looking for?!", "Pick me!"};
+    private String[] uniclassTitleFormats = {"%s"};
+    private String[] couponTitleFormats = {"%s"};
 
     private String[] enromentDescFormats = {"You've enrolled in %s"};
     //TODO EARNED FOR DOING WHAT??
     private String[] pointDescFormats = {"You've earned %s points"};
     private String[] redemptionDescFormats = {"You've redeemed %s"};
-    private String[] uniclassDescFormats = {"%s"};
+    private String[] uniclassDescFormats = {"Is this the class you're looking for?!", "Pick me!"};
+    private String[] couponDescFormats = {"%s"};
 
     public enum Type {
         CARD_ENROLMENT,
         CARD_POINT,
         CARD_REDEMPTION,
-        CARD_UNICLASS
+        CARD_UNICLASS,
+        CARD_COUPON
     }
 
     public ListResultEntity(String response_message, List<T> resultList, Type type) {
@@ -79,24 +88,43 @@ public class ListResultEntity<T> {
                 return pointTitleFormats[new Random().nextInt(pointTitleFormats.length)];
             case CARD_REDEMPTION:
                 return redemptionTitleFormats[new Random().nextInt(redemptionTitleFormats.length)];
-            case CARD_UNICLASS:
-                return uniclassTitleFormats[new Random().nextInt(uniclassTitleFormats.length)];
             default:
                 return "Hmm?";
         }
     }
 
-    public String GetDesc(String formatData) {
+    public String GetTitle(String formatData) {
+        switch (GetType()) {
+            case CARD_UNICLASS:
+                return String.format(uniclassTitleFormats[new Random().nextInt(uniclassTitleFormats.length)], formatData);
+            case CARD_COUPON:
+                return String.format(couponTitleFormats[new Random().nextInt(couponTitleFormats.length)], formatData);
+            default:
+                return "Hmm?";
+        }
+    }
+
+    public String GetDesc(String... formatData) {
         switch (GetType()) {
             case CARD_ENROLMENT:
-                Log.wtf("Format Date", formatData);
                 return String.format(enromentDescFormats[new Random().nextInt(enromentDescFormats.length)], formatData);
             case CARD_POINT:
                 return String.format(pointDescFormats[new Random().nextInt(pointDescFormats.length)], formatData);
             case CARD_REDEMPTION:
                 return String.format(redemptionDescFormats[new Random().nextInt(redemptionDescFormats.length)], formatData);
             case CARD_UNICLASS:
-                return String.format(uniclassDescFormats[new Random().nextInt(uniclassDescFormats.length)], formatData);
+                return uniclassDescFormats[new Random().nextInt(uniclassDescFormats.length)];
+            case CARD_COUPON:
+                return String.format(couponDescFormats[new Random().nextInt(couponDescFormats.length)], formatData);
+            default:
+                return "Hmm?";
+        }
+    }
+
+    public String GetDesc() {
+        switch (GetType()) {
+            case CARD_UNICLASS:
+                return uniclassDescFormats[new Random().nextInt(uniclassDescFormats.length)];
             default:
                 return "Hmm?";
         }
@@ -112,6 +140,8 @@ public class ListResultEntity<T> {
                 return R.mipmap.coupon_redeemed;
             case CARD_UNICLASS:
                 return R.mipmap.classroom_detected;
+            case CARD_COUPON:
+                return R.mipmap.reward_given;
             default:
                 return R.mipmap.classroom_detected;
         }
@@ -121,9 +151,9 @@ public class ListResultEntity<T> {
         switch (GetType()) {
             case CARD_ENROLMENT:
                 Log.wtf("CARD_ENROLMENT", Integer.toString(Globals.getInstance().GetEnrolmentsResult().GetResult().GetList().size()));
-                EnrolmentResponse enResponse = Globals.getInstance().GetEnrolmentsResult().GetResult().GetList().get(index);
+                EnrolmentEntity enResponse = Globals.getInstance().GetEnrolmentsResult().GetResult().GetList().get(index);
                 String uniclassName = "";
-                for (UniclassResponse uniclass : Globals.getInstance().GetUniclassesResult().GetResult().GetList()) {
+                for (UniclassEntity uniclass : Globals.getInstance().GetUniclassesResult().GetResult().GetList()) {
                     if (uniclass.GetID() == enResponse.GetUniclassID()) {
                         uniclassName = uniclass.GetName();
                     }
@@ -131,9 +161,9 @@ public class ListResultEntity<T> {
                 return uniclassName;
             case CARD_POINT:
                 Log.wtf("CARD_POINT", Integer.toString(Globals.getInstance().GetEnrolmentsResult().GetResult().GetList().size()));
-                PointResponse pointResponse = Globals.getInstance().GetPointsResult().GetResult().GetList().get(index);
+                PointEntity pointResponse = Globals.getInstance().GetPointsResult().GetResult().GetList().get(index);
                 String points = "";
-                for (RewardResponse reward : Globals.getInstance().GetRewardsResult().GetResult().GetList()) {
+                for (RewardEntity reward : Globals.getInstance().GetRewardsResult().GetResult().GetList()) {
                     if (reward.GetID() == pointResponse.GetRewardID()) {
                         points = Integer.toString(reward.GetValue());
                     }
@@ -141,9 +171,9 @@ public class ListResultEntity<T> {
                 return points;
             case CARD_REDEMPTION:
                 Log.wtf("CARD_REDEMPTION", Integer.toString(Globals.getInstance().GetEnrolmentsResult().GetResult().GetList().size()));
-                RedemptionResponse redemptionResponse = Globals.getInstance().GetRedemptionsResult().GetResult().GetList().get(index);
+                RedemptionEntity redemptionResponse = Globals.getInstance().GetRedemptionsResult().GetResult().GetList().get(index);
                 String couponName = "";
-                for (CouponResponse coupon : Globals.getInstance().GetCouponsResult().GetResult().GetList()) {
+                for (CouponEntity coupon : Globals.getInstance().GetCouponsResult().GetResult().GetList()) {
                     if (coupon.GetID() == redemptionResponse.GetCouponID()) {
                         couponName = coupon.GetName();
                     }
@@ -151,6 +181,27 @@ public class ListResultEntity<T> {
                 return couponName;
             case CARD_UNICLASS:
                     return Globals.getInstance().GetUniclassesResult().GetResult().GetList().get(index).GetName();
+            default:
+                return "Unknown";
+        }
+    }
+
+    public String GetFormatData(Integer index, Integer formatIndex) {
+        switch (GetType()) {
+            case CARD_COUPON:
+                Log.wtf("CARD_COUPON", Integer.toString(Globals.getInstance().GetCouponsResult().GetResult().GetList().size()));
+                CouponEntity couponEntity = Globals.getInstance().GetCouponsResult().GetResult().GetList().get(index);
+                String formatData = "";
+
+                if(formatIndex.equals(0)) //0 = name
+                    formatData = couponEntity.GetName();
+                else if(formatIndex.equals(1)) //1 = desc
+                    formatData = couponEntity.GetDesc();
+                else
+                    formatData = "Fuck";
+
+                Log.wtf("FormatData", formatData);
+                return formatData;
             default:
                 return "Unknown";
         }

@@ -1,5 +1,7 @@
 package xyz.uniwards.uniwards_student.StudentHandle;
 
+import android.util.Log;
+
 import xyz.uniwards.uniwards_student.APIHandling.IReqResult;
 
 /**
@@ -23,19 +25,20 @@ public class StudentResult implements IReqResult<StudentResponse> {
     public StudentResult(StudentResponse data)
     {
         this.studentData = data;
+        Log.wtf("Res", data.toString());
     }
 
     //TODD FIX FUCKUP
     public StudentResponse GetResult() {
         switch(GetType()) {
             case STUDENT_GET_FAILED:
-                //studentResp.SetResponse("Failed to get student!");
+                studentData.SetResponse("Failed to get student!");
                 break;
             case STUDENT_GET_SUCCESS:
-                //studentResp.SetResponse("Successfully got rewards!");
+                studentData.SetResponse("Successfully got rewards!");
                 break;
             default:
-                //studentResp.SetResponse("An unknown error occured!");
+                studentData.SetResponse("An unknown error occured!");
                 break;
         }
 
@@ -45,4 +48,6 @@ public class StudentResult implements IReqResult<StudentResponse> {
     public Type GetType() {
         return Type.values()[Integer.parseInt(studentData.GetResponse())];
     }
+
+    public StudentEntity GetStudent() { return this.studentData.GetStudent(); }
 }

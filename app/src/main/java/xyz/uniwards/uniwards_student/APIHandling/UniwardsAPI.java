@@ -43,6 +43,9 @@ public interface UniwardsAPI {
     @GET("/api/getcoupons")
     Call<CouponsResponse> GetCoupons(@Header("Token") String token);
 
+    @GET("/api/getcouponbytier/{tier}")
+    Call<CouponsResponse> GetCouponsByTier(@Header("Token") String token, @Path("tier") int tier);
+
     @GET("/api/getcouponbyid/{id}")
     Call<CouponResponse> GetCouponByID(@Header("Token") String token, @Path("id") int id);
 

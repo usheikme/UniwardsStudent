@@ -9,23 +9,23 @@ import java.util.List;
 
 public class CouponsResponse {
     private String response_message;
-    private List<CouponResponse> coupons = null;
+    private List<CouponEntity> coupons = null;
 
-    public List<CouponResponse> GetCoupons() {
+    public List<CouponEntity> GetCoupons() {
         return coupons;
     }
 
     //TODO Empty Check
     public List<String> GetUniverisityCodes() {
         List<String> uni_codes = new ArrayList<>();
-        for (CouponResponse uni : coupons) {
-            uni_codes.add(uni.GetName());
+        for (CouponEntity uni : coupons) {
+            //uni_codes.add(uni.GetName());
         }
 
         return uni_codes;
     }
 
-    public void SetCoupons(List<CouponResponse> coupons) {
+    public void SetCoupons(List<CouponEntity> coupons) {
         this.coupons = coupons;
     }
 

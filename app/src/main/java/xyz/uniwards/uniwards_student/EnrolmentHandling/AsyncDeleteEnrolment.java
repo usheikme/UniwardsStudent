@@ -20,6 +20,7 @@ import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentResponse;
 import xyz.uniwards.uniwards_student.Globals;
 import xyz.uniwards.uniwards_student.ListResultEntity;
 import xyz.uniwards.uniwards_student.TokenValidation.TokenHandle;
+import xyz.uniwards.uniwards_student.UniclassHandling.UniclassEntity;
 import xyz.uniwards.uniwards_student.UniclassHandling.UniclassResponse;
 import xyz.uniwards.uniwards_student.UniclassHandling.UniclassesResponse;
 import xyz.uniwards.uniwards_student.UniclassHandling.UniclassesResult;
@@ -33,7 +34,7 @@ public class AsyncDeleteEnrolment extends AsyncTask<Void, Void, Void> {
     private RecyclerView mRecyclerView;
     private APIHelper helper;
     private GenericEnrolmentResponse deleteEnrolmentResp;
-    private EnrolmentResponse enrolmentToDelete;
+    private EnrolmentEntity enrolmentToDelete;
     private Integer uniclassID;
     public AsyncDeleteEnrolment(Activity activity, String uniclassName) {
         this.activity = activity;
@@ -42,9 +43,9 @@ public class AsyncDeleteEnrolment extends AsyncTask<Void, Void, Void> {
         this.helper = new APIHelper();
     }
 
-    private EnrolmentResponse GetEnrolmentByUniclassID(Integer uniClassID) {
-        EnrolmentResponse theEnrolment = null;
-        for (EnrolmentResponse enrolment : Globals.getInstance().GetEnrolmentsResult().GetEnrolments()) {
+    private EnrolmentEntity GetEnrolmentByUniclassID(Integer uniClassID) {
+        EnrolmentEntity theEnrolment = null;
+        for (EnrolmentEntity enrolment : Globals.getInstance().GetEnrolmentsResult().GetEnrolments()) {
             if (uniClassID.equals(enrolment.GetUniclassID())) {
                 theEnrolment = enrolment;
             }
@@ -54,7 +55,7 @@ public class AsyncDeleteEnrolment extends AsyncTask<Void, Void, Void> {
 
     private Integer GetUniclassIDByName(String uniclassName) {
         Integer uniclass_id = -1;
-        for (UniclassResponse uniclass : Globals.getInstance().GetUniclassesResult().GetUniclasses()) {
+        for (UniclassEntity uniclass : Globals.getInstance().GetUniclassesResult().GetUniclasses()) {
             if (uniclassName.equals(uniclass.GetName())) {
                 uniclass_id = uniclass.GetID();
             }

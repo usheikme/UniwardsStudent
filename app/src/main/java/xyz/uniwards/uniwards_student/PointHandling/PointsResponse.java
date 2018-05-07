@@ -10,23 +10,23 @@ import java.util.List;
 
 public class PointsResponse {
     private String response_message;
-    private List<PointResponse> points = null;
+    private List<PointEntity> points = null;
 
-    public List<PointResponse> GetPoints() {
+    public List<PointEntity> GetPoints() {
         return points;
     }
 
     //TODO Empty Check
     public List<String> GetUniverisityCodes() {
         List<String> uni_codes = new ArrayList<>();
-        for (PointResponse uni : points) {
-            uni_codes.add(uni.GetDate());
+        for (PointEntity uni : points) {
+            //uni_codes.add(uni.GetDate());
         }
 
         return uni_codes;
     }
 
-    public void SetPoints(List<PointResponse> points) {
+    public void SetPoints(List<PointEntity> points) {
         this.points = points;
     }
 

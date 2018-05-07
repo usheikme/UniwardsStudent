@@ -9,23 +9,23 @@ import java.util.List;
  */
 
 public class VendorsResponse {
-    private List<VendorResponse> vendors = null;
+    private List<VendorEntity> vendors = null;
 
-    public List<VendorResponse> GetVendors() {
+    public List<VendorEntity> GetVendors() {
         return vendors;
     }
 
     //TODO Empty Check
     public List<String> GetUniverisityCodes() {
         List<String> uni_codes = new ArrayList<>();
-        for (VendorResponse uni : vendors) {
-            uni_codes.add(uni.GetEmail());
+        for (VendorEntity uni : vendors) {
+            //uni_codes.add(uni.GetEmail());
         }
 
         return uni_codes;
     }
 
-    public void SetVendors(List<VendorResponse> vendors) {
+    public void SetVendors(List<VendorEntity> vendors) {
         this.vendors = vendors;
     }
 

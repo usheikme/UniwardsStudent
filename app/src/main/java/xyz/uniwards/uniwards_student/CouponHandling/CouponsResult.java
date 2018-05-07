@@ -10,7 +10,7 @@ import xyz.uniwards.uniwards_student.ListResultEntity;
  */
 
 
-public class CouponsResult implements IReqResult<ListResultEntity<CouponResponse>> {
+public class CouponsResult implements IReqResult<ListResultEntity<CouponEntity>> {
     private CouponsResponse couponsData;
 
     public enum Type {
@@ -28,8 +28,8 @@ public class CouponsResult implements IReqResult<ListResultEntity<CouponResponse
         this.couponsData = data;
     }
 
-    public ListResultEntity<CouponResponse> GetResult() {
-        ListResultEntity<CouponResponse> couponsEnt = new ListResultEntity("", null, ListResultEntity.Type.CARD_ENROLMENT);
+    public ListResultEntity<CouponEntity> GetResult() {
+        ListResultEntity<CouponEntity> couponsEnt = new ListResultEntity("", null, ListResultEntity.Type.CARD_COUPON);
         switch (GetType()) {
             case COUPON_GET_FAILED:
                 break;
@@ -49,5 +49,5 @@ public class CouponsResult implements IReqResult<ListResultEntity<CouponResponse
         return Type.values()[Integer.parseInt(couponsData.GetResponse())];
     }
 
-    public List<CouponResponse> GetCoupons() { return couponsData.GetCoupons(); }
+    public List<CouponEntity> GetCoupons() { return couponsData.GetCoupons(); }
 }

@@ -1,32 +1,16 @@
 package xyz.uniwards.uniwards_student.VendorHandling;
 
 /**
- * Created by Umayr on 4/28/2018.
+ * Created by Umayr on 5/7/2018.
  */
 
 public class VendorResponse {
-    private String email;
-    private int id;
-    private String mobile;
-    private String name;
-    private int type;
-    private String website;
+    private String response_message;
+    private VendorEntity vendor;
 
-    public String GetEmail() { return email; }
-    public void SetEmail(String value) { this.email = value; }
+    public String GetResponse() { return this.response_message; }
+    public void SetResponse(String response_message) { this.response_message = response_message; }
 
-    public long GetID() { return id; }
-    public void SetID(int value) { this.id = value; }
-
-    public String GetMobile() { return mobile; }
-    public void SetMobile(String value) { this.mobile = value; }
-
-    public String GetName() { return name; }
-    public void SetName(String value) { this.name = value; }
-
-    public long GetType() { return type; }
-    public void SetType(int value) { this.type = value; }
-
-    public String GetWebsite() { return website; }
-    public void SetWebsite(String value) { this.website = value; }
+    public VendorEntity GetVendor() { return this.vendor; }
+    public void SetVendor(VendorEntity vendor) { this.vendor = vendor; }
 }

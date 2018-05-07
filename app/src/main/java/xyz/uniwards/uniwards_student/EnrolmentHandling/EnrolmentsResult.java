@@ -9,7 +9,7 @@ import xyz.uniwards.uniwards_student.ListResultEntity;
  * Created by Umayr on 5/1/2018.
  */
 
-public class EnrolmentsResult implements IReqResult<ListResultEntity<EnrolmentResponse>> {
+public class EnrolmentsResult implements IReqResult<ListResultEntity<EnrolmentEntity>> {
     private EnrolmentsResponse enrolmentsData;
 
     public enum Type {
@@ -27,8 +27,8 @@ public class EnrolmentsResult implements IReqResult<ListResultEntity<EnrolmentRe
         this.enrolmentsData = data;
     }
 
-    public ListResultEntity<EnrolmentResponse> GetResult() {
-        ListResultEntity<EnrolmentResponse> enrolmentsEnt = new ListResultEntity("", null, ListResultEntity.Type.CARD_ENROLMENT);
+    public ListResultEntity<EnrolmentEntity> GetResult() {
+        ListResultEntity<EnrolmentEntity> enrolmentsEnt = new ListResultEntity("", null, ListResultEntity.Type.CARD_ENROLMENT);
         switch (GetType()) {
             case ENROLMENT_GET_FAILED:
                 enrolmentsEnt.SetResponseMessage("Failed to get enrolments!");
@@ -49,5 +49,5 @@ public class EnrolmentsResult implements IReqResult<ListResultEntity<EnrolmentRe
         return Type.values()[Integer.parseInt(enrolmentsData.GetResponse())];
     }
 
-    public List<EnrolmentResponse> GetEnrolments() { return enrolmentsData.GetEnrolments(); }
+    public List<EnrolmentEntity> GetEnrolments() { return enrolmentsData.GetEnrolments(); }
 }

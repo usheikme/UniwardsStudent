@@ -20,6 +20,7 @@ import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentResponse;
 import xyz.uniwards.uniwards_student.Globals;
 import xyz.uniwards.uniwards_student.ListResultEntity;
 import xyz.uniwards.uniwards_student.TokenValidation.TokenHandle;
+import xyz.uniwards.uniwards_student.UniclassHandling.UniclassEntity;
 import xyz.uniwards.uniwards_student.UniclassHandling.UniclassResponse;
 import xyz.uniwards.uniwards_student.UniclassHandling.UniclassesResponse;
 import xyz.uniwards.uniwards_student.UniclassHandling.UniclassesResult;
@@ -33,7 +34,7 @@ public class AsyncNewEnrolment extends AsyncTask<Void, Void, Void> {
     private RecyclerView mRecyclerView;
     private APIHelper helper;
     private GenericEnrolmentResponse newEnrolmentResp;
-    private UniclassResponse newUniclass;
+    private UniclassEntity newUniclass;
 
     public AsyncNewEnrolment(Activity activity, String uniclassName) {
         this.activity = activity;
@@ -41,9 +42,9 @@ public class AsyncNewEnrolment extends AsyncTask<Void, Void, Void> {
         this.helper = new APIHelper();
     }
 
-    private UniclassResponse GetUniclassByName(String uniclassName) {
-        UniclassResponse theClass = null;
-        for (UniclassResponse uniclass : Globals.getInstance().GetUniclassesResult().GetUniclasses()) {
+    private UniclassEntity GetUniclassByName(String uniclassName) {
+        UniclassEntity theClass = null;
+        for (UniclassEntity uniclass : Globals.getInstance().GetUniclassesResult().GetUniclasses()) {
             Log.d(uniclassName, uniclass.GetName());
             if (uniclassName.equals(uniclass.GetName())) {
                 Log.d("XXXXXXXXXXXXXXXXXXXX", uniclass.GetName());

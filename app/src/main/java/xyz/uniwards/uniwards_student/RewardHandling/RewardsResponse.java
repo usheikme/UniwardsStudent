@@ -9,23 +9,23 @@ import java.util.List;
 
 public class RewardsResponse {
     private String response_message;
-    private List<RewardResponse> rewards = null;
+    private List<RewardEntity> rewards = null;
 
-    public List<RewardResponse> GetRewards() {
+    public List<RewardEntity> GetRewards() {
         return rewards;
     }
 
     //TODO Empty Check
     public List<String> GetUniverisityCodes() {
         List<String> uni_codes = new ArrayList<>();
-        for (RewardResponse uni : rewards) {
-            uni_codes.add(uni.GetRequirement());
+        for (RewardEntity uni : rewards) {
+            //uni_codes.add(uni.GetRequirement());
         }
 
         return uni_codes;
     }
 
-    public void SetRewards(List<RewardResponse> rewards) { this.rewards = rewards; }
+    public void SetRewards(List<RewardEntity> rewards) { this.rewards = rewards; }
 
     public String GetResponse() { return this.response_message; }
 
