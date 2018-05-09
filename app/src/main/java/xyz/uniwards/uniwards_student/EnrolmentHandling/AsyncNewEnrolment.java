@@ -61,13 +61,13 @@ public class AsyncNewEnrolment extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... theVoid) {
         if(newUniclass != null)
-            NewEnrolmentSub(newUniclass.GetID(), Globals.getInstance().GetID(), Globals.GetCurrentDate());
+            NewEnrolmentStub(newUniclass.GetID(), Globals.getInstance().GetID(), Globals.GetCurrentDate());
         else
             Toast.makeText(activity, "Failed to enrol!", Toast.LENGTH_LONG).show();
         return null;
     }
 
-    private void NewEnrolmentSub(Integer uniclass_id, Integer student_id, String date) {
+    private void NewEnrolmentStub(Integer uniclass_id, Integer student_id, String date) {
         UniwardsAPI uniapi = APIHelper.GetUniwardsAPI();
         Call<GenericEnrolmentResponse> call = uniapi.NewEnrolment(TokenHandle.token, uniclass_id, student_id, date);
         call.enqueue(new Callback<GenericEnrolmentResponse>() {

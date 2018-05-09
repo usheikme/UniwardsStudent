@@ -51,6 +51,7 @@ public class AsyncRegister extends AsyncTask<Void, Void, Void> {
         final EditText text_rusername = activity.findViewById(R.id.text_rusername);
         final EditText text_remail = activity.findViewById(R.id.text_remail);
         final EditText text_rpassword = activity.findViewById(R.id.text_rpassword);
+        final EditText text_rpasscode = activity.findViewById(R.id.text_rpasscode);
         final RadioButton radio_rstudent = activity.findViewById(R.id.radio_rstudent);
         final RadioButton radio_rtutor = activity.findViewById(R.id.radio_rtutor);
         final Spinner spinner_uni = activity.findViewById(R.id.spinner_uni);
@@ -77,6 +78,7 @@ public class AsyncRegister extends AsyncTask<Void, Void, Void> {
                                                         text_rpassword.getText().toString(),
                                                         st_type,
                                                         0,
+                                                        Integer.parseInt(text_rpasscode.getText().toString()),
                                                         uni_id);
 
 
@@ -142,6 +144,7 @@ public class AsyncRegister extends AsyncTask<Void, Void, Void> {
                                                                     user.GetPassword(),
                                                                     user.GetST_type(),
                                                                     user.GetAuth_Status(),
+                                                                    user.GetPasscode(),
                                                                     user.GetUni_id());
         call.enqueue(new Callback<RegisterResponse>() {
             @Override
@@ -163,7 +166,7 @@ public class AsyncRegister extends AsyncTask<Void, Void, Void> {
     }
 
     private void HandleRegister(RegisterResult registerResult) {
-        if (registerResult.GetRegisterType() == RegisterResult.Type.REGISTER_SUCCESS) {
+        if (registerResult.GetType() == RegisterResult.Type.REGISTER_SUCCESS) {
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

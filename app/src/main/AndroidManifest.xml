@@ -28,8 +28,17 @@
         <activity android:name=".MainScreens.DashboardActivity" />
         <activity
             android:name=".MainScreens.Popups.Enrol.PopupEnrolActivity"
-            android:theme="@style/Theme.Transparent"></activity>
-        <activity android:name=".MainScreens.Popups.DropEnrolment.PopupDropActivity"></activity>
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".MainScreens.Popups.DropEnrolment.PopupDropActivity"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".MainScreens.Popups.Passcode.StudentCode"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".MainScreens.Popups.Passcode.VendorCode"
+            android:theme="@style/Theme.Transparent" />
+        <activity android:name=".MainScreens.Popups.SuccessfulRedemption"></activity>
     </application>
 
 </manifest>

@@ -23,7 +23,7 @@ public class RegisterResult {
 
     public String GetResult() {
         String message = "";
-        switch(GetRegisterType()) {
+        switch(GetType()) {
             case REGISTER_SUCCESS:
                 message = "";
                 break;
@@ -35,7 +35,7 @@ public class RegisterResult {
         return message;
     }
 
-    public Type GetRegisterType() {
+    public Type GetType() {
         return Type.values()[Integer.parseInt(registerData.GetResponse())];
     }
 }

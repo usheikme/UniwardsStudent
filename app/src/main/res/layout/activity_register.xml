@@ -11,17 +11,17 @@
 
     <ImageView
         android:id="@+id/rlogo"
-        android:layout_width="125dp"
-        android:layout_height="125dp"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         app:srcCompat="@drawable/logo" />
 
     <EditText
         android:id="@+id/text_rfname"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_alignEnd="@+id/text_rusername"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/rlogo"
         android:background="@layout/rounded_edittext"
         android:ems="10"
@@ -33,7 +33,7 @@
 
     <EditText
         android:id="@+id/text_rlname"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignStart="@+id/text_rfname"
         android:layout_below="@+id/text_rfname"
@@ -50,7 +50,7 @@
 
     <EditText
         android:id="@+id/text_rmobile"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignStart="@+id/text_rlname"
         android:layout_below="@+id/text_rlname"
@@ -67,17 +67,17 @@
 
     <EditText
         android:id="@+id/text_rdate"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignBottom="@+id/imageView"
         android:layout_alignStart="@+id/text_rmobile"
         android:layout_marginTop="8dp"
         android:background="@layout/rounded_edittext"
         android:ems="10"
+        android:focusable="false"
         android:gravity="center"
         android:hint="Birthdate"
         android:inputType="date"
-        android:focusable="false"
         android:textColor="@android:color/background_light"
         android:textSize="15sp"
         tools:layout_editor_absoluteX="194dp"
@@ -85,7 +85,7 @@
 
     <EditText
         android:id="@+id/text_rusername"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_below="@+id/text_rdate"
         android:layout_centerHorizontal="true"
@@ -102,7 +102,7 @@
 
     <EditText
         android:id="@+id/text_remail"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignStart="@+id/text_rusername"
         android:layout_below="@+id/text_rusername"
@@ -119,7 +119,7 @@
 
     <EditText
         android:id="@+id/text_rpassword"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignStart="@+id/text_remail"
         android:layout_below="@+id/text_remail"
@@ -130,15 +130,17 @@
         android:hint="Password"
         android:inputType="textPassword"
         android:textColor="@android:color/background_light"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="332dp" />
 
     <RadioButton
         android:id="@+id/radio_rtutor"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/radio_rstudent"
         android:layout_alignBottom="@+id/radio_rstudent"
-        android:layout_alignStart="@+id/text_rpassword"
+        android:layout_toStartOf="@+id/radio_rstudent"
         android:checked="true"
         android:ems="10"
         android:text="Tutor"
@@ -148,25 +150,25 @@
 
     <RadioButton
         android:id="@+id/radio_rstudent"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_alignEnd="@+id/text_rpassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_below="@+id/text_rpassword"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="7dp"
         android:ems="10"
         android:text="Student"
         android:textColor="@android:color/background_light"
         android:textSize="14sp" />
 
 
-
     <Spinner
         android:id="@+id/spinner_uni"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_alignStart="@+id/radio_rtutor"
-        android:layout_below="@+id/radio_rtutor"
-        android:layout_marginTop="15dp"
+        android:layout_alignStart="@id/text_rpassword"
+        android:layout_alignEnd="@id/text_rpassword"
+        android:layout_below="@+id/radio_rstudent"
+        android:layout_marginTop="8dp"
         android:background="@layout/rounded_edittext"
         tools:layout_editor_absoluteX="55dp"
         tools:layout_editor_absoluteY="463dp" />
@@ -187,12 +189,29 @@
         android:id="@+id/button_register"
         android:layout_width="150dp"
         android:layout_height="30dp"
-        android:layout_below="@+id/spinner_uni"
+        android:layout_below="@+id/text_rpasscode"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="25dp"
         android:background="@layout/rounded_button"
         android:elevation="15dp"
         android:stateListAnimator="@null"
         android:text="Register" />
+
+    <EditText
+        android:id="@+id/text_rpasscode"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/text_rpassword"
+        android:layout_below="@+id/spinner_uni"
+        android:layout_marginTop="15dp"
+        android:background="@layout/rounded_edittext"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Passcode"
+        android:inputType="textPassword|number"
+        android:textColor="@android:color/background_light"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="332dp" />
 
 </RelativeLayout>

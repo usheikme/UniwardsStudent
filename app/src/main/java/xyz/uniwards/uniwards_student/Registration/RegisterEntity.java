@@ -16,10 +16,11 @@ public class RegisterEntity {
     private String password;
     private Integer st_type;
     private Integer auth_status;
+    private Integer passcode;
     private Integer uni_id;
 
     public RegisterEntity(String fname, String lname, String mobile, String birthdate, String username, String email, String password,
-                          Integer st_type, Integer auth_status, Integer uni_id) {
+                          Integer st_type, Integer auth_status, Integer passcode, Integer uni_id) {
         this.fname = fname;
         this.lname = lname;
         this.mobile = mobile;
@@ -29,6 +30,7 @@ public class RegisterEntity {
         this.password = password;
         this.st_type = st_type;
         this.auth_status = auth_status;
+        this.passcode = passcode;
         this.uni_id = uni_id;
     }
 
@@ -41,6 +43,7 @@ public class RegisterEntity {
     public String GetPassword() { return this.password; }
     public Integer GetST_type() { return this.st_type; }
     public Integer GetAuth_Status() { return this.auth_status; }
+    public Integer GetPasscode() { return this.passcode; }
     public Integer GetUni_id() { return this.uni_id; }
 
     public void SetFname(String fname) { this.fname = fname; }
@@ -52,5 +55,6 @@ public class RegisterEntity {
     public void SetPassword(String password) { this.password = password; }
     public void SetST_type(Integer st_type) { this.st_type = st_type; }
     public void SetAuth_status(Integer auth_status) { this.auth_status = auth_status; }
+    public void SetPasscode(Integer passcode) { this.passcode = passcode; }
     public void SetUni_id(Integer uni_id) { this.uni_id = uni_id; }
 }

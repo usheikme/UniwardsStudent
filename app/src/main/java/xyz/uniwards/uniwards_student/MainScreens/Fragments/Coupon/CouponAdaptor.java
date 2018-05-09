@@ -1,5 +1,7 @@
 package xyz.uniwards.uniwards_student.MainScreens.Fragments.Coupon;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,13 +14,14 @@ import android.widget.Toast;
 import java.util.List;
 
 import xyz.uniwards.uniwards_student.DashCardHandle.DashCard;
+import xyz.uniwards.uniwards_student.MainScreens.Popups.Passcode.StudentCode;
 import xyz.uniwards.uniwards_student.R;
 
 
 public class CouponAdaptor extends RecyclerView.Adapter<CouponAdaptor.ViewHolder> {
     private static final String TAG = "CustomAdapter";
     private static List<DashCard> dashCards;
-
+    private static Activity activity;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -26,7 +29,6 @@ public class CouponAdaptor extends RecyclerView.Adapter<CouponAdaptor.ViewHolder
         public ImageView itemImage;
         public TextView itemTitle;
         public TextView itemDetail;
-
 
         public ViewHolder(View v) {
             super(v);
@@ -39,15 +41,17 @@ public class CouponAdaptor extends RecyclerView.Adapter<CouponAdaptor.ViewHolder
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
-                    Toast.makeText(v.getContext(), "Thank you, enjoy your points :)", Toast.LENGTH_LONG).show();
+                    Intent popup_studentcode = new Intent(v.getContext(), StudentCode.class);
+                    popup_studentcode.putExtra("couponName", itemTitle.getText());
+                    activity.startActivity(popup_studentcode);
                 }
             });
         }
     }
 
-    public CouponAdaptor(List<DashCard> dashCards) {
+    public CouponAdaptor(List<DashCard> dashCards, Activity activity) {
         this.dashCards = dashCards;
+        this.activity = activity;
     }
 
     // Create new views (invoked by the layout manager)

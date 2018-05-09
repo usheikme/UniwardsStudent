@@ -71,13 +71,13 @@ public class AsyncDeleteEnrolment extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... theVoid) {
         if(enrolmentToDelete != null)
-            DeleteEnrolmentSub(enrolmentToDelete.GetUniclassID(), Globals.getInstance().GetID(), enrolmentToDelete.GetDate());
+            DeleteEnrolmentStub(enrolmentToDelete.GetUniclassID(), Globals.getInstance().GetID(), enrolmentToDelete.GetDate());
         else
             Toast.makeText(activity, "Failed to enrol!", Toast.LENGTH_LONG).show();
         return null;
     }
 
-    private void DeleteEnrolmentSub(Integer uniclass_id, Integer student_id, String date) {
+    private void DeleteEnrolmentStub(Integer uniclass_id, Integer student_id, String date) {
         UniwardsAPI uniapi = APIHelper.GetUniwardsAPI();
         Call<GenericEnrolmentResponse> call = uniapi.DeleteEnrolment(TokenHandle.token, uniclass_id, student_id, date);
         call.enqueue(new Callback<GenericEnrolmentResponse>() {

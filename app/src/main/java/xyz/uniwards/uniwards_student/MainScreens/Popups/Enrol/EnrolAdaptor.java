@@ -12,8 +12,10 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import xyz.uniwards.uniwards_student.APIHandling.ReqThreadEntity;
 import xyz.uniwards.uniwards_student.DashCardHandle.DashCard;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.AsyncNewEnrolment;
+import xyz.uniwards.uniwards_student.Globals;
 import xyz.uniwards.uniwards_student.R;
 
 
@@ -42,7 +44,9 @@ public class EnrolAdaptor extends RecyclerView.Adapter<EnrolAdaptor.ViewHolder> 
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "Element " + dashCards.get(getAdapterPosition()).GetCardTitle() + " clicked.");
-                    new AsyncNewEnrolment(activity, dashCards.get(getAdapterPosition()).GetCardTitle()).execute();
+                    //new AsyncNewEnrolment(activity, dashCards.get(getAdapterPosition()).GetCardTitle()).execute();
+                    ReqThreadEntity request = new ReqThreadEntity(activity, new AsyncNewEnrolment(activity, dashCards.get(getAdapterPosition()).GetCardTitle()));
+                    Globals.getInstance().GetReqThread().AddRequest(request);
                 }
             });
         }

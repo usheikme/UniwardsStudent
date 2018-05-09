@@ -12,7 +12,9 @@ import xyz.uniwards.uniwards_student.CouponHandling.CouponsResponse;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentsResponse;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.GenericEnrolmentResponse;
 import xyz.uniwards.uniwards_student.Login.LoginResponse;
+import xyz.uniwards.uniwards_student.MainScreens.Popups.Passcode.PasscodeResponse;
 import xyz.uniwards.uniwards_student.PointHandling.PointsResponse;
+import xyz.uniwards.uniwards_student.RedemptionHandling.GenericRedemptionResponse;
 import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionResponse;
 import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionsResponse;
 import xyz.uniwards.uniwards_student.Registration.RegisterResponse;
@@ -109,6 +111,14 @@ public interface UniwardsAPI {
     @GET("/api/validate_token/{token}/{username}")
     Call<ValidateTokenResponse> ValidateToken(@Path("token") String token, @Path("username") String username);
 
+    @GET("/api/validate_studentpasscode/{student_passcode}")
+    Call<PasscodeResponse> ValidateStudentPasscode(@Header("Token") String token, @Path("student_passcode") String student_passcode);
+
+    @GET("/api/validate_vendorpasscode/{vendor_passcode}/{vendor_id}")
+    Call<PasscodeResponse> ValidateVendorPasscode(@Header("Token") String token,
+                                                  @Path("vendor_passcode") String vendor_passcode,
+                                                  @Path("vendor_id") Integer vendor_id);
+
     @FormUrlEncoded
     @POST("/api/login")
     Call<LoginResponse> StudentLogin(@Header("Token") String token, @Field("username") String username, @Field("password") String password);
@@ -126,6 +136,12 @@ public interface UniwardsAPI {
                                             @Field("date") String date);
 
     @FormUrlEncoded
+    @POST("/api/newredemption")
+    Call<GenericRedemptionResponse> NewRedemption(@Header("Token") String token, @Field("coupon_id") Integer coupon_id,
+                                                  @Field("student_id") Integer student_id,
+                                                  @Field("date") String date);
+
+    @FormUrlEncoded
     @POST("/api/registeruser")
     Call<RegisterResponse> RegisterUser(@Header("Token") String token,
                                         @Field("fname") String fname,
@@ -137,5 +153,6 @@ public interface UniwardsAPI {
                                         @Field("password") String password,
                                         @Field("st_type") Integer st_type,
                                         @Field("auth_status") Integer auth_status,
+                                        @Field("passcode") Integer passcode,
                                         @Field("uni_id") Integer uni_id);
 }

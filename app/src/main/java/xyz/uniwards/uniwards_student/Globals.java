@@ -11,6 +11,7 @@ import xyz.uniwards.uniwards_student.APIHandling.RequestThread;
 import xyz.uniwards.uniwards_student.CouponHandling.CouponsResponse;
 import xyz.uniwards.uniwards_student.CouponHandling.CouponsResult;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentsResult;
+import xyz.uniwards.uniwards_student.MainScreens.Popups.Passcode.PasscodeResult;
 import xyz.uniwards.uniwards_student.PointHandling.PointsResult;
 import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionsResult;
 import xyz.uniwards.uniwards_student.RewardHandling.RewardsResult;
@@ -30,6 +31,8 @@ public class Globals {
     private UniclassesResult uniclassesResult;
     private CouponsResult couponsResult;
     private StudentResult studentResult;
+    private PasscodeResult studentPasscodeResult;
+    private PasscodeResult vendorPasscodeResult;
     private Integer id;
 
     public static Globals getInstance() {
@@ -100,6 +103,18 @@ public class Globals {
     }
 
     public void SetStudentResult(StudentResult studentResult) { this.studentResult = studentResult; }
+
+    public PasscodeResult GetStudentPasscodeResult() {
+        return this.studentPasscodeResult;
+    }
+
+    public void SetStudentPasscodeResult(PasscodeResult studentPasscodeResult) { this.studentPasscodeResult = studentPasscodeResult; }
+
+    public PasscodeResult GetVendorPasscodeResult() {
+        return this.vendorPasscodeResult;
+    }
+
+    public void SetVendorPasscodeResult(PasscodeResult vendorPasscodeResult) { this.vendorPasscodeResult = vendorPasscodeResult; }
 
     public Integer GetID() {
         return this.id;

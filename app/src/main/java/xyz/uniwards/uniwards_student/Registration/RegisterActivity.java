@@ -20,6 +20,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import xyz.uniwards.uniwards_student.APIHandling.ReqThreadEntity;
+import xyz.uniwards.uniwards_student.Globals;
 import xyz.uniwards.uniwards_student.R;
 import xyz.uniwards.uniwards_student.UniversityHandling.UniversityHandle;
 import xyz.uniwards.uniwards_student.UniversityHandling.UniversityResponse;
@@ -45,7 +47,9 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AsyncRegister(RegisterActivity.this).execute();
+                //new AsyncRegister(RegisterActivity.this).execute();
+                ReqThreadEntity request = new ReqThreadEntity(RegisterActivity.this, new AsyncRegister(RegisterActivity.this));
+                Globals.getInstance().GetReqThread().AddRequest(request);
             }
         });
     }

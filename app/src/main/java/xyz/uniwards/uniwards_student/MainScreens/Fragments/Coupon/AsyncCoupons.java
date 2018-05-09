@@ -151,7 +151,7 @@ public class AsyncCoupons extends AsyncTask<Void, Void, Void> {
             }
         });
 
-        this.mAdapter = new CouponAdaptor(dashCards);
+        this.mAdapter = new CouponAdaptor(dashCards, this.activity);
         this.mRecyclerView.setAdapter(this.mAdapter);
     }
 }
