@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -69,20 +71,149 @@ public class AsyncRegister extends AsyncTask<Void, Void, Void> {
         //TODO Implement parseBD
         String birthdate = "12/02/1995";
 
-        RegisterEntity newUser = new RegisterEntity(text_rfname.getText().toString(),
-                                                        text_rlname.getText().toString(),
-                                                        text_rmobile.getText().toString(),
-                                                        birthdate,
-                                                        text_rusername.getText().toString(),
-                                                        text_remail.getText().toString(),
-                                                        text_rpassword.getText().toString(),
-                                                        st_type,
-                                                        0,
-                                                        Integer.parseInt(text_rpasscode.getText().toString()),
-                                                        uni_id);
+        String fname = text_rfname.getText().toString();
+        String lname = text_rlname.getText().toString();
+        String mobile = text_rmobile.getText().toString();
+        String username = text_rusername.getText().toString();
+        String email = text_remail.getText().toString();
+        String password = text_rpassword.getText().toString();
+        String passcode = text_rpasscode.getText().toString();
 
+        final View fnameFocusView = text_rusername;
+        final View lnameFocusView = text_rpassword;
+        final View mobileFocusView = text_rusername;
+        final View usernameFocusView = text_rpassword;
+        final View emailFocusView = text_rusername;
+        final View passwordFocusView = text_rpassword;
+        final View passcodeFocusView = text_rusername;
 
+        Boolean badFname, badLname, badMobile, badUsername, badEmail, badPassword, badPasscode;
+        badFname = badLname = badMobile = badUsername = badEmail = badPassword = badPasscode = false;
 
+        if (BadInputCheck(fname, 3)) {
+            badFname = true;
+        }
+
+        if (BadInputCheck(lname, 3)) {
+            badLname = true;
+        }
+
+        if (BadInputCheck(mobile, 10)) {
+            badMobile = true;
+        }
+
+        if (BadInputCheck(username, 5)) {
+            badUsername = true;
+        }
+
+        if (BadInputCheck(email, 6)) {
+            badEmail = true;
+        }
+
+        if (BadInputCheck(password, 6)) {
+            badPassword = true;
+        }
+
+        if (BadInputCheck(passcode, 4) || passcode.length() > 4) {
+            badPasscode = true;
+        }
+
+        if (badFname) {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (pDialog.isShowing()) {
+                        pDialog.dismiss();
+                    }
+                    text_rfname.setError("Please enter a valid first name");
+                    fnameFocusView.requestFocus();
+                }
+            });
+
+        } else if (badLname) {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (pDialog.isShowing()) {
+                        pDialog.dismiss();
+                    }
+                    text_rlname.setError("Please enter a valid last name");
+                    lnameFocusView.requestFocus();
+                }
+            });
+        } else if (badMobile) {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (pDialog.isShowing()) {
+                        pDialog.dismiss();
+                    }
+                    text_rmobile.setError("Please enter a valid mobile no.");
+                    mobileFocusView.requestFocus();
+                }
+            });
+        }
+        else if (badUsername) {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (pDialog.isShowing()) {
+                        pDialog.dismiss();
+                    }
+                    text_rusername.setError("Please enter a valid username");
+                    usernameFocusView.requestFocus();
+                }
+            });
+        } else if (badEmail) {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (pDialog.isShowing()) {
+                        pDialog.dismiss();
+                    }
+                    text_remail.setError("Please enter a valid email");
+                    emailFocusView.requestFocus();
+                }
+            });
+        } else if (badPassword) {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (pDialog.isShowing()) {
+                        pDialog.dismiss();
+                    }
+                    text_rpassword.setError("Please enter a valid email");
+                    passwordFocusView.requestFocus();
+                }
+            });
+        } else if (badPasscode) {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (pDialog.isShowing()) {
+                        pDialog.dismiss();
+                    }
+                    text_rpasscode.setError("Please enter a valid passcode");
+                    passcodeFocusView.requestFocus();
+                }
+            });
+        }
+
+        else {
+            RegisterEntity newUser = new RegisterEntity(text_rfname.getText().toString(),
+                    text_rlname.getText().toString(),
+                    text_rmobile.getText().toString(),
+                    birthdate,
+                    text_rusername.getText().toString(),
+                    text_remail.getText().toString(),
+                    text_rpassword.getText().toString(),
+                    st_type,
+                    0,
+                    Integer.parseInt(text_rpasscode.getText().toString()),
+                    uni_id);
+
+            RegisterUserStub(newUser);
+        }
        /* final View usernameFocusView = text_username;
         final View passwordFocusView = text_password;
         Boolean badUsername = false;
@@ -125,12 +256,18 @@ public class AsyncRegister extends AsyncTask<Void, Void, Void> {
             });
         }
         else {*/
-            RegisterUserStub(newUser);
+            //RegisterUserStub(newUser);
         //}
 
         return null;
     }
 
+    private Boolean BadInputCheck(String input, Integer lenRestriction) {
+        if(TextUtils.isEmpty(input) || input.length() < lenRestriction)
+            return true;
+        else
+            return false;
+    }
 
     private void RegisterUserStub(final RegisterEntity user) {
         Log.wtf("GG", "GG");

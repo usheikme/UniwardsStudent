@@ -55,12 +55,12 @@ public class AsyncLogin extends AsyncTask<Void, Void, Void> {
         Boolean badUsername = false;
         Boolean badPassword = false;
 
-        if (TextUtils.isEmpty(username)) {
+        if (TextUtils.isEmpty(username) || username.length() < 5) {
             Log.i("Empty", "username");
             badUsername = true;
         }
 
-        if (TextUtils.isEmpty(password)) {
+        if (TextUtils.isEmpty(password) || password.length() < 6) {
             Log.i("Empty", "password");
             badPassword = true;
         }
