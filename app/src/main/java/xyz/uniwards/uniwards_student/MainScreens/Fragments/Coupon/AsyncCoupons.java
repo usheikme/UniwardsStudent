@@ -151,9 +151,15 @@ public class AsyncCoupons extends AsyncTask<Void, Void, Void> {
             }
         });
 
-        TextView text_ctitle_points = activity.findViewById(R.id.text_ctitle_points);
-        text_ctitle_points.setText(Globals.getInstance().GetStudentResult().GetStudent().GetTotalPoints().toString());
+        //TODO move to function
 
+        try {
+            TextView text_ctitle_points = activity.findViewById(R.id.text_ctitle_points);
+            text_ctitle_points.setText("Current points: " + Globals.getInstance().GetStudentResult().GetStudent().GetTotalPoints().toString());
+
+            TextView toolbar_cusername = activity.findViewById(R.id.toolbar_cusername);
+            toolbar_cusername.setText(Globals.getInstance().GetStudentResult().GetStudent().GetUsername().toString());
+        } catch (Exception e) {}
         this.mAdapter = new CouponAdaptor(dashCards, this.activity);
         this.mRecyclerView.setAdapter(this.mAdapter);
     }

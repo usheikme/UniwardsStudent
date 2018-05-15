@@ -13,6 +13,7 @@ import xyz.uniwards.uniwards_student.EnrolmentHandling.EnrolmentsResponse;
 import xyz.uniwards.uniwards_student.EnrolmentHandling.GenericEnrolmentResponse;
 import xyz.uniwards.uniwards_student.Login.LoginResponse;
 import xyz.uniwards.uniwards_student.MainScreens.Popups.Passcode.PasscodeResponse;
+import xyz.uniwards.uniwards_student.PointHandling.GenericPointResponse;
 import xyz.uniwards.uniwards_student.PointHandling.PointsResponse;
 import xyz.uniwards.uniwards_student.RedemptionHandling.GenericRedemptionResponse;
 import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionResponse;
@@ -140,6 +141,14 @@ public interface UniwardsAPI {
     Call<GenericRedemptionResponse> NewRedemption(@Header("Token") String token, @Field("coupon_id") Integer coupon_id,
                                                   @Field("student_id") Integer student_id,
                                                   @Field("date") String date);
+
+    @FormUrlEncoded
+    @POST("/api/newpoint")
+    Call<GenericPointResponse> NewPoint(@Header("Token") String token, @Field("student_id") Integer student_id,
+                                        @Field("reward_id") Integer reward_id,
+                                        @Field("tutor_id") Integer tutor_id,
+                                        @Field("date") String date,
+                                        @Field("tutor_passcode") Integer tutor_passcode);
 
     @FormUrlEncoded
     @POST("/api/registeruser")

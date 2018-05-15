@@ -82,6 +82,7 @@ public class AsyncProfile extends AsyncTask<Void, Void, Void> {
         Log.wtf("WTF", student.toString());
 
         String fullName = student.GetFname() + " " + student.GetLname();
+        fullName = "Umayr S";
         profile_name.setText(fullName);
 
         text_total_points_value.setText(student.GetTotalPoints().toString());

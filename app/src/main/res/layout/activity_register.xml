@@ -141,7 +141,7 @@
         android:layout_alignBaseline="@+id/radio_rstudent"
         android:layout_alignBottom="@+id/radio_rstudent"
         android:layout_toStartOf="@+id/radio_rstudent"
-        android:checked="true"
+        android:checked="false"
         android:ems="10"
         android:text="Tutor"
         android:textSize="14sp" />
@@ -155,6 +155,7 @@
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/text_rpassword"
         android:layout_marginTop="7dp"
+        android:checked="true"
         android:ems="10"
         android:text="Student"
         android:textColor="@android:color/background_light"

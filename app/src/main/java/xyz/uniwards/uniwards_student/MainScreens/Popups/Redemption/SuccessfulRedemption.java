@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import xyz.uniwards.uniwards_student.MainScreens.DashboardActivity;
 import xyz.uniwards.uniwards_student.R;
@@ -19,6 +20,9 @@ public class SuccessfulRedemption extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_successful_redemption);
         InitExitButtonAsClickable(this);
+
+        TextView text_sucessful_redemption = findViewById(R.id.text_sucessful_redemption);
+        text_sucessful_redemption.setText("Successfully redeemed: " + getIntent().getStringExtra("couponName"));
     }
 
     private void InitExitButtonAsClickable(final Activity thisAct) {

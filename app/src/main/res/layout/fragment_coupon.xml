@@ -37,7 +37,7 @@
                 android:textSize="100px" />
 
             <TextView
-                android:id="@+id/toolbar_username"
+                android:id="@+id/toolbar_cusername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"

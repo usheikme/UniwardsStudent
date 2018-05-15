@@ -37,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
         InitRegisterButton();
         InitBirthdayPicker();
         InitStudentRadioButton();
-        InitTutorRadioButton();
+        //InitTutorRadioButton();
         InitUniversitySpinner();
     }
 

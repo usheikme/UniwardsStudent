@@ -31,7 +31,7 @@ public class ListResultEntity<T> {
 
     private String[] enromentTitleFormats = {"New Enrolment"};
     private String[] pointTitleFormats = {"Congratulations!", "Wow!", "Good job!", "Look at you go!"};
-    private String[] redemptionTitleFormats = {"Enjoy!", "Time to go out!"};
+    private String[] redemptionTitleFormats = {"Enjoy!", "Look at you go!"};
     private String[] uniclassTitleFormats = {"%s"};
     private String[] couponTitleFormats = {"%s [%s pts]"};
 

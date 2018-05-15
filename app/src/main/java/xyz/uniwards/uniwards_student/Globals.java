@@ -133,12 +133,12 @@ public class Globals {
 
     //TODO move to backend
     public Integer GetCurrentTier(Integer currentPoints) {
-        Integer tier = 1;
+        Integer tier = 0;
         for(int x = 0; x < tiers.length; x++) {
             if(currentPoints > tiers[x])
                 tier = x;
         }
-        return tier+1;
+        return tier;
     }
 
     public Integer GetNextTierValue(Integer currentPoints) {
