@@ -14,7 +14,9 @@ import android.widget.Toast;
 import java.util.List;
 
 import xyz.uniwards.uniwards_student.DashCardHandle.DashCard;
+import xyz.uniwards.uniwards_student.Globals;
 import xyz.uniwards.uniwards_student.MainScreens.Popups.Passcode.StudentCode;
+import xyz.uniwards.uniwards_student.MainScreens.Popups.Redemption.FailedRedemption;
 import xyz.uniwards.uniwards_student.R;
 
 
@@ -41,9 +43,20 @@ public class CouponAdaptor extends RecyclerView.Adapter<CouponAdaptor.ViewHolder
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent popup_studentcode = new Intent(v.getContext(), StudentCode.class);
-                    popup_studentcode.putExtra("couponName", itemTitle.getText());
-                    activity.startActivity(popup_studentcode);
+                    String[] split = itemTitle.getText().toString().split(" \\[");
+                    String couponName = split[0];
+                    Integer couponCost = Integer.parseInt(split[1].replace(" pts]", ""));
+
+                    if(Globals.getInstance().GetStudentResult().GetStudent().GetTotalPoints() >= couponCost) {
+                        Intent popup_studentcode = new Intent(v.getContext(), StudentCode.class);
+                        popup_studentcode.putExtra("couponName", couponName);
+                        activity.startActivity(popup_studentcode);
+                    }
+                    else {
+                        Intent popup_failedredemption = new Intent(v.getContext(), FailedRedemption.class);
+                        popup_failedredemption.putExtra("message", "Not enough points!");
+                        activity.startActivity(popup_failedredemption);
+                    }
                 }
             });
         }

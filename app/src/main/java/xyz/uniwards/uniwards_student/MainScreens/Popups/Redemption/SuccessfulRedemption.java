@@ -1,4 +1,4 @@
-package xyz.uniwards.uniwards_student.MainScreens.Popups;
+package xyz.uniwards.uniwards_student.MainScreens.Popups.Redemption;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,8 +22,8 @@ public class SuccessfulRedemption extends AppCompatActivity {
     }
 
     private void InitExitButtonAsClickable(final Activity thisAct) {
-        final Button button_vcodefinish =findViewById(R.id.button_sredemtption);
-        button_vcodefinish.setOnClickListener(new View.OnClickListener() {
+        final Button button_sredemtption =findViewById(R.id.button_sredemtption);
+        button_sredemtption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(thisAct, DashboardActivity.class);

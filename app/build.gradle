@@ -47,4 +47,7 @@ dependencies {
 
     // pinview
     compile 'com.github.GoodieBag:Pinview:v1.3'
+
+    // QE
+    compile 'me.dm7.barcodescanner:zxing:1.9'
 }

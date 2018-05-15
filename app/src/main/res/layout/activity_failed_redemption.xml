@@ -12,33 +12,33 @@
     android:padding="0dp"
     android:layout_gravity="center"
     android:background="@layout/rounded_bg"
-    tools:context="xyz.uniwards.uniwards_student.MainScreens.Popups.Redemption.SuccessfulRedemption">
+    tools:context="xyz.uniwards.uniwards_student.MainScreens.Popups.Redemption.FailedRedemption">
 
 
     <TextView
-        android:id="@+id/text_sucessful_redemption"
+        android:id="@+id/text_failed_redemption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="13dp"
-        android:text="Redeemed!" />
+        android:text="Failed to redeem!" />
 
     <ImageView
-        android:id="@+id/image_successful_redemp"
+        android:id="@+id/image_failed_redemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginEnd="21dp"
-        android:layout_toStartOf="@+id/button_sredemtption"
+        android:layout_toStartOf="@+id/button_fredemtption"
         android:background="@mipmap/successful_redemp_icon"
         android:scaleType="centerCrop" />
 
     <Button
-        android:id="@+id/button_sredemtption"
+        android:id="@+id/button_fredemtption"
         android:layout_width="120dp"
         android:layout_height="30dp"
-        android:layout_below="@+id/text_sucessful_redemption"
+        android:layout_below="@+id/text_failed_redemption"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:background="@layout/rounded_button"
@@ -47,7 +47,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:text="Close"
-        app:layout_anchor="@+id/nestedScrollView"
         app:layout_anchorGravity="bottom|center" />
 
 </RelativeLayout>

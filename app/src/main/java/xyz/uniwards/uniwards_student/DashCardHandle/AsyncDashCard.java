@@ -296,6 +296,7 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
                             enrolmentsEnt.GetTitle(),
                             enrolmentsEnt.GetDesc(enrolmentsEnt.GetFormatData(i)),
                             tempDate));
+                    Log.i("NEW CARD", "ENROLMENT");
                     i++;
                 }
             }
@@ -315,6 +316,7 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
                         pointsEnt.GetTitle(),
                         pointsEnt.GetDesc(pointsEnt.GetFormatData(i)),
                         tempDate));
+                Log.i("NEW CARD", "POINT");
                 i++;
             }
         } catch (Exception e) { Log.wtf(e.toString(), "point"); }
@@ -333,6 +335,7 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
                         redemptionsEnt.GetTitle(),
                         redemptionsEnt.GetDesc(redemptionsEnt.GetFormatData(i)),
                         tempDate));
+                Log.i("NEW CARD", "REDEMPTION");
                 i++;
             }
         } catch (Exception e) { Log.wtf(e.toString(), "redemption"); }

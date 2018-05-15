@@ -11,6 +11,7 @@ import retrofit2.Response;
 import xyz.uniwards.uniwards_student.APIHandling.APIHelper;
 import xyz.uniwards.uniwards_student.APIHandling.UniwardsAPI;
 import xyz.uniwards.uniwards_student.Globals;
+import xyz.uniwards.uniwards_student.MainScreens.Popups.Redemption.FailedRedemption;
 import xyz.uniwards.uniwards_student.TokenValidation.TokenHandle;
 
 /**
@@ -70,6 +71,9 @@ public class AsyncStudentPasscode extends AsyncTask<Void, Void, Void> {
     //TODO Finish activity
     private void HandleStudentCodeResponse(Throwable t) {
         Log.wtf(t.toString(), "xxc");
+        Intent popup_failedredemption = new Intent(activity, FailedRedemption.class);
+        popup_failedredemption.putExtra("message", "Failed to query server!");
+        activity.startActivity(popup_failedredemption);
     }
 
 

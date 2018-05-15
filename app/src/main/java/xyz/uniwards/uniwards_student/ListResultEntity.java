@@ -33,7 +33,7 @@ public class ListResultEntity<T> {
     private String[] pointTitleFormats = {"Congratulations!", "Wow!", "Good job!", "Look at you go!"};
     private String[] redemptionTitleFormats = {"Enjoy!", "Time to go out!"};
     private String[] uniclassTitleFormats = {"%s"};
-    private String[] couponTitleFormats = {"%s"};
+    private String[] couponTitleFormats = {"%s [%s pts]"};
 
     private String[] enromentDescFormats = {"You've enrolled in %s"};
     //TODO EARNED FOR DOING WHAT??
@@ -99,6 +99,15 @@ public class ListResultEntity<T> {
                 return String.format(uniclassTitleFormats[new Random().nextInt(uniclassTitleFormats.length)], formatData);
             case CARD_COUPON:
                 return String.format(couponTitleFormats[new Random().nextInt(couponTitleFormats.length)], formatData);
+            default:
+                return "Hmm?";
+        }
+    }
+
+    public String GetTitle(String formatData0, String formatData1) {
+        switch (GetType()) {
+            case CARD_COUPON:
+                return String.format(couponTitleFormats[new Random().nextInt(couponTitleFormats.length)], formatData0, formatData1);
             default:
                 return "Hmm?";
         }
@@ -197,6 +206,8 @@ public class ListResultEntity<T> {
                     formatData = couponEntity.GetName();
                 else if(formatIndex.equals(1)) //1 = desc
                     formatData = couponEntity.GetDesc();
+                else if(formatIndex.equals(2))  //2 = points
+                    formatData = couponEntity.GetPointCost().toString();
                 else
                     formatData = "Fuck";
 

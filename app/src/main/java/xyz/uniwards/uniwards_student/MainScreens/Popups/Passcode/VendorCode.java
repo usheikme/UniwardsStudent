@@ -41,6 +41,7 @@ public class VendorCode extends AppCompatActivity {
             public void onClick(View view) {
                 ReqThreadEntity request = new ReqThreadEntity(thisAct, new AsyncVendorPasscode(thisAct, getIntent().getStringExtra("couponName"), vendorPinView.getValue().toString()));
                 Globals.getInstance().GetReqThread().AddRequest(request);
+                finish();
             }
         });
         this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

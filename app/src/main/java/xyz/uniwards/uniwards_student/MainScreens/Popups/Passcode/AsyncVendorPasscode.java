@@ -13,7 +13,7 @@ import xyz.uniwards.uniwards_student.APIHandling.ReqThreadEntity;
 import xyz.uniwards.uniwards_student.APIHandling.UniwardsAPI;
 import xyz.uniwards.uniwards_student.CouponHandling.CouponEntity;
 import xyz.uniwards.uniwards_student.Globals;
-import xyz.uniwards.uniwards_student.MainScreens.Popups.SuccessfulRedemption;
+import xyz.uniwards.uniwards_student.MainScreens.Popups.Redemption.FailedRedemption;
 import xyz.uniwards.uniwards_student.RedemptionHandling.AsyncNewRedemption;
 import xyz.uniwards.uniwards_student.TokenValidation.TokenHandle;
 
@@ -85,6 +85,9 @@ public class AsyncVendorPasscode extends AsyncTask<Void, Void, Void> {
 
     private void HandleVendorCodeResponse(Throwable t) {
         Log.wtf(t.toString(), "xxc");
+        Intent popup_failedredemption = new Intent(activity, FailedRedemption.class);
+        popup_failedredemption.putExtra("message", "Failed to query server!");
+        activity.startActivity(popup_failedredemption);
     }
 
 

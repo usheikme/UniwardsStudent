@@ -40,6 +40,7 @@ public class StudentCode extends AppCompatActivity {
             public void onClick(View view) {
                 ReqThreadEntity request = new ReqThreadEntity(thisAct, new AsyncStudentPasscode(thisAct, getIntent().getStringExtra("couponName"), studentPinView.getValue().toString()));
                 Globals.getInstance().GetReqThread().AddRequest(request);
+                finish();
             }
         });
         this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

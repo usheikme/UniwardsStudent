@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +61,15 @@ public class CouponFragment extends Fragment {
         ReqThreadEntity request = new ReqThreadEntity(getActivity(), new AsyncCoupons(this.getActivity(), this.mAdapter, this.mRecyclerView));
         Globals.getInstance().GetReqThread().AddRequest(request);
 
+        if(Globals.getInstance().GetStudentResult() != null)
+            SetTitleText(Globals.getInstance().GetStudentResult().GetStudent().GetTotalPoints().toString(), Page);
+
         return Page;
+    }
+
+    public void SetTitleText(String text, View page) {
+        TextView text_ctitle_points = page.findViewById(R.id.text_ctitle_points);
+        text_ctitle_points.setText(text);
     }
 
     @Override

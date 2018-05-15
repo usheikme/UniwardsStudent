@@ -145,7 +145,7 @@ public class AsyncEnrol extends AsyncTask<Void, Void, Void> {
 
                     if(!enrolled) {
                         dashCards.add(new DashCard(uniclassesEnt.GetIcon(),
-                                uniclassesEnt.GetTitle(),
+                                uniclassesEnt.GetTitle(uniclass.GetName()),
                                 uniclassesEnt.GetDesc(uniclassesEnt.GetFormatData(i)),
                                 null));
                     }

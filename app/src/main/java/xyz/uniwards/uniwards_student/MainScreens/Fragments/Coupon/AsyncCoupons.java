@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -25,6 +26,7 @@ import xyz.uniwards.uniwards_student.CouponHandling.CouponsResult;
 import xyz.uniwards.uniwards_student.DashCardHandle.DashCard;
 import xyz.uniwards.uniwards_student.Globals;
 import xyz.uniwards.uniwards_student.ListResultEntity;
+import xyz.uniwards.uniwards_student.R;
 import xyz.uniwards.uniwards_student.StudentHandle.StudentResponse;
 import xyz.uniwards.uniwards_student.StudentHandle.StudentResult;
 import xyz.uniwards.uniwards_student.TokenValidation.TokenHandle;
@@ -132,10 +134,8 @@ public class AsyncCoupons extends AsyncTask<Void, Void, Void> {
         try {
             if (couponsEnt != null) {
                 for (CouponEntity coupon : couponsEnt.GetList()) {
-                    Log.wtf("trn", couponsEnt.GetTitle(couponsEnt.GetFormatData(i, 0)));
-                    Log.wtf("rstnsrn", couponsEnt.GetDesc(couponsEnt.GetFormatData(i, 0)));
                     dashCards.add(new DashCard(couponsEnt.GetIcon(),
-                            couponsEnt.GetTitle(couponsEnt.GetFormatData(i, 0)),
+                            couponsEnt.GetTitle(couponsEnt.GetFormatData(i, 0), couponsEnt.GetFormatData(i, 2)),
                             couponsEnt.GetDesc(couponsEnt.GetFormatData(i, 1)),
                             null));
                     i++;
@@ -150,6 +150,9 @@ public class AsyncCoupons extends AsyncTask<Void, Void, Void> {
                 return o1.GetCardDate().compareTo(o2.GetCardDate());
             }
         });
+
+        TextView text_ctitle_points = activity.findViewById(R.id.text_ctitle_points);
+        text_ctitle_points.setText(Globals.getInstance().GetStudentResult().GetStudent().GetTotalPoints().toString());
 
         this.mAdapter = new CouponAdaptor(dashCards, this.activity);
         this.mRecyclerView.setAdapter(this.mAdapter);

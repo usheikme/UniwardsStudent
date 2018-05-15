@@ -12,6 +12,7 @@ import xyz.uniwards.uniwards_student.Globals;
 import xyz.uniwards.uniwards_student.MainScreens.Popups.DropEnrolment.PopupDropActivity;
 import xyz.uniwards.uniwards_student.MainScreens.Popups.Enrol.AsyncEnrol;
 import xyz.uniwards.uniwards_student.MainScreens.Popups.Enrol.PopupEnrolActivity;
+import xyz.uniwards.uniwards_student.MainScreens.Popups.QR.QRScanner;
 import xyz.uniwards.uniwards_student.R;
 
 import android.widget.Button;
@@ -26,6 +27,7 @@ public class ProfileFragment extends Fragment {
 
         InitEnrolButtonAsClickable(Page);
         InitDropButtonAsClickable(Page);
+        InitQRButtonAsClickable(Page);
 
         ReqThreadEntity request = new ReqThreadEntity(getActivity(), new AsyncProfile(getActivity()));
         Globals.getInstance().GetReqThread().AddRequest(request);
@@ -37,7 +39,7 @@ public class ProfileFragment extends Fragment {
         Button button_penrol = page.findViewById(R.id.button_penrol);
         final Intent popup_enrol = new Intent(page.getContext(), PopupEnrolActivity.class);
 
-         button_penrol.setOnClickListener(new View.OnClickListener() {
+        button_penrol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(popup_enrol);
@@ -53,6 +55,18 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(popup_drop);
+            }
+        });
+    }
+
+    private void InitQRButtonAsClickable(View page) {
+        Button button_scanqr = page.findViewById(R.id.button_scanqr);
+        final Intent popup_qr = new Intent(page.getContext(), QRScanner.class);
+
+        button_scanqr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(popup_qr);
             }
         });
     }

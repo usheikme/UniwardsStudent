@@ -3,7 +3,6 @@ package xyz.uniwards.uniwards_student.RedemptionHandling;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -14,9 +13,8 @@ import xyz.uniwards.uniwards_student.APIHandling.APIHelper;
 import xyz.uniwards.uniwards_student.APIHandling.UniwardsAPI;
 import xyz.uniwards.uniwards_student.CouponHandling.CouponEntity;
 import xyz.uniwards.uniwards_student.Globals;
-import xyz.uniwards.uniwards_student.MainScreens.Popups.SuccessfulRedemption;
+import xyz.uniwards.uniwards_student.MainScreens.Popups.Redemption.SuccessfulRedemption;
 import xyz.uniwards.uniwards_student.TokenValidation.TokenHandle;
-import xyz.uniwards.uniwards_student.UniclassHandling.UniclassEntity;
 
 /**
  * Created by Umayr on 5/9/2018.

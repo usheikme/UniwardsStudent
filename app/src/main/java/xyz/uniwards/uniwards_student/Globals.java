@@ -30,10 +30,11 @@ public class Globals {
     private RedemptionsResult redemptionsResult;
     private UniclassesResult uniclassesResult;
     private CouponsResult couponsResult;
-    private StudentResult studentResult;
+    private StudentResult studentResult = null;
     private PasscodeResult studentPasscodeResult;
     private PasscodeResult vendorPasscodeResult;
     private Integer id;
+    private Integer[] tiers = {1000, 2000, 3000};
 
     public static Globals getInstance() {
         return instance;
@@ -128,5 +129,19 @@ public class Globals {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         return formatter.format(date);
+    }
+
+    //TODO move to backend
+    public Integer GetCurrentTier(Integer currentPoints) {
+        Integer tier = 1;
+        for(int x = 0; x < tiers.length; x++) {
+            if(currentPoints > tiers[x])
+                tier = x;
+        }
+        return tier+1;
+    }
+
+    public Integer GetNextTierValue(Integer currentPoints) {
+        return tiers[GetCurrentTier(currentPoints)] - currentPoints;
     }
 }

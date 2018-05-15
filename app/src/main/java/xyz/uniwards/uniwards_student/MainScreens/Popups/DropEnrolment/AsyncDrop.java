@@ -113,7 +113,7 @@ public class AsyncDrop extends AsyncTask<Void, Void, Void> {
                         Log.wtf("WTFISTHIS", uniclassesEnt.GetTitle());
                         //so wrong... Swapped desc and title
                         dashCards.add(new DashCard(uniclassesEnt.GetIcon(),
-                                uniclassesEnt.GetTitle(),
+                                uniclassesEnt.GetTitle(uniclass.GetName()),
                                 uniclassesEnt.GetDesc(uniclassesEnt.GetFormatData(i)),
                                 null));
                     }
