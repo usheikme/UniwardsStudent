@@ -145,10 +145,10 @@ public interface UniwardsAPI {
     @FormUrlEncoded
     @POST("/api/newpoint")
     Call<GenericPointResponse> NewPoint(@Header("Token") String token, @Field("student_id") Integer student_id,
-                                        @Field("reward_id") Integer reward_id,
                                         @Field("tutor_id") Integer tutor_id,
-                                        @Field("date") String date,
-                                        @Field("tutor_passcode") Integer tutor_passcode);
+                                        @Field("reward_id") Integer reward_id,
+                                        @Field("tutor_passcode") Integer tutor_passcode,
+                                        @Field("date") String date);
 
     @FormUrlEncoded
     @POST("/api/registeruser")

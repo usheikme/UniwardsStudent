@@ -34,6 +34,7 @@ public class QRScanner extends AppCompatActivity implements ZXingScannerView.Res
         mScannerView.setResultHandler(this);
         mScannerView.startCamera();
         setContentView(mScannerView);
+        //fakeResult();
     }
 
     @Override
@@ -55,10 +56,9 @@ public class QRScanner extends AppCompatActivity implements ZXingScannerView.Res
             return;
 
         Integer tutorPasscode = ParseQRPasscode(scanResult.getText());
-        Toast.makeText(this, point.GetDate(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,scanResult.getText(), Toast.LENGTH_SHORT).show();
         ReqThreadEntity request = new ReqThreadEntity(this, new AsyncNewPoint(this, point, tutorPasscode));
         Globals.getInstance().GetReqThread().AddRequest(request);
-        finish();
     }
 
     public void fakeResult() {
@@ -67,6 +67,9 @@ public class QRScanner extends AppCompatActivity implements ZXingScannerView.Res
         if(point == null)
             return;
         Integer tutorPasscode = ParseQRPasscode(fake);
+
+        ReqThreadEntity request = new ReqThreadEntity(this, new AsyncNewPoint(this, point, tutorPasscode));
+        Globals.getInstance().GetReqThread().AddRequest(request);
     }
 
     //TODO Combine
@@ -75,11 +78,17 @@ public class QRScanner extends AppCompatActivity implements ZXingScannerView.Res
 
         try {
             String[] split = scanResult.split(";:;");
+            Log.wtf("split0", split[0]);
+            Log.wtf("split1", split[1]);
+            Log.wtf("split2", split[2]);
             newPoint = new PointEntity();
+            Log.wtf("MahID", Globals.getInstance().GetID().toString());
+
             newPoint.SetStudentID(Globals.getInstance().GetID());
             newPoint.SetTutorID(Integer.parseInt(split[0]));
             newPoint.SetRewardID(Integer.parseInt(split[1]));
             newPoint.SetDate(Globals.GetCurrentDate());
+           // Toast.makeText(this, newPoint.GetTutorID() + " " + newPoint.GetStudentID(), Toast.LENGTH_LONG).show();
         } catch (Exception e) { }
         return newPoint;
     }

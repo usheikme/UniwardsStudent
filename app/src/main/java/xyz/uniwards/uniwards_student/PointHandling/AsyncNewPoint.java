@@ -50,7 +50,10 @@ public class AsyncNewPoint extends AsyncTask<Void, Void, Void> {
         UniwardsAPI uniapi = APIHelper.GetUniwardsAPI();
 
         //TODO make generic point response
-        Call<GenericPointResponse> call = uniapi.NewPoint(TokenHandle.token, point.GetStudentID(), point.GetTutorID(), point.GetRewardID(), point.GetDate(), tutorPasscode);
+        Integer idd = point.GetTutorID();
+        //Toast.makeText(activity, "TEST", Toast.LENGTH_LONG).show();
+        //Toast.makeText(activity, idd.toString(), Toast.LENGTH_LONG).show();
+        Call<GenericPointResponse> call = uniapi.NewPoint(TokenHandle.token, point.GetStudentID(), point.GetTutorID(), point.GetRewardID(), tutorPasscode, point.GetDate());
         call.enqueue(new Callback<GenericPointResponse>() {
             @Override
             public void onResponse(Call<GenericPointResponse> call, Response<GenericPointResponse> response) {
@@ -69,7 +72,7 @@ public class AsyncNewPoint extends AsyncTask<Void, Void, Void> {
         if (newPointResult.GetType() == NewPointResult.Type.POINT_REGISTER_SUCCESS) {
             PointComplete();
         } else {
-            Toast.makeText(activity, newPointResult.GetResult(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(activity, newPointResult.GetResult(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -79,7 +82,7 @@ public class AsyncNewPoint extends AsyncTask<Void, Void, Void> {
 
     private void PointComplete() {
         Intent popup_failedredemption = new Intent(activity, FailedRedemption.class);
-        popup_failedredemption.putExtra("message", "Successfully received new reward!");
+        popup_failedredemption.putExtra("message", "Awarded Point!");
         activity.startActivity(popup_failedredemption);
     }
 }

@@ -43,6 +43,8 @@ import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionResponse;
 import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionsResponse;
 import xyz.uniwards.uniwards_student.RedemptionHandling.RedemptionsResult;
 import xyz.uniwards.uniwards_student.RewardHandling.RewardsResult;
+import xyz.uniwards.uniwards_student.StudentHandle.StudentResponse;
+import xyz.uniwards.uniwards_student.StudentHandle.StudentResult;
 import xyz.uniwards.uniwards_student.UniclassHandling.UniclassesResult;
 import xyz.uniwards.uniwards_student.RewardHandling.RewardsResponse;
 import xyz.uniwards.uniwards_student.TokenValidation.TokenHandle;
@@ -58,6 +60,7 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
     private Activity activity;
     private DashboardAdaptor mAdapter;
     private RecyclerView mRecyclerView;
+    private StudentResponse studentResp;
     private PointsResponse pointsResp;
     private RedemptionsResponse redemptionsResp;
     private RewardsResponse rewardsResp;
@@ -81,12 +84,7 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... theVoid) {
-        GetCouponsStub();
-        GetRewardsStub();
-        GetUniclassesStub();
-        GetPointsStub();
-        GetRedemptionsStub();
-        GetEnrolmentsStub();
+        GetStudentStub();
         return null;
     }
 
@@ -144,11 +142,45 @@ public class AsyncDashCard extends AsyncTask<Void, Void, Void> {
 
     private void HandleRewardsResponse(Throwable t) { Log.wtf(t.toString(), "reward_stub");}
 
+    private void GetStudentStub() {
+        UniwardsAPI uniapi = APIHelper.GetUniwardsAPI();
+        Call<StudentResponse> call = uniapi.GetStudent(TokenHandle.token);
+        call.enqueue(new Callback<StudentResponse>() {
+            @Override
+            public void onResponse(Call<StudentResponse> call, Response<StudentResponse> response) {
+                studentResp = response.body();
+                HandleStudentsResponse(new StudentResult(studentResp));
+            }
+
+            @Override
+            public void onFailure(Call<StudentResponse> call, Throwable t) {
+                HandleStudentsResponse(t);
+            }
+        });
+    }
+
+    private void HandleStudentsResponse(StudentResult studentResult) {
+        if (studentResult.GetType() == StudentResult.Type.STUDENT_GET_SUCCESS) {
+            Globals.getInstance().SetStudentResult(studentResult);
+            Log.wtf("FUCK THIS", studentResult.GetStudent().GetID().toString());
+            Globals.getInstance().SetID(studentResult.GetStudent().GetID());
+            GetPointsStub();
+            GetCouponsStub();
+            GetRewardsStub();
+            GetUniclassesStub();
+            GetRedemptionsStub();
+            GetEnrolmentsStub();
+        } else {
+            Toast.makeText(activity, studentResult.GetResult().GetResponse(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void HandleStudentsResponse(Throwable t) {
+        Log.wtf(t.toString(), "xxc");
+    }
+
     private void GetPointsStub() {
         UniwardsAPI uniapi = APIHelper.GetUniwardsAPI();
-        Log.wtf("TokenHandle.token", TokenHandle.token.toString());
-        Globals.getInstance().SetID(1);
-        Log.wtf("GLOBALSSTUFF", Globals.getInstance().GetID().toString());
         Call<PointsResponse> call = uniapi.GetPointsByStudentID(TokenHandle.token, Globals.getInstance().GetID());
         call.enqueue(new Callback<PointsResponse>() {
             @Override

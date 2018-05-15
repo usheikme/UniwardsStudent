@@ -20,5 +20,5 @@ public class PointEntity {
     public void SetTutorID(int value) { this.tutor_id = value; }
 
     public int GetRewardID() { return reward_id; }
-    public void SetRewardID(int value) { this.reward_id = reward_id; }
+    public void SetRewardID(int value) { this.reward_id = value; }
 }
