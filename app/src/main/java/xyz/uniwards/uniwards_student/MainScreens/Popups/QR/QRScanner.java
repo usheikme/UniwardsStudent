@@ -67,9 +67,13 @@ public class QRScanner extends AppCompatActivity implements ZXingScannerView.Res
         if(point == null)
             return;
         Integer tutorPasscode = ParseQRPasscode(fake);
-
-        ReqThreadEntity request = new ReqThreadEntity(this, new AsyncNewPoint(this, point, tutorPasscode));
-        Globals.getInstance().GetReqThread().AddRequest(request);
+        if(tutorPasscode != -1) {
+            ReqThreadEntity request = new ReqThreadEntity(this, new AsyncNewPoint(this, point, tutorPasscode));
+            Globals.getInstance().GetReqThread().AddRequest(request);
+        }
+        else {
+            Toast.makeText(this,"Invalid QR Code", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //TODO Combine
@@ -78,23 +82,20 @@ public class QRScanner extends AppCompatActivity implements ZXingScannerView.Res
 
         try {
             String[] split = scanResult.split(";:;");
-            Log.wtf("split0", split[0]);
-            Log.wtf("split1", split[1]);
-            Log.wtf("split2", split[2]);
             newPoint = new PointEntity();
-            Log.wtf("MahID", Globals.getInstance().GetID().toString());
 
             newPoint.SetStudentID(Globals.getInstance().GetID());
             newPoint.SetTutorID(Integer.parseInt(split[0]));
             newPoint.SetRewardID(Integer.parseInt(split[1]));
             newPoint.SetDate(Globals.GetCurrentDate());
-           // Toast.makeText(this, newPoint.GetTutorID() + " " + newPoint.GetStudentID(), Toast.LENGTH_LONG).show();
-        } catch (Exception e) { }
+        } catch (Exception e) { Log.wtf("ParseQRException: ", e.toString()); }
         return newPoint;
     }
 
     public Integer ParseQRPasscode(String scanResult) {
-        String[] split = scanResult.split(";:;");
-        return Integer.parseInt(split[2]);
+        try {
+            String[] split = scanResult.split(";:;");
+            return Integer.parseInt(split[2]);
+        } catch (Exception ArrayIndexOutOfBoundsException) { return -1; }
     }
 }

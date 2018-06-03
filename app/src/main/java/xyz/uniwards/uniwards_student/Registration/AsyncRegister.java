@@ -110,6 +110,9 @@ public class AsyncRegister extends AsyncTask<Void, Void, Void> {
             badEmail = true;
         }
 
+        if(!email.contains("uowmail.edu.au"))
+            badEmail = true;
+
         if (BadInputCheck(password, 6)) {
             badPassword = true;
         }

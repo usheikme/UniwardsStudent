@@ -31,7 +31,8 @@ public class PointsResult implements IReqResult<ListResultEntity<PointEntity> > 
     }
 
     public ListResultEntity<PointEntity> GetResult() {
-        ListResultEntity<PointEntity> pointsEnt = new ListResultEntity("", null, ListResultEntity.Type.CARD_POINT);
+        ListResultEntity<PointEntity> pointsEnt = new ListResultEntity("",
+                null, ListResultEntity.Type.CARD_POINT);
         switch(GetType()) {
             case POINT_GET_FAILED:
                 pointsEnt.SetResponseMessage("Failed to get points!");

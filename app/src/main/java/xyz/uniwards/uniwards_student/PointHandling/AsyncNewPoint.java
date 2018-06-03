@@ -53,7 +53,8 @@ public class AsyncNewPoint extends AsyncTask<Void, Void, Void> {
         Integer idd = point.GetTutorID();
         //Toast.makeText(activity, "TEST", Toast.LENGTH_LONG).show();
         //Toast.makeText(activity, idd.toString(), Toast.LENGTH_LONG).show();
-        Call<GenericPointResponse> call = uniapi.NewPoint(TokenHandle.token, point.GetStudentID(), point.GetTutorID(), point.GetRewardID(), tutorPasscode, point.GetDate());
+        Call<GenericPointResponse> call = uniapi.NewPoint(TokenHandle.token, point.GetStudentID(),
+                point.GetTutorID(), point.GetRewardID(), tutorPasscode, point.GetDate());
         call.enqueue(new Callback<GenericPointResponse>() {
             @Override
             public void onResponse(Call<GenericPointResponse> call, Response<GenericPointResponse> response) {

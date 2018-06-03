@@ -46,7 +46,7 @@ public class DropAdaptor extends RecyclerView.Adapter<DropAdaptor.ViewHolder> {
                 public void onClick(View v) {
                     Log.d(TAG, "Element " + dashCards.get(getAdapterPosition()).GetCardTitle() + " clicked.");
                     //new AsyncDeleteEnrolment(activity, dashCards.get(getAdapterPosition()).GetCardTitle()).execute();
-                    ReqThreadEntity request = new ReqThreadEntity(activity, new AsyncNewEnrolment(activity, dashCards.get(getAdapterPosition()).GetCardTitle()));
+                    ReqThreadEntity request = new ReqThreadEntity(activity, new AsyncDeleteEnrolment(activity, dashCards.get(getAdapterPosition()).GetCardTitle()));
                     Globals.getInstance().GetReqThread().AddRequest(request);
                 }
             });

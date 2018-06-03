@@ -83,10 +83,17 @@ public class AsyncProfile extends AsyncTask<Void, Void, Void> {
 
         String fullName = student.GetFname() + " " + student.GetLname();
         fullName = "Umayr S";
-        profile_name.setText(fullName);
 
-        text_total_points_value.setText(student.GetTotalPoints().toString());
-        text_tier_value.setText(Globals.getInstance().GetCurrentTier(student.GetTotalPoints()).toString());
-        text_next_tier_value.setText(Globals.getInstance().GetNextTierValue(student.GetTotalPoints()).toString() + " pts");
+        if(profile_name != null)
+            profile_name.setText(fullName);
+
+        if(text_total_points_value != null)
+            text_total_points_value.setText(student.GetTotalPoints().toString());
+
+        if(text_tier_value != null)
+            text_tier_value.setText(Globals.getInstance().GetCurrentTier(student.GetTotalPoints()).toString());
+
+        if(text_next_tier_value != null)
+            text_next_tier_value.setText(Globals.getInstance().GetNextTierValue(student.GetTotalPoints()).toString() + " pts");
     }
 }

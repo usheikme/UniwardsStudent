@@ -21,10 +21,6 @@ public class RequestThread implements Runnable {
         this.requestQ.add(reqEmt);
     }
 
-    public Integer ElementsInQ() {
-        return requestQ.size();
-    }
-
     public void run() {
         while (true) {
             try {
